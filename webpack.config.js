@@ -21,8 +21,5 @@ module.exports = {
     stats: {
         colors: true
     },
-    devtool: 'source-map',
-    devServer: {
-        contentBase: './dist'
-    }
+    devtool: 'source-map'
 };
