@@ -20,12 +20,10 @@ export default class Map extends React.Component {
         d3.json('../../data/us-10m.v1.json', function(error, us) {
             if (error) throw error;
             
-            const data = topojson.feature(us, us.objects.states).features;
-            
             svg.append('g')
                 .attr('class', 'states')
                 .selectAll('path')
-                .data(data)
+                .data(topojson.feature(us, us.objects.states).features)
                 .enter().append('path')
                 .attr('d', path)
                 .attr('id', function(d, i) {
@@ -34,10 +32,6 @@ export default class Map extends React.Component {
                 .on('click', function(d, i) {
                     console.log(d3.select(this).attr('id'));
                 });
-            
-            svg.append('path')
-                .attr('class', 'state-borders')
-                .attr('d', path(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; })));
         });
     }
     
