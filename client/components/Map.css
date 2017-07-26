@@ -1,10 +1,16 @@
+path {
+    fill: white;
+    stroke: black;
+}
+
 .states :hover {
+    stroke: black;
     fill: red;
 }
 
 .state-borders {
     fill: none;
-    stroke: #fff;
+    stroke: black;
     stroke-width: 0.5px;
     stroke-linejoin: round;
     stroke-linecap: round;
