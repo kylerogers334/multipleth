@@ -16,8 +16,8 @@ export default class Map extends React.Component {
         const svg = d3.select('svg');
         const path = d3.geoPath(); 
         
-        // change to local file
-        d3.json('https://d3js.org/us-10m.v1.json', function(error, us) {
+        // needs to pull from either db, or just serve within html
+        d3.json('../../data/us-10m.v1.json', function(error, us) {
             if (error) throw error;
 
             svg.append('g')
@@ -36,8 +36,7 @@ export default class Map extends React.Component {
     render() {
         return (
             <div id='map'>
-                <svg width="960" height="600">
-                </svg>
+                <svg width="960" height="600"></svg>
             </div>
         );
     }
