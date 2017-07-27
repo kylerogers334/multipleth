@@ -8,11 +8,10 @@ path {
     fill: red;
 }
 
-.state-borders {
-    fill: none;
-    stroke: black;
-    stroke-width: 0.5px;
-    stroke-linejoin: round;
-    stroke-linecap: round;
-    pointer-events: none;
+.state-overlay {
+    fill: white;
+}
+
+.state-enlarged {
+    /*transform: scale(3, 3);*/
 }
