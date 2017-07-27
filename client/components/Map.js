@@ -17,7 +17,7 @@ export default class Map extends React.Component {
         const path = d3.geoPath();
 
         // needs to pull from either db, or just serve within html
-        d3.json('../../data/us-10m.v1.json', function(error, us) {
+        d3.json('./data/us-10m.v1.json', function(error, us) {
             if (error) throw error;
             
             svg.append('g')
@@ -30,7 +30,28 @@ export default class Map extends React.Component {
                     return us.objects.states.geometries[i].info.name;
                 })
                 .on('click', function(d, i) {
-                    console.log(d3.select(this).attr('id'));
+                    const selectedState = d3.select(this);
+                    
+                    svg.append('rect')
+                        .attr('class', 'state-overlay')
+                        .attr('height', 600)
+                        .attr('width', 960)
+                        .attr('z-index', 50)
+                        .on('click', function(d, i) {
+                            d3.select('.state-enlarged').remove();
+                            d3.select(this).remove();
+                        });
+                        
+                    console.log(selectedState.attr('id'));
+                    svg.append('path')
+                        .datum(topojson.feature(us, us.objects.states.geometries[i]))
+                        .attr('class', 'state-enlarged')
+                        .attr('d', path)
+                        .attr('z-index', 100)
+                        .on('click', function(d, i) {
+                            d3.select('.state-overlay').remove();
+                            d3.select(this).remove();
+                        })
                 });
         });
     }
