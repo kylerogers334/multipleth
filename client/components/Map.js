@@ -21,7 +21,7 @@ export class Map extends React.Component {
         const path = d3.geoPath();
         
         // needs to pull from either db, or just serve within html
-        d3.json('./data/us-10m.v1.json', (error, us) => {
+        d3.json('./us-10m.v1.json', (error, us) => {
             if (error) throw error;
 
             this.props.dispatch(loadUsStatesData(us));
