@@ -34,9 +34,4 @@ export class Overlay extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({
-    displayOverlay: state.displayOverlay,
-    // enlargedState: state.enlargedState,
-});
-
-export default connect(mapStateToProps)(Overlay);
+export default connect()(Overlay);

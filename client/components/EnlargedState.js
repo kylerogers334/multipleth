@@ -9,16 +9,6 @@ export class EnlargedState extends React.Component {
     }
     
     componentDidMount() {
-        // const selectedState = this.props.enlargedState
-        // const selectedStateName = selectedState.id;
-        // const overlay = d3.select('.state-overlay');
-        // console.log(selectedState)
-        // console.log(selectedState.attributes)
-        // console.log('selectedState: ', selectedState);
-        // console.log(selectedState.attr('id'));
-        // overlay.append(function() {
-        //     return this.appendChild(selectedState);
-        // })
         d3.select('.state-enlarged').on('click', function(d, i) {
             console.log('state clicked');
         });
