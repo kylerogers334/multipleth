@@ -2,9 +2,11 @@ import React from 'react';
 import {connect} from 'react-redux';
 import * as d3 from 'd3';
 import * as topojson from 'topojson';
+
 import './Map.css';
 import Overlay from './Overlay';
 import {loadUsStatesData} from '../actions/actionMap.js';
+import {showOverlay} from '../actions/actionOverlay.js';
 
 export class Map extends React.Component {
     constructor(props) {
@@ -12,52 +14,44 @@ export class Map extends React.Component {
         this.createMap = this.createMap.bind(this);
     }
     
-    componentDidMount() {
-        this.createMap();
-    }
-    
     createMap() {
-        const svg = d3.select('svg');
-        const path = d3.geoPath();
-        
-        // needs to pull from either db, or just serve within html
         d3.json('./us-10m.v1.json', (error, us) => {
             if (error) throw error;
-
-            this.props.dispatch(loadUsStatesData(us));
-
-            svg.append('g')
+            
+            // React and D3 use this differently. reactThis saves the class this.
+            // Normal this is used as the D3 this.
+            let reactThis = this;
+            const d3StatesData = d3.select('#states-container')
                 .attr('class', 'states')
                 .selectAll('path')
-                .data(topojson.feature(
-                    this.props.usStatesData, 
-                    this.props.usStatesData.objects.states)
-                .features)
+                .data(topojson.feature(us, us.objects.states).features)
                 .enter().append('path')
-                .attr('d', path)
+                .attr('d', d3.geoPath())
                 .attr('id', (d, i) => {
-                    return this.props.usStatesData
-                            .objects.states.geometries[i].info.name;
+                    return us.objects.states.geometries[i].info.name;
                 })
                 .attr('data-index', (d, i) => { return i })
-                .on('click', (d, i) => {
-                    this.props.showOverlay = true;
+                .on('click', function(d, i) {
+                    // non arrow function used to not save React context 
+                    // but instead use D3 context
+                    reactThis.props.dispatch(showOverlay(this));
                 });
+                
+            this.props.dispatch(loadUsStatesData(d3StatesData));
         });
     }
     
     render() {
+        // Initial load.
+        if (!this.props.usStatesData) this.createMap();
+        
         let overlay;
-        if (this.props.showOverlay) {
-            overlay = 
-            <Overlay 
-                USStatesData={this.props.USStatesData}
-            />;
-        }
+        if (this.props.displayOverlay) overlay = <Overlay />;
         
         return (
             <div id='map'>
                 <svg width='960' height='600'>
+                    <g id="states-container"></g>
                     {overlay}
                 </svg>
             </div>
@@ -66,7 +60,7 @@ export class Map extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    showOverlay: state.showOverlay,
+    displayOverlay: state.displayOverlay,
     usStatesData: state.usStatesData
 });
 

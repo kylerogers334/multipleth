@@ -9,7 +9,8 @@ path {
 }
 
 .state-overlay {
-    fill: white;
+    z-index: 50;
+    fill: #5d5252;
 }
 
 .state-enlarged {
