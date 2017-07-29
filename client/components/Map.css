@@ -10,9 +10,10 @@ path {
 
 .state-overlay {
     z-index: 50;
-    fill: #5d5252;
+    fill: white;
 }
 
 .state-enlarged {
+    z-index: 100;
     /*transform: scale(3, 3);*/
 }
