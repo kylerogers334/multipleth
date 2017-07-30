@@ -13,13 +13,14 @@ export class EnlargedState extends React.Component {
 
         const dimensions = state.node().getBBox();
         const scale = (dimensions.x > dimensions.y) ?
-            Math.floor(600 / dimensions.height) :
+            Math.floor(800 / dimensions.height) :
             Math.floor(960 / dimensions.width);
         // console.log(dimensions);
         // console.log('scale', scale)
         const tX = (-scale) * dimensions.x + 50;
         const tY = (-scale) * dimensions.y + 50;
-        state.attr('transform', `translate(${tX}, ${tY}) scale(${scale}, ${scale})`);
+        state.attr('transform', `translate(${tX}, ${tY}) scale(${scale}, ${scale})`)
+            .attr('stroke-width', `${1/scale * 2}`)
     }
     
     render() {

@@ -50,7 +50,7 @@ export class Map extends React.Component {
         
         return (
             <div id='map'>
-                <svg width='960' height='600'>
+                <svg width='960' height='800'>
                     <g id="states-container"></g>
                     {overlay}
                 </svg>
