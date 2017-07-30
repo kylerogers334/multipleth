@@ -14,14 +14,19 @@ export class EnlargedState extends React.Component {
         const dimensions = state.node().getBBox();
         const xCenter = dimensions.x + (dimensions.x / 2);
         const yCenter = dimensions.y + (dimensions.y / 2);
-        const scale = Math.floor(600 / dimensions.height);
+        const scale = (dimensions.x > dimensions.y) ?
+            Math.floor(600 / dimensions.height) :
+            Math.floor(960 / dimensions.width);
         console.log(dimensions);
         console.log(xCenter, yCenter);
         
         // parent center is 480x 300y
         const xdiff = 480 - xCenter;
         const ydiff = 300 - yCenter;
-        state.attr('transform', `translate(${-250}, ${-50}) scale(${scale}, ${scale})`);
+        console.log(xdiff, ydiff)
+        state.attr('transform', `translate(${-100}, ${0}) scale(${scale}, ${scale})`)
+        // state.attr('transform', `translate(${100}, ${100})`)
+        // state.attr('transform', `translate(${-250}, ${-50}) scale(${scale}, ${scale})`);
         // state.attr('transform', 'scale(6, 6)')
     }
     
