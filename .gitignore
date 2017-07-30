@@ -5,4 +5,5 @@ npm-debug.log
 *.txt
 
 bundle.js
+bundle.js.map
 data
