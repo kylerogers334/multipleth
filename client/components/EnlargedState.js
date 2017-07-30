@@ -22,7 +22,7 @@ export class EnlargedState extends React.Component {
         state.attr('transform', `translate(${tX}, ${tY}) scale(${scale}, ${scale})`)
             .attr('stroke-width', `${1/scale * 2}`);
 
-        d3.json('./us10-m.v1.json', (error, us) => {
+        d3.json('./us-10m.v1.json', (error, us) => {
             // extracting data-FIPS-num attribute with correct format
             const temp = this.props.enlargedState.attributes[2].value;
             const fipsNum = (temp.length === 1) ? '0' + temp : temp;
