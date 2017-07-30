@@ -29,7 +29,9 @@ export class EnlargedState extends React.Component {
             
             const counties = us.objects.counties.geometries;
             us.objects.counties.geometries = counties.filter(c => {
-                return c.id.slice(0, 2) === fipsNum;
+                if (c.info === undefined) console.log(c)
+                // console.log(c)
+                // return c.info.id.slice(0, 2) === fipsNum;
             });
             
             d3.select('#overlay-container')
@@ -37,9 +39,15 @@ export class EnlargedState extends React.Component {
                 .data(topojson.feature(us, us.objects.counties).features)
                 .enter().append('path')
                 .attr('class', 'county')
+                .attr('id', (d, i) => {
+                    return us.objects.counties.geometries[i].info.name;
+                })
                 .attr('d', d3.geoPath())
                 .attr('transform', `translate(${tX}, ${tY}) scale(${scale}, ${scale})`)
-                .attr('stroke-width', `${1/scale * 2}`);
+                .attr('stroke-width', `${1/scale * 2}`)
+                .on('click', function() {
+                    console.log(this.id)
+                })
         });
     }
     
