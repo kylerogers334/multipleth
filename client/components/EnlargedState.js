@@ -9,20 +9,9 @@ export class EnlargedState extends React.Component {
     }
     
     componentDidMount() {
-        const state = d3.select('.state-enlarged');
-
-        const dimensions = state.node().getBBox();
-        const xCenter = dimensions.x + (dimensions.x / 2);
-        const yCenter = dimensions.y + (dimensions.y / 2);
-        const scale = Math.floor(600 / dimensions.height);
-        console.log(dimensions);
-        console.log(xCenter, yCenter);
-        
-        // parent center is 480x 300y
-        const xdiff = 480 - xCenter;
-        const ydiff = 300 - yCenter;
-        state.attr('transform', `translate(${-250}, ${-50}) scale(${scale}, ${scale})`);
-        // state.attr('transform', 'scale(6, 6)')
+        d3.select('.state-enlarged').on('click', function(d, i) {
+            console.log('state clicked');
+        });
     }
     
     render() {
@@ -30,7 +19,6 @@ export class EnlargedState extends React.Component {
             <path
                 d={this.props.enlargedState.attributes[0].value}
                 className='state-enlarged'
-                id={this.props.enlargedState.id}
             ></path>
         );
     }

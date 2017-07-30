@@ -10,13 +10,10 @@ path {
 
 .state-overlay {
     z-index: 50;
-    fill: #5e0321;
+    fill: white;
 }
 
 .state-enlarged {
     z-index: 100;
-}
-
-.state-enlarged #California {
-    transform: translate(350px);
+    /*transform: scale(3, 3);*/
 }
