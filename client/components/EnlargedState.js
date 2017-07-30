@@ -29,9 +29,7 @@ export class EnlargedState extends React.Component {
             
             const counties = us.objects.counties.geometries;
             us.objects.counties.geometries = counties.filter(c => {
-                if (c.info === undefined) console.log(c)
-                // console.log(c)
-                // return c.info.id.slice(0, 2) === fipsNum;
+                return c.info.id.slice(0, 2) === fipsNum;
             });
             
             d3.select('#overlay-container')
