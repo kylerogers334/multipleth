@@ -17,7 +17,7 @@ export class Overlay extends React.Component {
 
     showOverlay() {
         d3.select('.state-overlay')
-            .attr('height', 800)
+            .attr('height', 600)
             .attr('width', 960)
             .on('click', (d, i) => {
                 this.props.dispatch(hideOverlay());

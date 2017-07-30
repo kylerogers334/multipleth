@@ -16,3 +16,7 @@ path {
 .state-enlarged {
     z-index: 100;
 }
+
+.county :hover {
+    fill: red;
+}

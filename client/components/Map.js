@@ -30,6 +30,9 @@ export class Map extends React.Component {
                 .attr('id', (d, i) => {
                     return us.objects.states.geometries[i].info.name;
                 })
+                .attr('data-FIPS-number', (d, i) => {
+                    return us.objects.states.geometries[i].info.id;
+                })
                 .attr('data-index', (d, i) => { return i })
                 .on('click', function(d, i) {
                     // non arrow function used to not save React context 
