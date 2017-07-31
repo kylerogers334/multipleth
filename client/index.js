@@ -3,12 +3,11 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import store from './store.js';
 
-// import Header from './components/Header.js';
-import Map from './components/Map.js';
+import {App} from './components/App.js';
 
 ReactDOM.render(
     <Provider store={store}>
-        <Map />
+        <App />
     </Provider>,
     document.getElementById('root')
 );

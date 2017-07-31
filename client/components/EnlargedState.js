@@ -20,7 +20,7 @@ export class EnlargedState extends React.Component {
         const tY = (-scale) * dimensions.y + 50;
         
         state.attr('transform', `translate(${tX}, ${tY}) scale(${scale}, ${scale})`)
-            .attr('stroke-width', `${1/scale * 2}`);
+            .attr('stroke-width', `${1 / (scale * 2)}`);
 
         d3.json('./us-10m.v1.json', (error, us) => {
             // extracting data-FIPS-num attribute with correct format
@@ -42,7 +42,7 @@ export class EnlargedState extends React.Component {
                 })
                 .attr('d', d3.geoPath())
                 .attr('transform', `translate(${tX}, ${tY}) scale(${scale}, ${scale})`)
-                .attr('stroke-width', `${1/scale * 2}`)
+                .attr('stroke-width', `${ 1 / (scale * 2) }`)
                 .on('click', function() {
                     console.log(this.id)
                 })
