@@ -4,6 +4,8 @@ import * as d3 from 'd3';
 import * as d3Chromatic from 'd3-scale-chromatic';
 import * as topojson from 'topojson';
 
+import {stateHelper} from '../helpers/stateHelpers.js';
+
 import './Map.css';
 import Overlay from './Overlay';
 import {loadUsStatesData} from '../actions/actionMap.js';
@@ -17,21 +19,8 @@ export class Map extends React.Component {
     
     componentDidUpdate() {
         // might have to set categoryData to null before every change
-        // console.log('d3', d3);
-        // console.log('CHROMATIC', d3Chromatic);
         if (this.props.categoryData) {
-            const reactThis = this;
-            const color = d3.scaleThreshold()
-                        .domain(d3.range(2, 16))
-                        .range(d3Chromatic.schemeBlues[9]);
-            
-            d3.select('#states-container').selectAll('path')
-                .style('fill', function(d, i) {
-                    const state = d3.select(this).attr('id');
-                    const match = reactThis.props.categoryData
-                                .find(function(d) {if (d.name === state) return d;});
-                    return color(match.rate);
-                });
+            stateHelper(this.props.categoryName).call(this);
         } return true;
     }
     

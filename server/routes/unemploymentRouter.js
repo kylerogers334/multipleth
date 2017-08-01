@@ -14,8 +14,6 @@ router.get('/', function(req, res) {
         .catch(err => {
             console.error(err);
         });
-        
-    // res.json({message: 'unemployment'});
 });
 
 module.exports = router;
