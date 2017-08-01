@@ -5,11 +5,13 @@ import {
     SHOW_OVERLAY, 
     HIDE_OVERLAY
 } from '../actions/actionOverlay';
+import {SET_FORM_SELECT} from '../actions/actionForm';
 
 const initialState = {
     usStatesData: null,
     displayOverlay: false,
     enlargedState: null,
+    formSelection: null,
 };
 
 export default function(state=initialState, action) {
@@ -22,6 +24,8 @@ export default function(state=initialState, action) {
                             {enlargedState: action.enlargedState});
         case HIDE_OVERLAY: 
             return Object.assign({}, state, {displayOverlay: false});
+        case SET_FORM_SELECT:
+            return Object.assign({}, state, {formSelection: action.selection});
         default: return state;
     }
 }
