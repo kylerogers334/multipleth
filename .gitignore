@@ -8,3 +8,5 @@ bundle.js
 bundle.js.map
 *.map
 data
+
+*.sql
