@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {setFormSelect} from '../actions/actionForm.js';
+import {setFormSelect, fetchCategory} from '../actions/actionForm.js';
 
 export class Form extends React.Component {
     constructor(props) {
@@ -17,7 +17,8 @@ export class Form extends React.Component {
     
     handleSubmit(e) {
         e.preventDefault();
-        console.log(this.props.formSelection);
+        console.log('Form selection: ', this.props.formSelection);
+        this.props.dispatch(fetchCategory(this.props.formSelection));
     }
 
     render() {

@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as d3 from 'd3';
+import * as d3Chromatic from 'd3-scale-chromatic';
 import * as topojson from 'topojson';
 
 import './Map.css';
@@ -12,6 +13,28 @@ export class Map extends React.Component {
     constructor(props) {
         super(props);
         this.createMap = this.createMap.bind(this);
+    }
+    
+    componentDidUpdate() {
+        // might have to set categoryData to null before every change
+        // console.log('d3', d3);
+        // console.log('CHROMATIC', d3Chromatic);
+        if (this.props.categoryData) {
+            const reactThis = this;
+            console.log(d3Chromatic.schemeBlues)
+            const color = d3.scaleThreshold()
+                        .domain(d3.range(2, 100))
+                        .range(d3Chromatic.schemeBlues[9]);
+            
+            d3.select('#states-container').selectAll('path')
+                .style('fill', function(d, i) {
+                    const state = d3.select(this).attr('id');
+                    const match = reactThis.props.categoryData
+                                .find(function(d) {if (d.name === state) return d;});
+                    // console.log(match.id);
+                    return color(match.rate)
+                });
+        } return true;
     }
     
     createMap() {
@@ -30,6 +53,7 @@ export class Map extends React.Component {
                 .attr('id', (d, i) => {
                     return us.objects.states.geometries[i].info.name;
                 })
+            
                 .attr('data-FIPS-number', (d, i) => {
                     return us.objects.states.geometries[i].info.id;
                 })
@@ -64,7 +88,8 @@ export class Map extends React.Component {
 
 const mapStateToProps = state => ({
     displayOverlay: state.displayOverlay,
-    usStatesData: state.usStatesData
+    usStatesData: state.usStatesData,
+    categoryData: state.categoryData
 });
 
 export default connect(mapStateToProps)(Map);
