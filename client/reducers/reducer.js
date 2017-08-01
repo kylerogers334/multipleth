@@ -17,6 +17,7 @@ const initialState = {
     enlargedState: null,
     formSelection: null,
     categoryData: null,
+    categoryName: null,
 };
 
 export default function(state=initialState, action) {
@@ -32,7 +33,10 @@ export default function(state=initialState, action) {
         case SET_FORM_SELECT:
             return Object.assign({}, state, {formSelection: action.selection});
         case FETCH_CATEGORY_SUCCESS:
-            return Object.assign({}, state, {categoryData: action.data});
+            return Object.assign({}, state, {
+                categoryData: action.data,
+                categoryName: action.data.category
+            });
         case FETCH_CATEGORY_ERROR:{
             console.error(action.error); return;
         }

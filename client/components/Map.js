@@ -21,9 +21,8 @@ export class Map extends React.Component {
         // console.log('CHROMATIC', d3Chromatic);
         if (this.props.categoryData) {
             const reactThis = this;
-            console.log(d3Chromatic.schemeBlues)
             const color = d3.scaleThreshold()
-                        .domain(d3.range(2, 100))
+                        .domain(d3.range(2, 16))
                         .range(d3Chromatic.schemeBlues[9]);
             
             d3.select('#states-container').selectAll('path')
@@ -31,8 +30,7 @@ export class Map extends React.Component {
                     const state = d3.select(this).attr('id');
                     const match = reactThis.props.categoryData
                                 .find(function(d) {if (d.name === state) return d;});
-                    // console.log(match.id);
-                    return color(match.rate)
+                    return color(match.rate);
                 });
         } return true;
     }
@@ -89,7 +87,8 @@ export class Map extends React.Component {
 const mapStateToProps = state => ({
     displayOverlay: state.displayOverlay,
     usStatesData: state.usStatesData,
-    categoryData: state.categoryData
+    categoryData: state.categoryData,
+    categoryName: state.categoryName,
 });
 
 export default connect(mapStateToProps)(Map);

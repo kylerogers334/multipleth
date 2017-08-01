@@ -34,7 +34,7 @@ export const fetchCategory = category => dispatch => {
         return response.json();
     })
     .then(data => {
-        console.log("Category response: ", data);
+        data.category = category;
         return dispatch(fetchCategorySuccess(data));
     })
     .catch(err => {
