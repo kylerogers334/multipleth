@@ -8,7 +8,7 @@ import {stateHelper} from '../helpers/stateHelpers.js';
 
 import './Map.css';
 import Overlay from './Overlay';
-import {loadUsStatesData} from '../actions/actionMap.js';
+import {loadUsStatesData} from '../actions/actionHandleData.js';
 import {showOverlay} from '../actions/actionOverlay.js';
 
 export class Map extends React.Component {
@@ -19,8 +19,9 @@ export class Map extends React.Component {
     
     componentDidUpdate() {
         // might have to set categoryData to null before every change
-        if (this.props.categoryData) {
-            stateHelper(this.props.categoryName)(this.props.categoryData);
+        // console.log('cat data', this.props.cat)
+        if (this.props.categoryStateData) {
+            stateHelper(this.props.categoryName)(this.props.categoryStateData);
         } return true;
     }
     
@@ -76,7 +77,7 @@ export class Map extends React.Component {
 const mapStateToProps = state => ({
     displayOverlay: state.displayOverlay,
     usStatesData: state.usStatesData,
-    categoryData: state.categoryData,
+    categoryStateData: state.categoryStateData,
     categoryName: state.categoryName,
 });
 
