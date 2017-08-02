@@ -41,6 +41,9 @@ function blankLoadHelper() {
                 .attr('id', (d, i) => {
                     return us.objects.counties.geometries[i].info.name;
                 })
+                .attr('data-FIPS-num', (d, i) => {
+                    return us.objects.counties.geometries[i].info.id;
+                })
                 .attr('d', d3.geoPath())
                 .attr('transform', `translate(${tX}, ${tY}) scale(${scale}, ${scale})`)
                 .attr('stroke-width', `${ 1 / (scale * 2) }`)
@@ -50,6 +53,29 @@ function blankLoadHelper() {
         });
 }
 
-function countyUnemploymentHelper(categoryData) {
-    console.log('YEP');
+function countyUnemploymentHelper(categoryCountyData) {
+    const rateArr = categoryCountyData.map(county => {
+        return county.rate;
+    });
+    const dataMax = Math.max(...rateArr);
+    const dataMin = Math.min(...rateArr);
+    const steps = (dataMax - dataMin) / d3Chromatic.schemeBlues[9].length;
+    const color = d3.scaleThreshold()
+                // data set has largest values 1.2 and 2.3,
+                // 2nd param exclusive
+                .domain(d3.range(dataMin, dataMax, steps))
+                .range(d3Chromatic.schemeBlues[9]);
+
+    setTimeout(() => {
+        d3.select('#overlay-container').selectAll('path')
+        .style('fill', function() {
+            const county = this.attributes[2].value;
+            const match = categoryCountyData.find(function(d) {
+                if (d.fips === county) return d;
+            });
+            
+            return (match === undefined) ? 'red' : color(match.rate);
+        });
+    }, 100);
+    
 }

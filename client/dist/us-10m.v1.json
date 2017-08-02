@@ -53559,7 +53559,7 @@
       "geometries": [
         {
           "info": {
-            "id": "5",
+            "id": "05",
             "code": "AR",
             "name": "Arkansas"
           },
@@ -53639,7 +53639,7 @@
         },
         {
           "info": {
-            "id": "6",
+            "id": "06",
             "code": "CA",
             "name": "California"
           },
@@ -54269,7 +54269,7 @@
         },
         {
           "info": {
-            "id": "1",
+            "id": "01",
             "code": "AL",
             "name": "Alabama"
           },
@@ -54849,7 +54849,7 @@
         },
         {
           "info": {
-            "id": "4",
+            "id": "04",
             "code": "AZ",
             "name": "Arizona"
           },
@@ -54888,7 +54888,7 @@
         },
         {
           "info": {
-            "id": "8",
+            "id": "08",
             "code": "CO",
             "name": "Colorado"
           },
@@ -56039,7 +56039,7 @@
         },
         {
           "info": {
-            "id": "2",
+            "id": "02",
             "code": "AK",
             "name": "Alaska"
           },
@@ -57703,7 +57703,7 @@
         },
         {
           "info": {
-            "id": "9",
+            "id": "09",
             "code": "CT",
             "name": "Connecticut"
           },

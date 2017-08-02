@@ -55,9 +55,9 @@ export const fetchCategoryCountyError = error => ({
 });
 
 export const FETCH_CATEGORY_COUNTY = 'FETCH_CATEGORY_COUNTY';
-export const fetchCategoryCounty = category => dispatch => {
+export const fetchCategoryCounty = (category, selectedState) => dispatch => {
 //   dispatch(fetchCategoryRequest(category));
-    return fetch(`/api/${category}/county`)
+    return fetch(`/api/${category}/county/${selectedState}`)
     .then(response => {
         if (!response.ok) Promise.reject(response.statusText);
         return response.json();

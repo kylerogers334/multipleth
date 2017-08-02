@@ -28,7 +28,6 @@ export class Map extends React.Component {
     createMap() {
         d3.json('./us-10m.v1.json', (error, us) => {
             if (error) throw error;
-            
             // React and D3 use this differently. reactThis saves the class this.
             // Normal this is used as the D3 this.
             let reactThis = this;
@@ -41,7 +40,6 @@ export class Map extends React.Component {
                 .attr('id', (d, i) => {
                     return us.objects.states.geometries[i].info.name;
                 })
-            
                 .attr('data-FIPS-number', (d, i) => {
                     return us.objects.states.geometries[i].info.id;
                 })

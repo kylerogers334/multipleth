@@ -9,15 +9,20 @@ export class EnlargedState extends React.Component {
         super(props);
     }
     
-    componentWillUpdate(nextProps, nextState) {
-        if (nextProps.categoryCountyData) {
+    componentDidUpdate() {
+        if (this.props.categoryCountyData) {
             countyHelper(this.props.categoryName)(this.props.categoryCountyData);
         }
     }
     
     componentDidMount() {
         if (this.props.categoryName) {
-            this.props.dispatch(fetchCategoryCounty(this.props.categoryName));
+            this.props.dispatch(
+                fetchCategoryCounty(
+                    this.props.categoryName, 
+                    this.props.enlargedState.attributes[2].value
+                )
+            );
         }
         // Always show an empty state;
         countyHelper('blankLoad').call(this);
