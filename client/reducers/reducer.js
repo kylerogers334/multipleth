@@ -38,7 +38,7 @@ export default function(state=initialState, action) {
                 categoryName: action.data.category
             });
         case FETCH_CATEGORY_ERROR:{
-            console.error(action.error); return;
+            console.error(action.error); return state;
         }
         default: return state;
     }

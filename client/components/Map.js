@@ -20,7 +20,7 @@ export class Map extends React.Component {
     componentDidUpdate() {
         // might have to set categoryData to null before every change
         if (this.props.categoryData) {
-            stateHelper(this.props.categoryName).call(this);
+            stateHelper(this.props.categoryName)(this.props.categoryData);
         } return true;
     }
     
