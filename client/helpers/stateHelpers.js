@@ -13,19 +13,24 @@ function clearDataHelper(categoryData) {
 }
 
 function stateUnemploymentHelper(categoryStateData) {
+    const rateArr = categoryStateData.map(county => {
+        return county.rate;
+    });
+    const dataMin = Math.min(...rateArr);
+    const dataMax = Math.max(...rateArr);
+    const steps = (dataMax - dataMin) / d3Chromatic.schemeBlues[9].length;
     const color = d3.scaleThreshold()
-                // data set has largest values 2.3 and 6.8,
-                // 2nd param exclusive
-                .domain(d3.range(2.3, 6.9, 0.5))
+                .domain(d3.range(dataMin, dataMax, steps))
                 .range(d3Chromatic.schemeBlues[9]);
+                
+    const dataAsObj = {};
+    categoryStateData.forEach(c => {
+        dataAsObj[c.name] = c.rate;
+    });
     
     d3.select('#states-container').selectAll('path')
         .style('fill', function(d, i) {
-            const state = d3.select(this).attr('id');
-            const match = categoryStateData.find(function(d) {
-                if (d.name === state) return d;
-            });
-            return color(match.rate);
+            return color(dataAsObj[d3.select(this).attr('id')]);
         });
 }
 
