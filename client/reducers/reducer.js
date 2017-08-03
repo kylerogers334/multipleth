@@ -1,5 +1,6 @@
 import {
     LOAD_US_STATES_DATA,
+    CLEAR_MAP,
     FETCH_CATEGORY_STATE_SUCCESS,
     FETCH_CATEGORY_STATE_ERROR,
     FETCH_CATEGORY_COUNTY_SUCCESS,
@@ -37,6 +38,12 @@ export default function(state=initialState, action) {
             return Object.assign({}, state, {displayOverlay: false});
         case SET_FORM_SELECT:
             return Object.assign({}, state, {formSelection: action.selection});
+        case CLEAR_MAP: 
+            return Object.assign({}, state, {
+                categoryStateData: null,
+                categoryCountyData: null,
+                categoryName: null,
+            });
         case FETCH_CATEGORY_STATE_SUCCESS:
             return Object.assign({}, state, {
                 categoryStateData: action.data,

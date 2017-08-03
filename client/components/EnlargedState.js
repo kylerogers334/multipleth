@@ -12,6 +12,8 @@ export class EnlargedState extends React.Component {
     componentDidUpdate() {
         if (this.props.categoryCountyData) {
             countyHelper(this.props.categoryName)(this.props.categoryCountyData);
+        } else if (this.props.categoryCountyData === null) {
+            countyHelper('clear')();
         }
     }
     

@@ -4,12 +4,18 @@ import * as topojson from 'topojson';
 
 export const countyHelper = category => {
     switch (category) {
-        case 'blankLoad': return blankLoadHelper;
+        case 'clear': return countyClearHelper;
+        case 'blankLoad': return blankCountyLoadHelper;
         case 'unemployment': return countyUnemploymentHelper;
     }
 };
 
-function blankLoadHelper() {
+function countyClearHelper() {
+    d3.select('#overlay-container').selectAll('path')
+        .style('fill', 'white');
+}
+
+function blankCountyLoadHelper() {
     const state = d3.select('.state-enlarged');
         
         const dimensions = state.node().getBBox();

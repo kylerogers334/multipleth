@@ -3,13 +3,14 @@ import * as d3Chromatic from 'd3-scale-chromatic';
 
 export const stateHelper = category => {
     switch (category) {
-        case 'clear/state': return clearDataHelper;
+        case 'clear': return stateClearHelper;
         case 'unemployment': return stateUnemploymentHelper;
     }
 };
 
-function clearDataHelper(categoryData) {
-    console.log('clearDataHelper NYI');
+function stateClearHelper(categoryData) {
+    d3.select('#states-container').selectAll('path')
+        .style('fill', 'white');
 }
 
 function stateUnemploymentHelper(categoryStateData) {

@@ -22,7 +22,9 @@ export class Map extends React.Component {
         // console.log('cat data', this.props.cat)
         if (this.props.categoryStateData) {
             stateHelper(this.props.categoryName)(this.props.categoryStateData);
-        } return true;
+        } else if (this.props.categoryStateData === null) {
+            stateHelper('clear')();
+        }
     }
     
     createMap() {
@@ -76,6 +78,7 @@ const mapStateToProps = state => ({
     displayOverlay: state.displayOverlay,
     usStatesData: state.usStatesData,
     categoryStateData: state.categoryStateData,
+    categoryCountyData: state.categoryCountyData,
     categoryName: state.categoryName,
 });
 

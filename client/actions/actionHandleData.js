@@ -6,6 +6,12 @@ export const loadUsStatesData = usStatesData => ({
      type: LOAD_US_STATES_DATA
 });
 
+export const CLEAR_MAP = 'CLEAR_MAP';
+export const clearMap = () => ({
+    type: CLEAR_MAP
+    // type: CLEAR_MAP
+});
+
 // async actions to add /api/whatever to state
 // export const FETCH_CATEGORY_REQUEST = 'FETCH_CATEGORY_REQUEST';
 // export const fetchCategoryRequest = () => ({

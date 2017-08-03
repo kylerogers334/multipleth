@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {setFormSelect} from '../actions/actionForm.js';
-import {fetchCategoryState} from '../actions/actionHandleData.js';
+import {clearMap, fetchCategoryState} from '../actions/actionHandleData.js';
 
 export class Form extends React.Component {
     constructor(props) {
@@ -19,7 +19,12 @@ export class Form extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         console.log('Form selection: ', this.props.formSelection);
-        this.props.dispatch(fetchCategoryState(this.props.formSelection));
+        if (this.props.formSelection === 'clear') {
+            console.log('clearMap dispatched')
+            this.props.dispatch(clearMap());
+        } else {
+            this.props.dispatch(fetchCategoryState(this.props.formSelection));
+        }
     }
 
     render() {
