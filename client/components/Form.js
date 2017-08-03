@@ -20,7 +20,7 @@ export class Form extends React.Component {
         e.preventDefault();
         console.log('Form selection: ', this.props.formSelection);
         if (this.props.formSelection === 'clear') {
-            console.log('clearMap dispatched')
+            console.log('clearMap dispatched');
             this.props.dispatch(clearMap());
         } else {
             this.props.dispatch(fetchCategoryState(this.props.formSelection));
@@ -33,6 +33,7 @@ export class Form extends React.Component {
                 <select value={this.props.formSelection || "Pick an option"} onChange={e => this.handleSelection(e)}>
                     <option value="null">Pick an option</option>
                     <option value="unemployment">Unemployment</option>
+                    <option value="population">Population</option>
                     <option value="clear">Clear Map</option>
                 </select>
                 <input type="submit" />

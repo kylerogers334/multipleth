@@ -48517,7 +48517,7 @@
         {
           "info": {
             "id": "11001",
-            "name": "District of Columbia"
+            "name": "DC"
           },
           "type": "Polygon",
           "arcs": [
@@ -57918,7 +57918,7 @@
           "info": {
             "id": "11",
             "code": "DC",
-            "name": "District-of-Columbia"
+            "name": "DC"
           },
           "type": "MultiPolygon",
           "arcs": [

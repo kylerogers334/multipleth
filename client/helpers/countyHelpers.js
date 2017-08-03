@@ -7,6 +7,7 @@ export const countyHelper = category => {
         case 'clear': return countyClearHelper;
         case 'blankLoad': return blankCountyLoadHelper;
         case 'unemployment': return countyUnemploymentHelper;
+        case 'population': return countyPopulationHelper;
     }
 };
 
@@ -60,20 +61,18 @@ function blankCountyLoadHelper() {
 }
 
 function countyUnemploymentHelper(categoryCountyData) {
-    const rateArr = categoryCountyData.map(county => {
-        return county.rate;
-    });
-    const dataMin = Math.min(...rateArr);
-    const dataMax = Math.max(...rateArr);
-    const steps = (dataMax - dataMin) / d3Chromatic.schemeBlues[9].length;
-    const color = d3.scaleThreshold()
-                .domain(d3.range(dataMin, dataMax, steps))
-                .range(d3Chromatic.schemeBlues[9]);
-                
     const dataAsObj = {};
     categoryCountyData.forEach(c => {
         dataAsObj[c.fips] = c.rate;
     });
+    
+    const values = Object.values(dataAsObj);
+    const dataMin = Math.min(...values);
+    const dataMax = Math.max(...values);
+    const steps = (dataMax - dataMin) / d3Chromatic.schemeBlues[9].length;
+    const color = d3.scaleThreshold()
+                .domain(d3.range(dataMin, dataMax, steps))
+                .range(d3Chromatic.schemeBlues[9]);
     
     // Timeout prevents bug where reducer changing the categoryCountyData
     // (data received from database) before D3 can draw every county line.
@@ -87,4 +86,31 @@ function countyUnemploymentHelper(categoryCountyData) {
         });
     }, 100);
     
+}
+
+function countyPopulationHelper(categoryCountyData) {
+    const dataAsObj = {};
+    categoryCountyData.forEach(c => {
+        dataAsObj[c.fips] = c.population;
+    });
+    
+    const values = Object.values(dataAsObj);
+    const dataMin = Math.min(...values);
+    const dataMax = Math.max(...values);
+    const steps = (dataMax - dataMin) / d3Chromatic.schemeBlues[9].length;
+    const color = d3.scaleThreshold()
+                .domain(d3.range(dataMin, dataMax, steps))
+                .range(d3Chromatic.schemeBlues[9]);
+            
+    // Timeout prevents bug where reducer changing the categoryCountyData
+    // (data received from database) before D3 can draw every county line.
+    // If that were to happen, D3 would find no path elements to select and 
+    // will not update the color.
+    setTimeout(() => {
+        d3.select('#overlay-container').selectAll('path')
+        .style('fill', function() {
+            const match = dataAsObj[this.attributes[2].value];
+            return (match === undefined) ? 'red' : color(match);
+        });
+    }, 100);
 }
