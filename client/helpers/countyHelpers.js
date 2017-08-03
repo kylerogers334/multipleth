@@ -74,7 +74,11 @@ function countyUnemploymentHelper(categoryCountyData) {
     categoryCountyData.forEach(c => {
         dataAsObj[c.fips] = c.rate;
     });
-
+    
+    // Timeout prevents bug where reducer changing the categoryCountyData
+    // (data received from database) before D3 can draw every county line.
+    // If that were to happen, D3 would find no path elements to select and 
+    // will not update the color.
     setTimeout(() => {
         d3.select('#overlay-container').selectAll('path')
         .style('fill', function() {
