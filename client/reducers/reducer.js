@@ -13,7 +13,7 @@ import {
 } from '../actions/actionOverlay.js';
 
 const initialState = {
-    usStatesData: null,
+    usStatesLineData: null,
     displayOverlay: false,
     enlargedState: null,
     categoryStateData: null,
@@ -25,7 +25,7 @@ export default function(state=initialState, action) {
     // console.log('Action dispatched:', action.type);
     switch (action.type) {
         case LOAD_US_STATES_DATA: 
-            return Object.assign({}, state, {usStatesData: action.usStatesData});
+            return Object.assign({}, state, {usStatesLineData: action.usStatesLineData});
         case SHOW_OVERLAY:
             return Object.assign({}, state, {displayOverlay: true}, 
                             {enlargedState: action.enlargedState});

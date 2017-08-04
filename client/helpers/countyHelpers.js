@@ -66,9 +66,9 @@ function countyUnemploymentHelper(categoryCountyData) {
         dataAsObj[c.fips] = c.rate;
     });
     
-    const values = Object.values(dataAsObj);
-    const dataMin = Math.min(...values);
-    const dataMax = Math.max(...values);
+    const values = Object.values(dataAsObj).sort((a, b) => a - b);
+    const dataMin = d3.quantile(values, 0.15);
+    const dataMax = d3.quantile(values, 0.95);
     const steps = (dataMax - dataMin) / d3Chromatic.schemeBlues[9].length;
     const color = d3.scaleThreshold()
                 .domain(d3.range(dataMin, dataMax, steps))
@@ -84,7 +84,7 @@ function countyUnemploymentHelper(categoryCountyData) {
             const match = dataAsObj[this.attributes[2].value];
             return (match === undefined) ? 'red' : color(match);
         });
-    }, 100);
+    }, 150);
     
 }
 
@@ -94,9 +94,9 @@ function countyPopulationHelper(categoryCountyData) {
         dataAsObj[c.fips] = c.population;
     });
     
-    const values = Object.values(dataAsObj);
-    const dataMin = Math.min(...values);
-    const dataMax = Math.max(...values);
+    const values = Object.values(dataAsObj).sort((a, b) => a - b);
+    const dataMin = d3.quantile(values, 0.15);
+    const dataMax = d3.quantile(values, 0.95);
     const steps = (dataMax - dataMin) / d3Chromatic.schemeBlues[9].length;
     const color = d3.scaleThreshold()
                 .domain(d3.range(dataMin, dataMax, steps))
@@ -114,5 +114,5 @@ function countyPopulationHelper(categoryCountyData) {
             const match = dataAsObj[this.attributes[2].value];
             return (match === undefined) ? 'red' : color(match);
         });
-    }, 100);
+    }, 150);
 }

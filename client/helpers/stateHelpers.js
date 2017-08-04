@@ -20,9 +20,9 @@ function stateUnemploymentHelper(categoryStateData) {
         dataAsObj[state.name] = state.rate;
     });
     
-    const values = Object.values(dataAsObj);
-    const dataMin = Math.min(...values);
-    const dataMax = Math.max(...values);
+    const values = Object.values(dataAsObj).sort((a, b) => a - b);
+    const dataMin = d3.quantile(values, 0.15);
+    const dataMax = d3.quantile(values, 0.95);
     const steps = (dataMax - dataMin) / d3Chromatic.schemeBlues[9].length;
     const color = d3.scaleThreshold()
                 .domain(d3.range(dataMin, dataMax, steps))
@@ -40,14 +40,14 @@ function statePopulationHelper(categoryStateData) {
         dataAsObj[state.name] = state.population;
     });
     
-    const values = Object.values(dataAsObj);
-    const dataMin = Math.min(...values);
-    const dataMax = Math.max(...values) / 2;
+    const values = Object.values(dataAsObj).sort((a, b) => a - b);
+    const dataMin = d3.quantile(values, 0.15);
+    const dataMax = d3.quantile(values, 0.95);
     const steps = (dataMax - dataMin) / d3Chromatic.schemeBlues[9].length;
     const color = d3.scaleThreshold()
                 .domain(d3.range(dataMin, dataMax, steps))
                 .range(d3Chromatic.schemeBlues[9]);
-
+                
     d3.select('#states-container').selectAll('path')
         .style('fill', function(d, i) {
             return color(dataAsObj[d3.select(this).attr('id')]);

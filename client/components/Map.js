@@ -75,9 +75,8 @@ export class Map extends React.Component {
 
 const mapStateToProps = state => ({
     displayOverlay: state.displayOverlay,
-    usStatesData: state.usStatesData,
+    usStatesLineData: state.usStatesLineData,
     categoryStateData: state.categoryStateData,
-    categoryCountyData: state.categoryCountyData,
     categoryName: state.categoryName,
 });
 

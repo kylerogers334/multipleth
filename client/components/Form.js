@@ -13,6 +13,7 @@ export class Form extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         if (this.selection.value === null) {
+            console.log('tried to submit form without selection');
             return;
         }
         
