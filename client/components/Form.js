@@ -1,36 +1,44 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {setFormSelect} from '../actions/actionForm.js';
 import {clearMap, fetchCategoryState} from '../actions/actionHandleData.js';
+import {fetchCategoryCounty} from '../actions/actionHandleData.js';
 
 export class Form extends React.Component {
     constructor(props) {
         super(props);
-    }
-    
-    handleSelection(e) {
-        // prevent the default form option from changing state
-        if (e.target.value !== 'null') {
-            this.props.dispatch(setFormSelect(e.target.value));
-        }
+        
     }
     
     handleSubmit(e) {
         e.preventDefault();
-        console.log('Form selection: ', this.props.formSelection);
-        if (this.props.formSelection === 'clear') {
-            console.log('clearMap dispatched');
+        if (this.selection.value === null) {
+            return;
+        }
+        
+        else if (this.selection.value === 'clear') {
             this.props.dispatch(clearMap());
-        } else {
-            this.props.dispatch(fetchCategoryState(this.props.formSelection));
+        } 
+        
+        else if (!this.props.enlargedState) {
+            this.props.dispatch(fetchCategoryState(this.selection.value));
+        } 
+        
+        else {
+            this.props.dispatch(fetchCategoryState(this.selection.value));
+            this.props.dispatch(
+                fetchCategoryCounty(
+                    this.selection.value, 
+                    this.props.enlargedState.attributes[2].value
+                )
+            );
         }
     }
 
     render() {
         return (
             <form onSubmit={e => this.handleSubmit(e)}>
-                <select value={this.props.formSelection || "Pick an option"} onChange={e => this.handleSelection(e)}>
+                <select ref={selection => this.selection = selection}>
                     <option value="null">Pick an option</option>
                     <option value="unemployment">Unemployment</option>
                     <option value="population">Population</option>
@@ -43,7 +51,10 @@ export class Form extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    formSelection: state.formSelection
+    enlargedState: state.enlargedState,
+    categoryStateData: state.categoryStateData,
+    categoryCountyData: state.categoryCountyData,
+    categoryName: state.categoryName,
 });
 
 export default connect(mapStateToProps)(Form);

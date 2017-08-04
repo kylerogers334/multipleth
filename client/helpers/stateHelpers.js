@@ -42,7 +42,7 @@ function statePopulationHelper(categoryStateData) {
     
     const values = Object.values(dataAsObj);
     const dataMin = Math.min(...values);
-    const dataMax = Math.max(...values);
+    const dataMax = Math.max(...values) / 2;
     const steps = (dataMax - dataMin) / d3Chromatic.schemeBlues[9].length;
     const color = d3.scaleThreshold()
                 .domain(d3.range(dataMin, dataMax, steps))

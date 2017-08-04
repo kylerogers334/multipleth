@@ -10,21 +10,9 @@ export class EnlargedState extends React.Component {
     }
     
     componentDidUpdate() {
-        // If a user requests data viewing county, the below block will fire.
-        if (this.props.categoryName && !this.props.categoryCountyData) {
-            this.props.dispatch(
-                fetchCategoryCounty(
-                    this.props.categoryName, 
-                    this.props.enlargedState.attributes[2].value
-                )
-            );
-        }
-        
-        // If a user requests data viewing country, then clicks on a state,
-        // the below if block will fire.
-        else if (this.props.categoryCountyData) {
+        if (this.props.categoryCountyData) {
             countyHelper(this.props.categoryName)(this.props.categoryCountyData);
-        } 
+        }
         
         else if (this.props.categoryCountyData === null) {
             countyHelper('clear')();

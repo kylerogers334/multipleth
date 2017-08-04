@@ -106,9 +106,11 @@ function countyPopulationHelper(categoryCountyData) {
     // (data received from database) before D3 can draw every county line.
     // If that were to happen, D3 would find no path elements to select and 
     // will not update the color.
+    // console.log(dataAsObj)
     setTimeout(() => {
         d3.select('#overlay-container').selectAll('path')
         .style('fill', function() {
+            // console.log(this.attributes);
             const match = dataAsObj[this.attributes[2].value];
             return (match === undefined) ? 'red' : color(match);
         });
