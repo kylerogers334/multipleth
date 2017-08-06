@@ -8,55 +8,88 @@ export class Legend extends React.Component {
         super(props);
     }
     
-    componentDidMount() {
+    componentDidUpdate() {
         
+        const dataValues = [].sort((a, b) => a - b);
+        this.props.categoryStateData.forEach(s => {
+            dataValues.push(s.rate);
+        });
+
+        const dataMin = d3.quantile(dataValues, 0.05);
+        const dataMax = d3.quantile(dataValues, 0.95);
+        const steps = (dataMax - dataMin) / 8;
+        // console.log(dataMin, dataMax, steps);
+        const fixedRange = d3.range(dataMin, dataMax, steps).map(function(i) {
+            return Number(i.toFixed(1));
+        });
+        // console.log(fixedRange)
         const g = d3.select('.legend')
             .attr('class', 'legend')
-            .attr("transform", "translate(0,40)");
-
+            .attr('transform', 'translate(0,40)');
+        
         const x = d3.scaleLinear()
-            .domain([1, 10])
+            .domain(fixedRange)
             .rangeRound([600, 860]);
-        // console.log(x)
-        // console.log(x.domain())
-        // console.log(x.domain()[0])
+            
+        console.log(x.domain());
         
         const color = d3.scaleThreshold()
-            .domain(d3.range(2, 10))
+            .domain(fixedRange)
             .range(d3Chromatic.schemeBlues[9]);
             
+        // const color10 = d3.scaleThreshold()
+        //     .domain(d3.range(2, 10))
+        //     .range(d3Chromatic.schemeBlues[9]);
+        
+        const xPosition = d3.scaleLinear()
+            .domain([1, 10])
+            .rangeRound([600, 860]);
+        // console.log(d3Chromatic.schemeBlues[9])
         g.selectAll('rect')
-            .data(color.range().map(function(d) {
-                // console.log(d);
+            .data(color.range()
+            .map(function(d) {
+                console.log(d);
                 d = color.invertExtent(d);
-                // console.log(d);
+                console.log(d);
                 // I can possibly replace these with [1, 10]
                 if (d[0] === undefined) d[0] = x.domain()[0];
                 if (d[1] === undefined) d[1] = x.domain()[0];
                 return d;
-            }))
+            })
+            )
             .enter().append('rect')
                 .attr('height', 8)
-                .attr('x', function(d) { return x(d[0]); })
-                .attr('width', function(d) { return x(d[1]) - x(d[0]); })
-                .attr('fill', function(d) { return color(d[0])});
+                .attr('x', function(d, i) { return xPosition(i + 1); })
+                .attr('width', function(d) { return 29; })
+                .attr('fill', function(d, i) { return d3Chromatic.schemeBlues[9][i]; });
                 
         g.append('text')
             .attr('class', 'legend-title')
-            .attr('x', x.range()[0]) // 600
+            .attr('x', 600) // 600
             .attr('y', -6)
             .attr('fill', '#000')
             .attr('text-anchor', 'start')
             .attr('font-weight', 'bold')
             .text('Unemployment rate');
-        
-        g.call(d3.axisBottom(x)
+            
+        const bsRange = [null, ...fixedRange]
+        g.call(d3.axisBottom(xPosition)
             .tickSize(15)
-            // if i === 0 then x%
-            .tickFormat(function(x, i) { return i ? x : x + '%'; })
-            .tickValues(color.domain()))
+            .tickFormat(function(x, i) { 
+                if (i === 1) {
+                    return bsRange[i] + '%';
+                }
+                return bsRange[i] ? bsRange[i] : ''; 
+            }))
         .select('.domain')
             .remove();
+        console.log(
+            d3.select('.legend').selectAll('g')
+            .attr('opacity', function(d, i) {
+                if (i === 0 || i === 9) return 0;
+                else return 1;
+            })
+        )
     }
     
     render() {
@@ -69,7 +102,9 @@ export class Legend extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    categoryName: state.categoryName
+    categoryName: state.categoryName,
+    categoryStateData: state.categoryStateData,
+    categoryCountyData: state.categoryCountyData,
 });
 
 export default connect(mapStateToProps)(Legend);
