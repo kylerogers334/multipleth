@@ -8,6 +8,7 @@ import {stateHelper} from '../helpers/stateHelpers.js';
 
 import './Map.css';
 import Overlay from './Overlay';
+import Legend from './Legend';
 import {loadUsStatesData} from '../actions/actionHandleData.js';
 import {showOverlay} from '../actions/actionOverlay.js';
 
@@ -64,7 +65,8 @@ export class Map extends React.Component {
         
         return (
             <div id='map'>
-                <svg width='960' height='800'>
+                <svg width='960' height='800' id='svg-container'>
+                    <Legend />
                     <g id="states-container"></g>
                     {overlay}
                 </svg>
