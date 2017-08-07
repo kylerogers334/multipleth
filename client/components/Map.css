@@ -10,7 +10,7 @@ path {
 
 .state-overlay {
     z-index: 50;
-    fill: #5e0321;
+    fill: white;
 }
 
 .state-enlarged {

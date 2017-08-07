@@ -93,7 +93,7 @@ function countyPopulationHelper(categoryCountyData) {
     });
     
     const values = Object.values(dataAsObj).sort((a, b) => a - b);
-    const dataMin = d3.quantile(values, 0.15); [0, 10, 30];
+    const dataMin = d3.quantile(values, 0.15);
     const dataMax = d3.quantile(values, 0.95);
     const steps = (dataMax - dataMin) / d3Chromatic.schemeBlues[9].length;
     const color = d3.scaleThreshold()
@@ -104,7 +104,6 @@ function countyPopulationHelper(categoryCountyData) {
     // (data received from database) before D3 can draw every county line.
     // If that were to happen, D3 would find no path elements to select and 
     // will not update the color.
-    // console.log(dataAsObj)
     setTimeout(() => {
         d3.select('#overlay-container').selectAll('path')
         .style('fill', function() {

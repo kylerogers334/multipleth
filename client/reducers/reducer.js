@@ -22,7 +22,6 @@ const initialState = {
 };
 
 export default function(state=initialState, action) {
-    // console.log('Action dispatched:', action.type);
     switch (action.type) {
         case LOAD_US_STATES_DATA: 
             return Object.assign({}, state, {usStatesLineData: action.usStatesLineData});
