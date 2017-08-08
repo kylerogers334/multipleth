@@ -9,12 +9,10 @@ path {
 }
 
 .state-overlay {
-    z-index: 50;
     fill: white;
 }
 
 .state-enlarged {
-    z-index: 100;
 }
 
 .county :hover {

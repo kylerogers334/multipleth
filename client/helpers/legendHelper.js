@@ -45,7 +45,7 @@ function legendLoadHelper(adjustedRange, category, currentView) {
     }
     
     g.attr('transform', 'translate(0,40)')
-        .attr('z-index', '150').raise();
+        .raise();
     
     const color = d3.scaleThreshold()
         .domain(adjustedRange)
