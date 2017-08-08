@@ -8,7 +8,7 @@ import {stateHelper} from '../helpers/stateHelpers.js';
 
 import './Map.css';
 import Overlay from './Overlay';
-import Legend from './Legend';
+import StateLegend from './StateLegend';
 import {loadUsStatesData} from '../actions/actionHandleData.js';
 import {showOverlay} from '../actions/actionOverlay.js';
 
@@ -19,8 +19,6 @@ export class Map extends React.Component {
     }
     
     componentDidUpdate() {
-        // might have to set categoryData to null before every change
-        // console.log('cat data', this.props.cat)
         if (this.props.categoryStateData) {
             stateHelper(this.props.categoryName)(this.props.categoryStateData);
         } else if (this.props.categoryStateData === null) {
@@ -47,7 +45,7 @@ export class Map extends React.Component {
                     return us.objects.states.geometries[i].info.id;
                 })
                 .on('click', function(d, i) {
-                    // non arrow function used to not use React context 
+                    // non arrow function used to not call with React context, 
                     // but instead use D3 context
                     reactThis.props.dispatch(showOverlay(this));
                 });
@@ -67,7 +65,7 @@ export class Map extends React.Component {
             <div id='map'>
                 <svg width='960' height='800' id='svg-container'>
                     <g id="states-container">
-                        <Legend />
+                        <StateLegend />
                     </g>
                     {overlay}
                 </svg>

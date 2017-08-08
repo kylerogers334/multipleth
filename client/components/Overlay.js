@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import * as d3 from 'd3';
 
 import EnlargedState from './EnlargedState.js';
-import Legend from './Legend.js';
+import CountyLegend from './CountyLegend.js';
 import {hideOverlay} from '../actions/actionOverlay.js';
 import './Overlay.css';
 
@@ -28,7 +28,7 @@ export class Overlay extends React.Component {
     render() {
         return (
             <g id="overlay-container">
-                <Legend />
+                <CountyLegend />
                 <rect className="state-overlay"></rect>
                 <EnlargedState />
             </g>
