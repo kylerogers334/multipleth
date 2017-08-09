@@ -14,9 +14,16 @@ export const legendHelper = category => {
 
 function legendClearHelper() {
     // replaces legend with an empty <g>
-    const svg = d3.select('svg');
-    svg.select('.legend').remove();
-    svg.append('g').attr('class', 'legend');
+    d3.select('.state-legend').remove();
+    d3.select('.county-legend').remove();
+    
+    d3.select('#states-container')
+        .append('g')
+        .attr('class', 'state-legend');
+        
+    d3.select('#overlay-container')
+        .append('g')
+        .attr('class', 'county-legend');
 }
 
 function legendRangeAdjustHelper(currentView, categoryName, data) {
@@ -28,12 +35,12 @@ function legendRangeAdjustHelper(currentView, categoryName, data) {
     });
 }
 
-function legendUnemploymentHelper(categoryStateData) {
-    return categoryStateData.map(s => s.rate).sort((a, b) => a - b);
+function legendUnemploymentHelper(categoryData) {
+    return categoryData.map(s => s.rate).sort((a, b) => a - b);
 }
 
-function legendPopulationHelper(categoryStateData) {
-    return categoryStateData.map(c => c.population).sort((a, b) => a - b);
+function legendPopulationHelper(categoryData) {
+    return categoryData.map(c => c.population).sort((a, b) => a - b);
 }
 
 function legendLoadHelper(adjustedRange, category, currentView) {
@@ -62,15 +69,22 @@ function legendLoadHelper(adjustedRange, category, currentView) {
             .attr('x', function(d, i) { return xPosition(i); })
             .attr('width', 37)
             .attr('fill', function(d, i) { return d3Chromatic.schemeBlues[9][i]; });
-            
+    
+    // Fixes an issue with text not being changed
+    d3.selectAll('.state-legend-title').remove();
+    if (currentView === 'county') d3.selectAll('.county-legend-title').remove();
+    
     g.append('text')
-        .attr('class', 'legend-title')
+        .attr('class', function() {
+            if (currentView === 'county') return 'county-legend-title';
+            else return 'state-legend-title';
+        })
         .attr('x', 541)
         .attr('y', -6)
         .attr('fill', '#000')
         .attr('text-anchor', 'start')
         .attr('font-weight', 'bold')
-        .text('Unemployment rate');
+        .text(legendTextHelper(category));
     
     // shiftedRange moves tick location to the right by 1.
     const shiftedRange = [null, ...adjustedRange];
@@ -83,13 +97,13 @@ function legendLoadHelper(adjustedRange, category, currentView) {
         .remove();
     
     // hide the ticks on both ends
-    d3.selectAll('.state-legend').selectAll('g')
+    d3.select('.state-legend').selectAll('g')
     .attr('opacity', function(d, i) {
         if (i === 0 || i === 9) return 0;
         else return 1;
     });
     
-    d3.selectAll('.county-legend').selectAll('g')
+    d3.select('.county-legend').selectAll('g')
     .attr('opacity', function(d, i) {
         if (i === 0 || i === 9) return 0;
         else return 1;
@@ -113,5 +127,12 @@ function legendNumberFixerHelper(n, currentView, category) {
                 case 'population': return f('.1', 1e4)(n);
             }
         }
+    }
+}
+
+function legendTextHelper(category) {
+    switch(category) {
+        case 'unemployment': return 'Unemployment rate';
+        case 'population': return 'Total Population';
     }
 }
