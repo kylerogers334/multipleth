@@ -25,33 +25,41 @@ export default function(state=initialState, action) {
     switch (action.type) {
         case LOAD_US_STATES_DATA: 
             return Object.assign({}, state, {usStatesLineData: action.usStatesLineData});
+            
         case SHOW_OVERLAY:
-            return Object.assign({}, state, {displayOverlay: true}, 
-                            {enlargedState: action.enlargedState});
+            return Object.assign({}, state, {
+                        displayOverlay: true, 
+                        enlargedState: action.enlargedState
+                    });
+                    
         case HIDE_OVERLAY: 
             return Object.assign({}, state, {displayOverlay: false});
+            
         case CLEAR_MAP: 
             return Object.assign({}, state, {
-                categoryStateData: null,
-                categoryCountyData: null,
-                categoryName: null,
-            });
+                        categoryStateData: null,
+                        categoryCountyData: null,
+                        categoryName: null,
+                    });
+                    
         case FETCH_CATEGORY_STATE_SUCCESS:
             return Object.assign({}, state, {
-                categoryStateData: action.data,
-                categoryName: action.data.category
-            });
-        case FETCH_CATEGORY_STATE_ERROR:{
+                        categoryStateData: action.data,
+                        categoryName: action.data.category
+                    });
+                    
+        case FETCH_CATEGORY_STATE_ERROR:
             console.error(action.error); return state;
-        }
+        
         case FETCH_CATEGORY_COUNTY_SUCCESS:
             return Object.assign({}, state, {
-                categoryCountyData: action.data,
-                categoryName: action.data.category
-            });
-        case FETCH_CATEGORY_COUNTY_ERROR:{
+                        categoryCountyData: action.data,
+                        categoryName: action.data.category
+                    });
+                    
+        case FETCH_CATEGORY_COUNTY_ERROR:
             console.error(action.error); return state;
-        }
+        
         default: return state;
     }
 }

@@ -8,6 +8,7 @@ export const countyHelper = category => {
         case 'blankLoad': return blankCountyLoadHelper;
         case 'unemployment': return countyUnemploymentHelper;
         case 'population': return countyPopulationHelper;
+        case 'income': return countyIncomeHelper;
     }
 };
 
@@ -64,26 +65,7 @@ function countyUnemploymentHelper(categoryCountyData) {
         dataAsObj[c.fips] = c.rate;
     });
     
-    const values = Object.values(dataAsObj).sort((a, b) => a - b);
-    const dataMin = d3.quantile(values, 0.15);
-    const dataMax = d3.quantile(values, 0.95);
-    const steps = (dataMax - dataMin) / d3Chromatic.schemeBlues[9].length;
-    const color = d3.scaleThreshold()
-                .domain(d3.range(dataMin, dataMax, steps))
-                .range(d3Chromatic.schemeBlues[9]);
-    
-    // Timeout prevents bug where reducer changing the categoryCountyData
-    // (data received from database) before D3 can draw every county line.
-    // If that were to happen, D3 would find no path elements to select and 
-    // will not update the color.
-    setTimeout(() => {
-        d3.select('#overlay-container').selectAll('path')
-        .style('fill', function() {
-            const match = dataAsObj[this.attributes[2].value];
-            return (match === undefined) ? 'red' : color(match);
-        });
-    }, 150);
-    
+    countyDataHelper(dataAsObj);
 }
 
 function countyPopulationHelper(categoryCountyData) {
@@ -92,7 +74,20 @@ function countyPopulationHelper(categoryCountyData) {
         dataAsObj[c.fips] = c.population;
     });
     
-    const values = Object.values(dataAsObj).sort((a, b) => a - b);
+    countyDataHelper(dataAsObj);
+}
+
+function countyIncomeHelper(categoryCountyData) {
+    const dataAsObj = {};
+    categoryCountyData.forEach(county => {
+        dataAsObj[county.fips] = county.median_income;
+    });
+    
+    countyDataHelper(dataAsObj);
+}
+
+function countyDataHelper(data) {
+    const values = Object.values(data).sort((a, b) => a - b);
     const dataMin = d3.quantile(values, 0.15);
     const dataMax = d3.quantile(values, 0.95);
     const steps = (dataMax - dataMin) / d3Chromatic.schemeBlues[9].length;
@@ -107,7 +102,7 @@ function countyPopulationHelper(categoryCountyData) {
     setTimeout(() => {
         d3.select('#overlay-container').selectAll('path')
         .style('fill', function() {
-            const match = dataAsObj[this.attributes[2].value];
+            const match = data[this.attributes[2].value];
             return (match === undefined) ? 'red' : color(match);
         });
     }, 150);

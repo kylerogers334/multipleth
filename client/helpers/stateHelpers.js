@@ -6,6 +6,7 @@ export const stateHelper = category => {
         case 'clear': return stateClearHelper;
         case 'unemployment': return stateUnemploymentHelper;
         case 'population': return statePopulationHelper;
+        case 'income': return stateIncomeHelper;
     }
 };
 
@@ -20,18 +21,7 @@ function stateUnemploymentHelper(categoryStateData) {
         dataAsObj[state.name] = state.rate;
     });
     
-    const values = Object.values(dataAsObj).sort((a, b) => a - b);
-    const dataMin = d3.quantile(values, 0.15);
-    const dataMax = d3.quantile(values, 0.95);
-    const steps = (dataMax - dataMin) / d3Chromatic.schemeBlues[9].length;
-    const color = d3.scaleThreshold()
-                .domain(d3.range(dataMin, dataMax, steps))
-                .range(d3Chromatic.schemeBlues[9]);
-                
-    d3.select('#states-container').selectAll('path')
-        .style('fill', function(d, i) {
-            return color(dataAsObj[d3.select(this).attr('id')]);
-        });
+    stateDataHelper(dataAsObj);
 }
 
 function statePopulationHelper(categoryStateData) {
@@ -40,7 +30,20 @@ function statePopulationHelper(categoryStateData) {
         dataAsObj[state.name] = state.population;
     });
     
-    const values = Object.values(dataAsObj).sort((a, b) => a - b);
+    stateDataHelper(dataAsObj);
+}
+
+function stateIncomeHelper(categoryStateData) {
+    const dataAsObj = {};
+    categoryStateData.forEach(state => {
+        dataAsObj[state.name] = state.median_income;
+    });
+    
+    stateDataHelper(dataAsObj);
+}
+
+function stateDataHelper(data) {
+    const values = Object.values(data).sort((a, b) => a - b);
     const dataMin = d3.quantile(values, 0.15);
     const dataMax = d3.quantile(values, 0.95);
     const steps = (dataMax - dataMin) / d3Chromatic.schemeBlues[9].length;
@@ -50,6 +53,6 @@ function statePopulationHelper(categoryStateData) {
                 
     d3.select('#states-container').selectAll('path')
         .style('fill', function(d, i) {
-            return color(dataAsObj[d3.select(this).attr('id')]);
+            return color(data[d3.select(this).attr('id')]);
         });
 }

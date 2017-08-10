@@ -6,6 +6,7 @@ export const legendHelper = category => {
         case null: return legendClearHelper;
         case 'unemployment': return legendUnemploymentHelper;
         case 'population': return legendPopulationHelper;
+        case 'income': return legendIncomeHelper;
         case 'load': return legendLoadHelper;
         case 'number-fix': return legendNumberFixerHelper;
         case 'range-adjust': return legendRangeAdjustHelper;
@@ -36,11 +37,15 @@ function legendRangeAdjustHelper(currentView, categoryName, data) {
 }
 
 function legendUnemploymentHelper(categoryData) {
-    return categoryData.map(s => s.rate).sort((a, b) => a - b);
+    return categoryData.map(d => d.rate).sort((a, b) => a - b);
 }
 
 function legendPopulationHelper(categoryData) {
-    return categoryData.map(c => c.population).sort((a, b) => a - b);
+    return categoryData.map(d => d.population).sort((a, b) => a - b);
+}
+
+function legendIncomeHelper(categoryData) {
+    return categoryData.map(d => d.median_income).sort((a, b) => a - b);
 }
 
 function legendLoadHelper(adjustedRange, category, currentView) {
@@ -118,6 +123,7 @@ function legendNumberFixerHelper(n, currentView, category) {
             switch(category) {
                 case 'unemployment': return f('.1', 1e1)(n);
                 case 'population': return f('.1', 1e6)(n);
+                case 'income': return f('.1', 1e4)(n);
             }
         }
             
@@ -125,6 +131,7 @@ function legendNumberFixerHelper(n, currentView, category) {
             switch(category) {
                 case 'unemployment': return f('.1', 1e1)(n);
                 case 'population': return f('.1', 1e4)(n);
+                case 'income': return f('.1', 1e4)(n);
             }
         }
     }
@@ -132,7 +139,8 @@ function legendNumberFixerHelper(n, currentView, category) {
 
 function legendTextHelper(category) {
     switch(category) {
-        case 'unemployment': return 'Unemployment rate';
+        case 'unemployment': return 'Unemployment Rate';
         case 'population': return 'Total Population';
+        case 'income': return 'Median Income';
     }
 }
