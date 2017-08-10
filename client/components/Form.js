@@ -10,8 +10,10 @@ export class Form extends React.Component {
         
     }
     
-    handleSelection(selection) {
-        if (selection=== 'clear') {
+    handleSelection(e) {
+        const selection = e.target.parentElement.getAttribute('name');
+        
+        if (selection === 'clear') {
             this.props.dispatch(clearMap());
         } 
         
@@ -31,34 +33,35 @@ export class Form extends React.Component {
     }
 
     render() {
-        // return (
-        //     <form onSubmit={e => this.handleSubmit(e)}>
-        //         <select ref={selection => this.selection = selection}>
-        //             <option value="null">Pick an option</option>
-        //             <option value="unemployment">Unemployment</option>
-        //             <option value="population">Population</option>
-        //             <option value="income">Income</option>
-        //             <option value="clear">Clear Map</option>
-        //         </select>
-        //         <input type="submit" />
-        //     </form>
-        // );
-        
         return (
             <div className="form-container">
-                <div className="form-item" 
-                    onClick={this.handleSelection('unemployment')}
-                    >
-                    Unemployment
+                <div className="form-item" name="unemployment">
+                    <a onClick={e => this.handleSelection(e)} href="#">Unemployment</a>
                 </div>
-                <div className="form-item">Income</div>
-                <div className="form-item">Population</div>
-                <div className="form-item">TODO</div>
-                <div className="form-item">TODO</div>
-                <div className="form-item">TODO</div>
-                <div className="form-item">TODO</div>
-                <div className="form-item">TODO</div>
-                <div className="form-item">TODO</div>
+                <div className="form-item" name="population">
+                    <a onClick={e => this.handleSelection(e)} href="#">Population</a>
+                </div>
+                <div className="form-item" name="income">
+                    <a onClick={e => this.handleSelection(e)} href="#">Income</a>
+                </div>
+                <div className="form-item" name="TODO">
+                    <a onClick={e => this.handleSelection(e)} href="#">TODO</a>
+                </div>
+                <div className="form-item" name="TODO">
+                    <a onClick={e => this.handleSelection(e)} href="#">TODO</a>
+                </div>
+                <div className="form-item" name="TODO">
+                    <a onClick={e => this.handleSelection(e)} href="#">TODO</a>
+                </div>
+                <div className="form-item" name="TODO">
+                    <a onClick={e => this.handleSelection(e)} href="#">TODO</a>
+                </div>
+                <div className="form-item" name="TODO">
+                    <a onClick={e => this.handleSelection(e)} href="#">TODO</a>
+                </div>
+                <div className="form-item" name="clear">
+                    <a onClick={e => this.handleSelection(e)} href="#">Clear Map</a>
+                </div>
             </div>
         );
     }
