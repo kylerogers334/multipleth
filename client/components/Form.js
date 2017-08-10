@@ -10,26 +10,20 @@ export class Form extends React.Component {
         
     }
     
-    handleSubmit(e) {
-        e.preventDefault();
-        if (this.selection.value === null) {
-            console.log('tried to submit form without selection');
-            return;
-        }
-        
-        else if (this.selection.value === 'clear') {
+    handleSelection(selection) {
+        if (selection=== 'clear') {
             this.props.dispatch(clearMap());
         } 
         
         else if (!this.props.enlargedState) {
-            this.props.dispatch(fetchCategoryState(this.selection.value));
+            this.props.dispatch(fetchCategoryState(selection));
         } 
         
         else {
-            this.props.dispatch(fetchCategoryState(this.selection.value));
+            this.props.dispatch(fetchCategoryState(selection));
             this.props.dispatch(
                 fetchCategoryCounty(
-                    this.selection.value, 
+                    selection, 
                     this.props.enlargedState.attributes[2].value
                 )
             );
@@ -37,16 +31,35 @@ export class Form extends React.Component {
     }
 
     render() {
+        // return (
+        //     <form onSubmit={e => this.handleSubmit(e)}>
+        //         <select ref={selection => this.selection = selection}>
+        //             <option value="null">Pick an option</option>
+        //             <option value="unemployment">Unemployment</option>
+        //             <option value="population">Population</option>
+        //             <option value="income">Income</option>
+        //             <option value="clear">Clear Map</option>
+        //         </select>
+        //         <input type="submit" />
+        //     </form>
+        // );
+        
         return (
-            <form onSubmit={e => this.handleSubmit(e)}>
-                <select ref={selection => this.selection = selection}>
-                    <option value="null">Pick an option</option>
-                    <option value="unemployment">Unemployment</option>
-                    <option value="population">Population</option>
-                    <option value="clear">Clear Map</option>
-                </select>
-                <input type="submit" />
-            </form>
+            <div className="form-container">
+                <div className="form-item" 
+                    onClick={this.handleSelection('unemployment')}
+                    >
+                    Unemployment
+                </div>
+                <div className="form-item">Income</div>
+                <div className="form-item">Population</div>
+                <div className="form-item">TODO</div>
+                <div className="form-item">TODO</div>
+                <div className="form-item">TODO</div>
+                <div className="form-item">TODO</div>
+                <div className="form-item">TODO</div>
+                <div className="form-item">TODO</div>
+            </div>
         );
     }
 }

@@ -3,18 +3,25 @@ path {
     stroke: black;
 }
 
-.states :hover {
-    stroke: black;
-    fill: red;
+#svg-container {
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
 }
 
-.state-overlay {
-    fill: white;
+.form-container {
+    border-radius: 10px;
+    border: 1px solid black;
+    height: 160px;
+    width: 800px;
+    margin: 0 auto;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;
 }
 
-.state-enlarged {
-}
-
-.county :hover {
-    fill: red;
+.form-item {
+    padding-top: 15px;
+    justify-self: center;
 }

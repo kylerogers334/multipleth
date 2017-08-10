@@ -63,7 +63,7 @@ export class Map extends React.Component {
         
         return (
             <div id='map'>
-                <svg width='960' height='800' id='svg-container'>
+                <svg width='960' height='650' id='svg-container'>
                     <g id="states-container">
                         <StateLegend />
                     </g>

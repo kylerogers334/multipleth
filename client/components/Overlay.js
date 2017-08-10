@@ -27,7 +27,7 @@ export class Overlay extends React.Component {
     
     render() {
         return (
-            <g id="overlay-container">
+            <g id="overlay-container" fill="white">
                 <CountyLegend />
                 <rect className="state-overlay"></rect>
                 <EnlargedState />
