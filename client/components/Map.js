@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as d3 from 'd3';
-import * as d3Chromatic from 'd3-scale-chromatic';
 import * as topojson from 'topojson';
 
 import {stateHelper} from '../helpers/stateHelpers.js';
@@ -13,11 +12,6 @@ import {loadUsStatesData} from '../actions/actionHandleData.js';
 import {showOverlay} from '../actions/actionOverlay.js';
 
 export class Map extends React.Component {
-    constructor(props) {
-        super(props);
-        this.createMap = this.createMap.bind(this);
-    }
-    
     componentDidUpdate() {
         if (this.props.categoryStateData) {
             stateHelper(this.props.categoryName)(this.props.categoryStateData);
@@ -79,6 +73,7 @@ const mapStateToProps = state => ({
     usStatesLineData: state.usStatesLineData,
     categoryStateData: state.categoryStateData,
     categoryName: state.categoryName,
+    color: state.color
 });
 
 export default connect(mapStateToProps)(Map);

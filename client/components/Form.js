@@ -1,15 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
+import ColorPicker from './ColorPicker.js';
+
 import {clearMap, fetchCategoryState} from '../actions/actionHandleData.js';
 import {fetchCategoryCounty} from '../actions/actionHandleData.js';
 
 export class Form extends React.Component {
-    constructor(props) {
-        super(props);
-        
-    }
-    
     handleSelection(e) {
         const selection = e.target.parentElement.getAttribute('name');
         
@@ -35,32 +32,37 @@ export class Form extends React.Component {
     render() {
         return (
             <div className="form-container">
-                <div className="form-item" name="unemployment">
-                    <a onClick={e => this.handleSelection(e)} href="#">Unemployment</a>
-                </div>
-                <div className="form-item" name="population">
-                    <a onClick={e => this.handleSelection(e)} href="#">Population</a>
-                </div>
-                <div className="form-item" name="income">
-                    <a onClick={e => this.handleSelection(e)} href="#">Income</a>
-                </div>
-                <div className="form-item" name="TODO">
-                    <a onClick={e => this.handleSelection(e)} href="#">TODO</a>
-                </div>
-                <div className="form-item" name="TODO">
-                    <a onClick={e => this.handleSelection(e)} href="#">TODO</a>
-                </div>
-                <div className="form-item" name="TODO">
-                    <a onClick={e => this.handleSelection(e)} href="#">TODO</a>
-                </div>
-                <div className="form-item" name="TODO">
-                    <a onClick={e => this.handleSelection(e)} href="#">TODO</a>
-                </div>
-                <div className="form-item" name="TODO">
-                    <a onClick={e => this.handleSelection(e)} href="#">TODO</a>
-                </div>
-                <div className="form-item" name="clear">
-                    <a onClick={e => this.handleSelection(e)} href="#">Clear Map</a>
+                <ColorPicker />
+                <div className="selection-container">
+                    <div className="selection-items-container">
+                        <div className="selection-item" name="unemployment">
+                            <a onClick={e => this.handleSelection(e)} href="#">Unemployment</a>
+                        </div>
+                        <div className="selection-item" name="population">
+                            <a onClick={e => this.handleSelection(e)} href="#">Population</a>
+                        </div>
+                        <div className="selection-item" name="income">
+                            <a onClick={e => this.handleSelection(e)} href="#">Income</a>
+                        </div>
+                        <div className="selection-item" name="TODO">
+                            <a onClick={e => this.handleSelection(e)} href="#">TODO</a>
+                        </div>
+                        <div className="selection-item" name="TODO">
+                            <a onClick={e => this.handleSelection(e)} href="#">TODO</a>
+                        </div>
+                        <div className="selection-item" name="TODO">
+                            <a onClick={e => this.handleSelection(e)} href="#">TODO</a>
+                        </div>
+                        <div className="selection-item" name="TODO">
+                            <a onClick={e => this.handleSelection(e)} href="#">TODO</a>
+                        </div>
+                        <div className="selection-item" name="TODO">
+                            <a onClick={e => this.handleSelection(e)} href="#">TODO</a>
+                        </div>
+                        <div className="selection-item" name="clear">
+                            <a onClick={e => this.handleSelection(e)} href="#">Clear Map</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         );

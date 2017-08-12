@@ -8,15 +8,7 @@ import {hideOverlay} from '../actions/actionOverlay.js';
 import './Overlay.css';
 
 export class Overlay extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-    
     componentDidMount() {
-        this.showOverlay();
-    }
-
-    showOverlay() {
         d3.select('.state-overlay')
             .attr('height', 600)
             .attr('width', 960)
@@ -24,7 +16,7 @@ export class Overlay extends React.Component {
                 this.props.dispatch(hideOverlay());
             });
     }
-    
+
     render() {
         return (
             <g id="overlay-container" fill="white">

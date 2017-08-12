@@ -32,6 +32,7 @@ export class StateLegend extends React.Component {
 const mapStateToProps = state => ({
     categoryName: state.categoryName,
     categoryStateData: state.categoryStateData,
+    color: state.color,
 });
 
 export default connect(mapStateToProps)(StateLegend);

@@ -41,6 +41,7 @@ const mapStateToProps = state => ({
     categoryName: state.categoryName,
     categoryStateData: state.categoryStateData,
     categoryCountyData: state.categoryCountyData,
+    color: state.color
 });
 
 export default connect(mapStateToProps)(CountyLegend);

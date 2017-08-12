@@ -1,5 +1,6 @@
 import * as d3 from 'd3';
-import * as d3Chromatic from 'd3-scale-chromatic';
+import store from '../store.js';
+import colorSelector from './colorHelpers.js';
 
 export const legendHelper = category => {
     switch (category) {
@@ -49,19 +50,34 @@ function legendIncomeHelper(categoryData) {
 }
 
 function legendLoadHelper(adjustedRange, category, currentView) {
+    
     let g;
-    if (currentView === 'county') {
+    if (currentView === 'county') { 
+        // the selection -> remove -> reapply on both blocksfixes a bug where 
+        // colors dont update correctly
+        d3.select('.county-legend').remove();
+        d3.select('#overlay-container')
+            .append('g')
+            .attr('class', 'county-legend');
+            
         g = d3.select('.county-legend');
     } else {
+        d3.select('.state-legend').remove();
+        d3.select('#states-container')
+            .append('g')
+            .attr('class', 'state-legend');
+            
         g = d3.select('.state-legend');
     }
     
     g.attr('transform', 'translate(0,40)')
         .raise();
     
+    const selectedColor = colorSelector(store.getState().color);
+
     const color = d3.scaleThreshold()
         .domain(adjustedRange)
-        .range(d3Chromatic.schemeBlues[9]);
+        .range(selectedColor);
     
     const xPosition = d3.scaleLinear()
         .domain([0, 9])
@@ -73,7 +89,7 @@ function legendLoadHelper(adjustedRange, category, currentView) {
             .attr('height', 8)
             .attr('x', function(d, i) { return xPosition(i); })
             .attr('width', 37)
-            .attr('fill', function(d, i) { return d3Chromatic.schemeBlues[9][i]; });
+            .attr('fill', function(d, i) { return selectedColor[i]; });
     
     // Fixes an issue with text not being changed
     d3.selectAll('.state-legend-title').remove();
@@ -117,7 +133,6 @@ function legendLoadHelper(adjustedRange, category, currentView) {
 
 function legendNumberFixerHelper(n, currentView, category) {
     const f = d3.formatPrefix;
-    // console.log(f('.1', 1e6)(n))
     switch(currentView) {
         case 'state': {
             switch(category) {

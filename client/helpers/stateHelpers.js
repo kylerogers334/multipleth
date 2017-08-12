@@ -1,5 +1,6 @@
 import * as d3 from 'd3';
-import * as d3Chromatic from 'd3-scale-chromatic';
+import colorSelector from './colorHelpers.js';
+import store from '../store.js';
 
 export const stateHelper = category => {
     switch (category) {
@@ -42,15 +43,15 @@ function stateIncomeHelper(categoryStateData) {
     stateDataHelper(dataAsObj);
 }
 
-function stateDataHelper(data) {
+function stateDataHelper(data, selectedColor) {
     const values = Object.values(data).sort((a, b) => a - b);
     const dataMin = d3.quantile(values, 0.15);
     const dataMax = d3.quantile(values, 0.95);
-    const steps = (dataMax - dataMin) / d3Chromatic.schemeBlues[9].length;
+    const steps = (dataMax - dataMin) / 9;
     const color = d3.scaleThreshold()
                 .domain(d3.range(dataMin, dataMax, steps))
-                .range(d3Chromatic.schemeBlues[9]);
-                
+                .range(colorSelector(store.getState().color));
+
     d3.select('#states-container').selectAll('path')
         .style('fill', function(d, i) {
             return color(data[d3.select(this).attr('id')]);

@@ -12,6 +12,8 @@ import {
     HIDE_OVERLAY
 } from '../actions/actionOverlay.js';
 
+import {CHANGE_COLOR} from '../actions/actionMap.js';
+
 const initialState = {
     usStatesLineData: null,
     displayOverlay: false,
@@ -19,13 +21,17 @@ const initialState = {
     categoryStateData: null,
     categoryCountyData: null,
     categoryName: null,
+    color: 'blue'
 };
 
 export default function(state=initialState, action) {
     switch (action.type) {
         case LOAD_US_STATES_DATA: 
             return Object.assign({}, state, {usStatesLineData: action.usStatesLineData});
-            
+        
+        case CHANGE_COLOR:
+            return Object.assign({}, state, {color: action.color});
+        
         case SHOW_OVERLAY:
             return Object.assign({}, state, {
                         displayOverlay: true, 

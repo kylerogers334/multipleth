@@ -5,10 +5,6 @@ import {countyHelper} from '../helpers/countyHelpers.js';
 import {fetchCategoryCounty} from '../actions/actionHandleData.js';
 
 export class EnlargedState extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-    
     componentDidUpdate() {
         if (this.props.categoryCountyData) {
             countyHelper(this.props.categoryName)(this.props.categoryCountyData);
@@ -48,6 +44,7 @@ const mapStateToProps = state => ({
     enlargedState: state.enlargedState,
     categoryCountyData: state.categoryCountyData,
     categoryName: state.categoryName,
+    color: state.color
 });
 
 export default connect(mapStateToProps)(EnlargedState);

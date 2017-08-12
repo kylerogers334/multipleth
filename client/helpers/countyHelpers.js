@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
-import * as d3Chromatic from 'd3-scale-chromatic';
 import * as topojson from 'topojson';
+import colorSelector from './colorHelpers';
+import store from '../store.js';
 
 export const countyHelper = category => {
     switch (category) {
@@ -90,10 +91,10 @@ function countyDataHelper(data) {
     const values = Object.values(data).sort((a, b) => a - b);
     const dataMin = d3.quantile(values, 0.15);
     const dataMax = d3.quantile(values, 0.95);
-    const steps = (dataMax - dataMin) / d3Chromatic.schemeBlues[9].length;
+    const steps = (dataMax - dataMin) / 9;
     const color = d3.scaleThreshold()
                 .domain(d3.range(dataMin, dataMax, steps))
-                .range(d3Chromatic.schemeBlues[9]);
+                .range(colorSelector(store.getState().color));
            
     // Timeout prevents bug where reducer changing the categoryCountyData
     // (data received from database) before D3 can draw every county line.
