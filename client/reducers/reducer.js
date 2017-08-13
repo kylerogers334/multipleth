@@ -12,7 +12,9 @@ import {
     HIDE_OVERLAY
 } from '../actions/actionOverlay.js';
 
-import {CHANGE_COLOR} from '../actions/actionMap.js';
+import { CHANGE_COLOR } from '../actions/actionMap.js';
+
+import { SHOW_ABOUT_MODAL, SHOW_HELP_MODAL, HIDE_MODAL } from '../actions/actionInfoModal';
 
 const initialState = {
     usStatesLineData: null,
@@ -21,13 +23,24 @@ const initialState = {
     categoryStateData: null,
     categoryCountyData: null,
     categoryName: null,
-    color: 'blue'
+    color: 'blue',
+    showInfoModal: false
 };
 
 export default function(state=initialState, action) {
+    console.log('dispatching action:', action.type);
     switch (action.type) {
         case LOAD_US_STATES_DATA: 
             return Object.assign({}, state, {usStatesLineData: action.usStatesLineData});
+            
+        case SHOW_ABOUT_MODAL:
+            return Object.assign({}, state, {showInfoModal: 'about'});
+            
+        case SHOW_HELP_MODAL:
+            return Object.assign({}, state, {showInfoModal: 'help'});
+            
+        case HIDE_MODAL:
+            return Object.assign({}, state, {showInfoModal: false});
         
         case CHANGE_COLOR:
             return Object.assign({}, state, {color: action.color});

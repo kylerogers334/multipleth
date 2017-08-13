@@ -53,7 +53,7 @@ function legendLoadHelper(adjustedRange, category, currentView) {
     
     let g;
     if (currentView === 'county') { 
-        // the selection -> remove -> reapply on both blocksfixes a bug where 
+        // the selection -> remove -> reapply on both blocks fixes a bug where 
         // colors dont update correctly
         d3.select('.county-legend').remove();
         d3.select('#overlay-container')
