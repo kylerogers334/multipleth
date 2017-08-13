@@ -1,6 +1,8 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {changeColor} from '../actions/actionMap.js';
+import { connect } from 'react-redux';
+import { changeColor } from '../../actions/actionMap.js';
+
+import './ColorPicker.css';
 
 export class ColorPicker extends React.Component {
     render() {

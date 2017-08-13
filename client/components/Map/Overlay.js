@@ -1,11 +1,10 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as d3 from 'd3';
 
 import EnlargedState from './EnlargedState.js';
-import CountyLegend from './CountyLegend.js';
-import {hideOverlay} from '../actions/actionOverlay.js';
-import './Overlay.css';
+import CountyLegend from '../Legend/CountyLegend.js';
+import { hideOverlay } from '../../actions/actionOverlay.js';
 
 export class Overlay extends React.Component {
     componentDidMount() {

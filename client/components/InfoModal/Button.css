@@ -1,0 +1,22 @@
+.info-btn {
+    position: absolute;
+    left: 20px;
+    font-family: 'Roboto Slab', serif;
+    border-radius: 5px;
+    color: #000000;
+    font-size: 15px;
+    background: #fff;
+    border: solid #000000 1px;
+    text-decoration: none;
+}
+
+.about {
+    top: 20px;
+    padding: 5px 10px 5px 10px;
+}
+
+.help {
+    width: 43px;
+    top: 60px;
+    padding: 5px 10px 5px 15px;
+}

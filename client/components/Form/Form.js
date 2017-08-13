@@ -1,10 +1,12 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import ColorPicker from './ColorPicker.js';
 
-import {clearMap, fetchCategoryState} from '../actions/actionHandleData.js';
-import {fetchCategoryCounty} from '../actions/actionHandleData.js';
+import { clearMap, fetchCategoryState } from '../../actions/actionHandleData.js';
+import { fetchCategoryCounty } from '../../actions/actionHandleData.js';
+
+import './Form.css';
 
 export class Form extends React.Component {
     handleSelection(e) {
