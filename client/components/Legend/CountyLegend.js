@@ -8,7 +8,6 @@ export class CountyLegend extends React.Component {
         
         if (this.props.categoryName === null) {
             categoryHelper();
-            console.log('cleared');
             return;
         } 
 

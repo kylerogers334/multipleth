@@ -10,7 +10,6 @@ import AboutModal from './InfoModal/AboutModal.js';
 
 export class App extends React.Component {
     displayModal() {
-        console.log('displayModal called, props ->', this.props.showInfoModal);
         if (this.props.showInfoModal === 'help') {
             return <HelpModal />;
         } else if (this.props.showInfoModal === 'about') {
