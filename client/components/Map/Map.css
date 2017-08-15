@@ -3,3 +3,31 @@
     margin: 0 auto;
     margin-top: 20px;
 }
+
+#overlay-container {
+    fill: white;
+}
+
+.close-overlay-container {
+    margin-top: 10px;
+    margin-left: 10px;
+   transform: translate(889px, 0px);
+}
+
+.close-overlay-button {
+    width: 70px;
+    height: 31px;
+    rx: 5px;
+    ry: 5px;
+    fill: white;
+    stroke: black;
+    color: #000000;
+}
+
+.close-overlay-text {
+    transform: translate(35px, 21px);
+    font-family: 'Roboto Slab', serif;
+    fill: black;
+    text-anchor: middle;
+    font-size: 15;
+}
