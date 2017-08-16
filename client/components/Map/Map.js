@@ -38,11 +38,23 @@ export class Map extends React.Component {
                 .attr('data-FIPS-number', (d, i) => {
                     return us.objects.states.geometries[i].info.id;
                 })
-                .on('click', function(d, i) {
+                .on('mouseover', function() {
+                    d3.select(this)
+                        .style('fill-opacity', 0.8);
+                })
+                .on('mouseout', function() {
+                    d3.select(this)
+                        .style('fill-opacity', 1);
+                })
+                .on('click', function() {
                     // non arrow function used to not call with React context, 
                     // but instead use D3 context
                     reactThis.props.dispatch(showOverlay(this));
-                });
+                })
+                .append('title')
+                    .text(function() { 
+                        return d3.select(this.parentNode).attr('id');
+                    });
                 
             this.props.dispatch(loadUsStatesData(d3StatesData));
         });

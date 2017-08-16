@@ -54,9 +54,22 @@ function blankCountyLoadHelper() {
             .attr('d', d3.geoPath())
             .attr('transform', `translate(${tX}, ${tY}) scale(${scale}, ${scale})`)
             .attr('stroke-width', `${ 1 / (scale * 2) }`)
+            .on('mouseover', function() {
+                d3.select(this)
+                    .style('fill-opacity', 0.8);
+            })
+            .on('mouseout', function() {
+                d3.select(this)
+                    .style('fill-opacity', 1);
+            })
             .on('click', function() {
                 console.log(this.id);
-            });
+            })
+            // Add info on mouseover
+            .append('title')
+                .text(function() { 
+                    return d3.select(this.parentNode).attr('id');
+                });
     });
 }
 
@@ -104,7 +117,7 @@ function countyDataHelper(data) {
         d3.select('#overlay-container').selectAll('path')
         .style('fill', function() {
             const match = data[this.attributes[2].value];
-            return (match === undefined) ? 'red' : color(match);
+            return (match === undefined) ? 'white' : color(match);
         });
     }, 150);
 }
