@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Map from './Map/Map.js';
-import Form from './Form/Form.js';
-import AboutButton from './InfoModal/AboutButton.js';
-import HelpButton from './InfoModal/HelpButton.js';
-import HelpModal from './InfoModal/HelpModal.js';
-import AboutModal from './InfoModal/AboutModal.js';
+import Map from './Map/Map';
+import Form from './Form/Form';
+import AboutButton from './InfoModal/AboutButton';
+import HelpButton from './InfoModal/HelpButton';
+import HelpModal from './InfoModal/HelpModal';
+import AboutModal from './InfoModal/AboutModal';
 
 export class App extends React.Component {
     displayModal() {

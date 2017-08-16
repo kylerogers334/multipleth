@@ -1,8 +1,8 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-import {countyHelper} from '../../helpers/countyHelpers.js';
-import {fetchCategoryCounty} from '../../actions/actionHandleData.js';
+import { countyHelper } from '../../helpers/countyHelpers';
+import { fetchCategoryCounty } from '../../actions/actionHandleData';
 
 export class EnlargedState extends React.Component {
     componentDidUpdate() {

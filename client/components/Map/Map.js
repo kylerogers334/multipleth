@@ -1,15 +1,16 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as d3 from 'd3';
 import * as topojson from 'topojson';
 
-import {stateHelper} from '../../helpers/stateHelpers.js';
+import { stateHelper } from '../../helpers/stateHelpers';
+import { loadUsStatesData } from '../../actions/actionHandleData';
+import { showOverlay } from '../../actions/actionOverlay';
 
-import './Map.css';
 import Overlay from './Overlay';
 import StateLegend from '../Legend/StateLegend';
-import { loadUsStatesData } from '../../actions/actionHandleData.js';
-import { showOverlay } from '../../actions/actionOverlay.js';
+
+import './Map.css';
 
 export class Map extends React.Component {
     componentDidUpdate() {

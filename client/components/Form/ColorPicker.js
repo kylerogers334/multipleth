@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { changeColor } from '../../actions/actionMap.js';
+import { changeColor } from '../../actions/actionMap';
 
 import './ColorPicker.css';
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { legendHelper } from '../../helpers/legendHelper.js';
+
+import { legendHelper } from '../../helpers/legendHelper';
 
 export class StateLegend extends React.Component {
     componentDidUpdate() {

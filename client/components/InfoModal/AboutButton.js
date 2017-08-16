@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import { showAboutModal } from '../../actions/actionInfoModal';
+
 import './Button.css';
 
 export class AboutButton extends React.Component {

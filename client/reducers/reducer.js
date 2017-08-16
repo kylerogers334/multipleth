@@ -5,14 +5,14 @@ import {
     FETCH_CATEGORY_STATE_ERROR,
     FETCH_CATEGORY_COUNTY_SUCCESS,
     FETCH_CATEGORY_COUNTY_ERROR,
-} from '../actions/actionHandleData.js';
+} from '../actions/actionHandleData';
 
 import {
     SHOW_OVERLAY, 
     HIDE_OVERLAY
-} from '../actions/actionOverlay.js';
+} from '../actions/actionOverlay';
 
-import { CHANGE_COLOR } from '../actions/actionMap.js';
+import { CHANGE_COLOR } from '../actions/actionMap';
 
 import { SHOW_ABOUT_MODAL, SHOW_HELP_MODAL, HIDE_MODAL } from '../actions/actionInfoModal';
 

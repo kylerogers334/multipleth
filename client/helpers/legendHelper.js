@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
+
+import colorSelector from './colorHelpers';
 import store from '../store.js';
-import colorSelector from './colorHelpers.js';
 
 export const legendHelper = category => {
     switch (category) {

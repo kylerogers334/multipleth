@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { hideModal } from '../../actions/actionInfoModal.js';
+
+import { hideModal } from '../../actions/actionInfoModal';
 
 import './Modal.css';
 

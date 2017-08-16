@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import { showHelpModal } from '../../actions/actionInfoModal';
+
 import './Button.css';
 
 export class HelpButton extends React.Component {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { hideOverlay } from '../../actions/actionOverlay.js';
+
+import { hideOverlay } from '../../actions/actionOverlay';
 
 import './Map.css';
 
