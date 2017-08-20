@@ -28,7 +28,6 @@ export class Map extends React.Component {
             // Normal this is used as the D3 this.
             let reactThis = this;
             const d3StatesData = d3.select('#states-container')
-                .attr('class', 'states')
                 .selectAll('path')
                 .data(topojson.feature(us, us.objects.states).features)
                 .enter().append('path')

@@ -14,6 +14,7 @@ export const stateHelper = category => {
 
 function stateClearHelper(categoryData) {
     d3.select('#states-container').selectAll('path')
+        .transition().duration(750)
         .style('fill', 'white');
 }
 
@@ -54,6 +55,7 @@ function stateDataHelper(data, selectedColor) {
                 .range(colorSelector(store.getState().color));
 
     d3.select('#states-container').selectAll('path')
+        .transition().duration(750)
         .style('fill', function(d, i) {
             return color(data[d3.select(this).attr('id')]);
         });

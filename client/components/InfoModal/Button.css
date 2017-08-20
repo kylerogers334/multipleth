@@ -1,4 +1,5 @@
 .info-btn {
+    cursor: pointer;
     position: absolute;
     left: 20px;
     font-family: 'Roboto Slab', serif;
@@ -19,4 +20,24 @@
     width: 43px;
     top: 60px;
     padding: 5px 10px 5px 15px;
+}
+
+.hoverOn {
+    transition: background-color 0.5s ease;
+    background-color: #000000;
+}
+
+.hoverOn > a {
+    transition: color 0.3s ease;
+    color: #ffffff;
+}
+
+.hoverOff {
+    transition: background-color 0.5s ease;
+    background-color: #ffffff;
+}
+
+.hoverOff > a {
+    transition: color 0.3s ease;
+    color: #000000;
 }

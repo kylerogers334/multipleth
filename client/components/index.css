@@ -9,6 +9,7 @@ a {
     font-family: 'Roboto Slab', serif;
     letter-spacing: 1px;
     font-weight: lighter;
+    color: black;
 }
 
 a:active {
@@ -17,5 +18,4 @@ a:active {
 
 a:visited {
     text-decoration: none;
-    color: black;
 }

@@ -5,13 +5,14 @@
 }
 
 #overlay-container {
+    transition: all 0.75s ease;
     fill: white;
 }
 
 .close-overlay-container {
     margin-top: 10px;
     margin-left: 10px;
-   transform: translate(889px, 0px);
+    transform: translate(889px, 0px);
 }
 
 .close-overlay-button {
@@ -32,4 +33,24 @@
     fill: black;
     text-anchor: middle;
     font-size: 15;
+}
+
+.hoverSvgOn > rect {
+    transition: fill 0.5s ease;
+    fill: #000000;
+}
+
+.hoverSvgOff > rect {
+    transition: fill 0.5s ease;
+    fill: #ffffff;
+}
+
+.hoverSvgOn > text {
+    transition: fill 0.3s ease;
+    fill: #ffffff;
+}
+
+.hoverSvgOff > text {
+    transition: fill 0.3s ease;
+    fill: #000000;
 }

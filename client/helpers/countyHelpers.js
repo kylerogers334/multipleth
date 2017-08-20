@@ -16,6 +16,7 @@ export const countyHelper = category => {
 
 function countyClearHelper() {
     d3.select('#overlay-container').selectAll('path')
+        .transition().duration(750)
         .style('fill', 'white');
 }
 
@@ -116,9 +117,10 @@ function countyDataHelper(data) {
     // will not update the color.
     setTimeout(() => {
         d3.select('#overlay-container').selectAll('path')
-        .style('fill', function() {
-            const match = data[this.attributes[2].value];
-            return (match === undefined) ? 'white' : color(match);
-        });
+            .transition().duration(750)
+            .style('fill', function() {
+                const match = data[this.attributes[2].value];
+                return (match === undefined) ? 'white' : color(match);
+            });
     }, 150);
 }

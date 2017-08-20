@@ -51,7 +51,6 @@ function legendIncomeHelper(categoryData) {
 }
 
 function legendLoadHelper(adjustedRange, category, currentView) {
-    
     let g;
     if (currentView === 'county') { 
         // the selection -> remove -> reapply on both blocks fixes a bug where 
@@ -90,7 +89,15 @@ function legendLoadHelper(adjustedRange, category, currentView) {
             .attr('height', 8)
             .attr('x', function(d, i) { return xPosition(i); })
             .attr('width', 37)
-            .attr('fill', function(d, i) { return selectedColor[i]; });
+            .attr('fill', function(d, i) { return selectedColor[i]; })
+            .on('mouseover', function() {
+                d3.select(this)
+                    .style('fill-opacity', 0.8);
+            })
+            .on('mouseout', function() {
+                d3.select(this)
+                    .style('fill-opacity', 1);
+            });
     
     // Fixes an issue with text not being changed
     d3.selectAll('.state-legend-title').remove();
@@ -105,7 +112,9 @@ function legendLoadHelper(adjustedRange, category, currentView) {
         .attr('y', -6)
         .attr('fill', '#000')
         .attr('text-anchor', 'start')
-        .attr('font-weight', 'bold')
+        .attr('font-size', '11px')
+        .attr('font-family', 'Roboto Slab, serif')
+        .attr('letter-spacing', '0.5px')
         .text(legendTextHelper(category));
     
     // shiftedRange moves tick location to the right by 1.
