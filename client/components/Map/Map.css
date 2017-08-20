@@ -15,6 +15,7 @@
 }
 
 .close-overlay-button {
+    cursor: pointer;
     width: 70px;
     height: 31px;
     rx: 5px;
@@ -25,6 +26,7 @@
 }
 
 .close-overlay-text {
+    cursor: pointer;
     transform: translate(35px, 21px);
     font-family: 'Roboto Slab', serif;
     fill: black;

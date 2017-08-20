@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const knex = require('../../config.js').knex;
+const knex = require('../../config/config.js').knex;
 
 router.get('/state', function(req, res) {
     knex
