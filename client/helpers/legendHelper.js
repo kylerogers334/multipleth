@@ -4,11 +4,19 @@ import colorSelector from './colorHelpers';
 import store from '../store.js';
 
 export const legendHelper = category => {
+    const luh = legendUniversalHelper;
     switch (category) {
         case null: return legendClearHelper;
-        case 'unemployment': return legendUnemploymentHelper;
-        case 'population': return legendPopulationHelper;
-        case 'income': return legendIncomeHelper;
+        case 'unemployment': return luh('rate');
+        case 'population': return luh('population');
+        case 'income': return luh('median_income');
+        case 'age': return luh('median_age');
+        case 'education': return luh('percent_bach_degree');
+        case 'housing': return luh('median_cost');
+        case 'rent': return luh('median_rent');
+        case 'white': return luh('white');
+        case 'black': return luh('black');
+        case 'asian': return luh('asian');
         case 'load': return legendLoadHelper;
         case 'number-fix': return legendNumberFixerHelper;
         case 'range-adjust': return legendRangeAdjustHelper;
@@ -38,16 +46,10 @@ function legendRangeAdjustHelper(currentView, categoryName, data) {
     });
 }
 
-function legendUnemploymentHelper(categoryData) {
-    return categoryData.map(d => d.rate).sort((a, b) => a - b);
-}
-
-function legendPopulationHelper(categoryData) {
-    return categoryData.map(d => d.population).sort((a, b) => a - b);
-}
-
-function legendIncomeHelper(categoryData) {
-    return categoryData.map(d => d.median_income).sort((a, b) => a - b);
+function legendUniversalHelper(dataKey) {
+    return function(categoryData) {
+        return categoryData.map(d => d[dataKey]).sort((a, b) => a - b);
+    };
 }
 
 function legendLoadHelper(adjustedRange, category, currentView) {
@@ -149,14 +151,28 @@ function legendNumberFixerHelper(n, currentView, category) {
                 case 'unemployment': return f('.1', 1e1)(n);
                 case 'population': return f('.1', 1e6)(n);
                 case 'income': return f('.1', 1e4)(n);
+                case 'age': return f('.1', 1e1)(n);
+                case 'education': return f('.1', 1e1)(n);
+                case 'housing': return f('.1', 1e1)(n);
+                case 'rent': return f('.1', 1e1)(n);
+                case 'white': return f('.1', 1e1)(n);
+                case 'black': return f('.1', 1e1)(n);
+                case 'asian': return f('.1', 1e1)(n);
             }
         }
             
         case 'county': {
             switch(category) {
                 case 'unemployment': return f('.1', 1e1)(n);
-                case 'population': return f('.1', 1e4)(n);
+                case 'population': return f('.1', 1e5)(n);
                 case 'income': return f('.1', 1e4)(n);
+                case 'age': return f('.1', 1e1)(n);
+                case 'education': return f('.1', 1e1)(n);
+                case 'housing': return f('.1', 1e1)(n);
+                case 'rent': return f('.1', 1e1)(n);
+                case 'white': return f('.1', 1e1)(n);
+                case 'black': return f('.1', 1e1)(n);
+                case 'asian': return f('.1', 1e1)(n);
             }
         }
     }
@@ -167,5 +183,12 @@ function legendTextHelper(category) {
         case 'unemployment': return 'Unemployment Rate';
         case 'population': return 'Total Population';
         case 'income': return 'Median Income';
+        case 'age': return 'Median Age';
+        case 'education': return '% of Population w/ Bachelor\'s degrees or higher';
+        case 'housing': return 'Median Housing Cost';
+        case 'rent': return 'Median Rent';
+        case 'white': return '% of Population is White/Latino';
+        case 'black': return '% of Population is Black';
+        case 'asian': return '% of Population is Asian';
     }
 }

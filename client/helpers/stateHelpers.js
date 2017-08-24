@@ -4,11 +4,19 @@ import colorSelector from './colorHelpers';
 import store from '../store';
 
 export const stateHelper = category => {
+    const suh = stateUniversalHelper;
     switch (category) {
         case 'clear': return stateClearHelper;
-        case 'unemployment': return stateUnemploymentHelper;
-        case 'population': return statePopulationHelper;
-        case 'income': return stateIncomeHelper;
+        case 'unemployment': return suh('rate');
+        case 'population': return suh('population');
+        case 'income': return suh('median_income');
+        case 'age': return suh('median_age');
+        case 'education': return suh('percent_bach_degree');
+        case 'housing': return suh('median_cost');
+        case 'rent': return suh('median_rent');
+        case 'white': return suh('white');
+        case 'black': return suh('black');
+        case 'asian': return suh('asian');
     }
 };
 
@@ -18,31 +26,15 @@ function stateClearHelper(categoryData) {
         .style('fill', 'white');
 }
 
-function stateUnemploymentHelper(categoryStateData) {
-    const dataAsObj = {};
-    categoryStateData.forEach(state => {
-        dataAsObj[state.name] = state.rate;
-    });
-    
-    stateDataHelper(dataAsObj);
-}
-
-function statePopulationHelper(categoryStateData) {
-    const dataAsObj = {};
-    categoryStateData.forEach(state => {
-        dataAsObj[state.name] = state.population;
-    });
-    
-    stateDataHelper(dataAsObj);
-}
-
-function stateIncomeHelper(categoryStateData) {
-    const dataAsObj = {};
-    categoryStateData.forEach(state => {
-        dataAsObj[state.name] = state.median_income;
-    });
-    
-    stateDataHelper(dataAsObj);
+function stateUniversalHelper(dataKey) {
+    return function(categoryStateData) {
+        const dataAsObj = {};
+        categoryStateData.forEach(state => {
+            dataAsObj[state.name] = state[dataKey];
+        });
+        
+        stateDataHelper(dataAsObj);
+    };
 }
 
 function stateDataHelper(data, selectedColor) {

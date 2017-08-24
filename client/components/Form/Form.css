@@ -1,3 +1,66 @@
+@import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
+
+/* start bootstrap css framework overrides */
+
+a:focus, a:hover {
+    text-decoration: none;
+    color: #000;
+}
+
+.btn-secondary {
+    margin-left: 75px;
+    margin-top: 10px;
+    margin-bottom: -10px;
+    cursor: pointer;
+    font-family: 'Roboto Slab', serif;
+    border-color: #fff;
+}
+
+.btn-secondary:hover {
+    border-color: #fff;
+    background-color: #fff;
+}
+
+.btn-secondary:active, .btn-secondary.active, .show > .btn-secondary.dropdown-toggle {
+    border-color: #fff;
+    background-color: #fff;
+    border: 1px solid black;
+}
+
+.btn-secondary:focus, .btn-secondary.focus {
+    box-shadow: none;
+}
+
+.dropdown-menu {
+    top: -11px;
+    border: 1px solid black;
+    font-family: 'Roboto Slab', serif;
+    min-width: 0rem;
+}
+
+.dropdown {
+    margin-left: -21px;
+}
+
+.dropdown-item:focus, .dropdown-item:hover {
+    transition: all 0.2s ease;
+    color: #fff;
+    background-color: #000;
+}
+
+#population-dropdown {
+    width: 10px;
+    right: 20px;
+    margin-right: -50px;
+    margin-left: -12px;
+}
+
+#housing-dropdown {
+    margin-right: -60px;
+}
+
+/* end bootstrap css framework overrides */
+
 .form-container {
     display: flex;
     justify-content: center;

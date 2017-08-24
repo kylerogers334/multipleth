@@ -5,12 +5,20 @@ import colorSelector from './colorHelpers';
 import store from '../store';
 
 export const countyHelper = category => {
+    const cuh = countyUniversalHelper;
     switch (category) {
         case 'clear': return countyClearHelper;
         case 'blankLoad': return blankCountyLoadHelper;
-        case 'unemployment': return countyUnemploymentHelper;
-        case 'population': return countyPopulationHelper;
-        case 'income': return countyIncomeHelper;
+        case 'unemployment': return cuh('rate');
+        case 'population': return cuh('population');
+        case 'income': return cuh('median_income');
+        case 'age': return cuh('median_age');
+        case 'education': return cuh('percent_bach_degree');
+        case 'housing': return cuh('median_cost');
+        case 'rent': return cuh('median_rent');
+        case 'white': return cuh('white');
+        case 'black': return cuh('black');
+        case 'asian': return cuh('asian');
     }
 };
 
@@ -18,6 +26,17 @@ function countyClearHelper() {
     d3.select('#overlay-container').selectAll('path')
         .transition().duration(750)
         .style('fill', 'white');
+}
+
+function countyUniversalHelper(dataKey) {
+    return function(categoryCountyData) {
+        const dataAsObj = {};
+        categoryCountyData.forEach(c => {
+            dataAsObj[c.fips] = c[dataKey];
+        });
+        
+        countyDataHelper(dataAsObj);
+    };
 }
 
 function blankCountyLoadHelper() {
@@ -75,36 +94,9 @@ function blankCountyLoadHelper() {
     });
 }
 
-function countyUnemploymentHelper(categoryCountyData) {
-    const dataAsObj = {};
-    categoryCountyData.forEach(c => {
-        dataAsObj[c.fips] = c.rate;
-    });
-    
-    countyDataHelper(dataAsObj);
-}
-
-function countyPopulationHelper(categoryCountyData) {
-    const dataAsObj = {};
-    categoryCountyData.forEach(c => {
-        dataAsObj[c.fips] = c.population;
-    });
-    
-    countyDataHelper(dataAsObj);
-}
-
-function countyIncomeHelper(categoryCountyData) {
-    const dataAsObj = {};
-    categoryCountyData.forEach(county => {
-        dataAsObj[county.fips] = county.median_income;
-    });
-    
-    countyDataHelper(dataAsObj);
-}
-
 function countyDataHelper(data) {
     const values = Object.values(data).sort((a, b) => a - b);
-    const dataMin = d3.quantile(values, 0.15);
+    const dataMin = d3.quantile(values, 0.05);
     const dataMax = d3.quantile(values, 0.95);
     const steps = (dataMax - dataMin) / 9;
     const color = d3.scaleThreshold()
