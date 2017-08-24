@@ -4,9 +4,9 @@ npm-debug.log
 *.env
 *.txt
 
-bundle.js
-bundle.js.map
-*.map
+*/bundle.js
+*/bundle.js.map
+*.js.map
 data
 
 *.sql
