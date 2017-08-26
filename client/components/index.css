@@ -19,3 +19,7 @@ a:active {
 a:visited {
     text-decoration: none;
 }
+
+p {
+    font-family: 'Roboto Slab', serif;
+}
