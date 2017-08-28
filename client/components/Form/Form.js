@@ -14,7 +14,8 @@ export class Form extends React.Component {
         super(props);
         this.state = { 
             populationDropdownOpen: false,
-            housingDropdownOpen: false
+            housingDropdownOpen: false,
+            cssSelection: ''
         };
     }
     
@@ -24,10 +25,30 @@ export class Form extends React.Component {
         });
     }
     
+    applySelectedClass(selection) {
+        // handle dropdowns
+        if ((['white', 'black', 'asian'].includes(this.state.cssSelection) && selection === 'population')
+            || (this.state.cssSelection === 'rent' && selection === 'housing')
+        ) {
+            return ' selected-outline';
+        }
+
+        if (this.state.cssSelection === selection) {
+            return ' selected-outline';
+        }
+
+        return '';
+    }
+    
+    
     handleSelection(selection) {
         if (selection === 'ignore') {
             return;
         }
+        
+        this.setState({
+            cssSelection: selection
+        });
         
         if (selection === 'clear') {
             this.props.dispatch(clearMap());
@@ -54,17 +75,22 @@ export class Form extends React.Component {
                 <ColorPicker />
                 <div className="selection-container">
                     <div className="selection-items-container">
-                        <div className="selection-item">
+                        <div className={'selection-item' + this.applySelectedClass('unemployment')}>
                             <a onClick={() => this.handleSelection('unemployment')} href="#">
                                 Unemployment
                             </a>
                         </div>
                         <Dropdown 
                             id="population-dropdown"
+                            
+                            style={this.state.selected}
                             isOpen={this.state.populationDropdownOpen} 
                             toggle={() => this.toggleDropdown('populationDropdownOpen')}
                         >
-                            <DropdownToggle caret>
+                            <DropdownToggle 
+                                caret
+                                className={this.applySelectedClass('population')}
+                            >
                                 Population
                             </DropdownToggle>
                             <DropdownMenu>
@@ -90,27 +116,31 @@ export class Form extends React.Component {
                                 </DropdownItem>
                             </DropdownMenu>
                         </Dropdown>
-                        <div className="selection-item">
+                        <div className={'selection-item' + this.applySelectedClass('income')}>
                             <a onClick={() => this.handleSelection('income')} href="#">
                                 Income
                             </a>
                         </div>
-                        <div className="selection-item">
+                        <div className={'selection-item' + this.applySelectedClass('age')}>
                             <a onClick={() => this.handleSelection('age')} href="#">
                                 Age
                             </a>
                         </div>
-                        <div className="selection-item">
+                        <div className={'selection-item' + this.applySelectedClass('education')}>
                             <a onClick={e => this.handleSelection('education')} href="#">
                                 Education
                             </a>
                         </div>
                         <Dropdown
                             id="housing-dropdown"
+                            style={this.state.selected}
                             isOpen={this.state.housingDropdownOpen} 
                             toggle={() => this.toggleDropdown('housingDropdownOpen')}
                         >
-                            <DropdownToggle caret>
+                            <DropdownToggle 
+                                caret
+                                className={this.applySelectedClass('housing')}
+                            >
                                 Housing Cost
                             </DropdownToggle>
                             <DropdownMenu>
@@ -126,13 +156,13 @@ export class Form extends React.Component {
                                 </DropdownItem>
                             </DropdownMenu>
                         </Dropdown>
-                        <div className="selection-item">
+                        <div className={'selection-item' + this.applySelectedClass('TODO')}>
                             <a onClick={e => this.handleSelection('TODO')} href="#">TODO</a>
                         </div>
-                        <div className="selection-item">
+                        <div className={'selection-item' + this.applySelectedClass('election')}>
                             <a onClick={e => this.handleSelection('election')} href="#">2016 Election</a>
                         </div>
-                        <div className="selection-item">
+                        <div className={'selection-item' + this.applySelectedClass(' ')}>
                             <a onClick={e => this.handleSelection('clear')} href="#">Clear Map</a>
                         </div>
                     </div>

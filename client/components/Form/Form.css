@@ -86,3 +86,10 @@ a:focus, a:hover {
     padding-top: 15px;
     justify-self: center;
 }
+
+.selected-outline {
+    border-bottom: 2.2px solid black;
+    border-radius: 0px;
+    padding-bottom: 3px;
+    margin-bottom: -5px;
+}
