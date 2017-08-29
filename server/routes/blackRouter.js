@@ -6,7 +6,7 @@ const knex = require('../../config/config.js').knex;
 router.get('/state', function(req, res) {
     knex
         .select('name', 'black')
-        .from('race_state')
+        .from('population_state')
         .then(results => {
             res.json(results);
         })
@@ -18,7 +18,7 @@ router.get('/state', function(req, res) {
 router.get('/county/:fipsID', function(req, res) {
     knex
         .select('fips', 'black')
-        .from('race_county')
+        .from('population_county')
         .where(knex.raw(`SUBSTRING(fips, 1, 2)='${req.params.fipsID}'`))
         .then(results => {
             res.json(results);
