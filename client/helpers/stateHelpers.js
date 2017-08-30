@@ -15,8 +15,10 @@ export const stateHelper = category => {
         case 'housing': return suh('median_cost');
         case 'rent': return suh('median_rent');
         case 'white': return suh('white');
+        case 'latino': return suh('latino');
         case 'black': return suh('black');
         case 'asian': return suh('asian');
+        case 'election': return stateElectionHelper();
     }
 };
 
@@ -34,6 +36,25 @@ function stateUniversalHelper(dataKey) {
         });
         
         stateDataHelper(dataAsObj);
+    };
+}
+
+function stateElectionHelper() {
+    return function(categoryStateData) {
+        const dataAsObj = {};
+        categoryStateData.forEach(state => {
+            dataAsObj[state.name] = state['winner'];
+        });
+        
+        d3.select('#states-container').selectAll('path')
+            .transition().duration(750)
+            .style('fill', function(d, i) {
+                return (
+                    dataAsObj[d3.select(this).attr('id')] === 'Donald Trump' ?
+                        '#D22532' : // red
+                        '#244999'   // blue
+                );
+            });
     };
 }
 

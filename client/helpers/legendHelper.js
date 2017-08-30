@@ -15,8 +15,10 @@ export const legendHelper = category => {
         case 'housing': return luh('median_cost');
         case 'rent': return luh('median_rent');
         case 'white': return luh('white');
+        case 'latino': return luh('latino');
         case 'black': return luh('black');
         case 'asian': return luh('asian');
+        case 'election': return legendElectionHelper;
         case 'load': return legendLoadHelper;
         case 'number-fix': return legendNumberFixerHelper;
         case 'range-adjust': return legendRangeAdjustHelper;
@@ -52,25 +54,51 @@ function legendUniversalHelper(dataKey) {
     };
 }
 
+function legendElectionHelper(currentView) {
+    const g = legendDOMSelectionHelper(currentView);
+    
+    g.attr('transform', 'translate(0,40)')
+        .raise();
+        
+    g.selectAll('rect')
+        .data([0, 1]).enter()
+        .append('rect')
+        .attr('x', function(d, i) { return 580 + 100 * i })
+        .attr('width', 20)
+        .attr('height', 20)
+        .attr('fill', function(d, i) {
+            return  (i === 0) ?  '#244999': '#D22532';
+        });
+        
+    g.append('text')
+        .attr('x', 608)
+        .attr('y', 14)
+        .text('Clinton');
+    
+    g.append('text')
+        .attr('x', 708)
+        .attr('y', 14)
+        .text('Trump');
+    
+    g.append('text')
+        .attr('class', function() {
+            if (currentView === 'county') return 'county-legend-title';
+            else return 'state-legend-title';
+        })
+        .attr('x', 600)
+        .attr('y', -6)
+        .text(legendTextHelper('election'));
+
+    g.selectAll('text')
+        .attr('fill', '#000')
+        .attr('text-anchor', 'start')
+        .attr('font-size', '11px')
+        .attr('font-family', 'Roboto Slab, serif')
+        .attr('letter-spacing', '0.5px');
+}
+
 function legendLoadHelper(adjustedRange, category, currentView) {
-    let g;
-    if (currentView === 'county') { 
-        // the selection -> remove -> reapply on both blocks fixes a bug where 
-        // colors dont update correctly
-        d3.select('.county-legend').remove();
-        d3.select('#overlay-container')
-            .append('g')
-            .attr('class', 'county-legend');
-            
-        g = d3.select('.county-legend');
-    } else {
-        d3.select('.state-legend').remove();
-        d3.select('#states-container')
-            .append('g')
-            .attr('class', 'state-legend');
-            
-        g = d3.select('.state-legend');
-    }
+    const g = legendDOMSelectionHelper(currentView);
     
     g.attr('transform', 'translate(0,40)')
         .raise();
@@ -143,6 +171,25 @@ function legendLoadHelper(adjustedRange, category, currentView) {
     });
 }
 
+function legendDOMSelectionHelper(currentView) {
+    // Fixes all issues with legend re-renders.
+    if (currentView === 'county') { 
+        d3.select('.county-legend').remove();
+        d3.select('#overlay-container')
+            .append('g')
+            .attr('class', 'county-legend');
+            
+        return d3.select('.county-legend');
+    } else {
+        d3.select('.state-legend').remove();
+        d3.select('#states-container')
+            .append('g')
+            .attr('class', 'state-legend');
+            
+        return d3.select('.state-legend');
+    }
+}
+
 function legendNumberFixerHelper(n, currentView, category) {
     const f = d3.formatPrefix;
     switch(currentView) {
@@ -156,6 +203,7 @@ function legendNumberFixerHelper(n, currentView, category) {
                 case 'housing': return f('.1', 1e1)(n);
                 case 'rent': return f('.1', 1e1)(n);
                 case 'white': return f('.1', 1e1)(n);
+                case 'latino': return f('.1', 1e1)(n);
                 case 'black': return f('.1', 1e1)(n);
                 case 'asian': return f('.1', 1e1)(n);
             }
@@ -171,6 +219,7 @@ function legendNumberFixerHelper(n, currentView, category) {
                 case 'housing': return f('.1', 1e1)(n);
                 case 'rent': return f('.1', 1e1)(n);
                 case 'white': return f('.1', 1e1)(n);
+                case 'latino': return f('.1', 1e1)(n);
                 case 'black': return f('.1', 1e1)(n);
                 case 'asian': return f('.1', 1e1)(n);
             }
@@ -187,8 +236,10 @@ function legendTextHelper(category) {
         case 'education': return '% of Population w/ Bachelor\'s degrees or higher';
         case 'housing': return 'Median Housing Cost';
         case 'rent': return 'Median Rent';
-        case 'white': return '% of Population is White/Latino';
+        case 'white': return '% of Population is White';
+        case 'latino': return '% of Population is Latino';
         case 'black': return '% of Population is Black';
         case 'asian': return '% of Population is Asian';
+        case 'election': return '2016 Election Results';
     }
 }

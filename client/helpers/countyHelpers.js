@@ -17,8 +17,10 @@ export const countyHelper = category => {
         case 'housing': return cuh('median_cost');
         case 'rent': return cuh('median_rent');
         case 'white': return cuh('white');
+        case 'latino': return cuh('latino');
         case 'black': return cuh('black');
         case 'asian': return cuh('asian');
+        case 'election': return countyElectionHelper();
     }
 };
 
@@ -36,6 +38,28 @@ function countyUniversalHelper(dataKey) {
         });
         
         countyDataHelper(dataAsObj);
+    };
+}
+
+function countyElectionHelper() {
+    return function(categoryCountyData) {
+        const dataAsObj = {};
+        categoryCountyData.forEach(c => {
+            dataAsObj[c.fips] = c['winner'];
+        });
+
+        setTimeout(() => {
+            d3.select('#overlay-container').selectAll('path')
+                .transition().duration(750)
+                .style('fill', function() {
+                    const match = dataAsObj[this.attributes[2].value];
+                    if (match === undefined) return 'white';
+                    return (match === 'Donald Trump' ?
+                        '#D22532' : // red
+                        '#244999'   // blue
+                    );
+                });
+        }, 150);
     };
 }
 

@@ -105,6 +105,11 @@ export class Form extends React.Component {
                                     White
                                 </DropdownItem>
                                 <DropdownItem 
+                                    onClick={() => this.handleSelection('latino')}
+                                >
+                                    Latino
+                                </DropdownItem>
+                                <DropdownItem 
                                     onClick={() => this.handleSelection('black')}
                                 >
                                     Black

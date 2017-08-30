@@ -10,7 +10,15 @@ export class StateLegend extends React.Component {
         if (this.props.categoryName === null) {
             categoryHelper();
             return;
-        } 
+        }
+        
+        // Election category is a special case, its legend is much different.
+        if (this.props.categoryName === 'election') {
+            // election is a completely different dataset requiring
+            // a completely different legend
+            categoryHelper('state');
+            return;
+        }
         
         const adjustedRange = legendHelper('range-adjust')(
                                     'state', 

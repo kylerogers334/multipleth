@@ -11,6 +11,14 @@ export class CountyLegend extends React.Component {
             categoryHelper();
             return;
         } 
+        
+        if (this.props.categoryName === 'election') {
+            // election is a completely different dataset requiring
+            // a completely different legend
+            categoryHelper('state');
+            categoryHelper('county');
+            return;
+        }
 
         const adjustedRangeState = legendHelper('range-adjust')(
                                     'state', 
