@@ -21,10 +21,14 @@ export class AboutModal extends React.Component {
                         <p>If you are unsure how to use this app, please click on help button on the top left.</p>
                         <p>The name is derived from multiple + choropleth, which is a 
                          map whose areas are shaded and/or proportioned to a dataset.</p>
-                        <p>Data is taken from the 
-                            <a target="_blank" href="https://factfinder.census.gov/faces/nav/jsf/pages/index.xhtml"> Census Bureau</a>.
+                        <p>Data is taken from the <span>  </span>
+                            <a target="_blank" href="https://factfinder.census.gov/faces/nav/jsf/pages/index.xhtml">Census Bureau</a>.
                         </p>
-                        <p>Curious how this was made? Check out the source here! github icon</p>
+                        <p>Curious how this was made? Check out the source code<span>  </span>
+                            <a target="_blank" href="https://github.com/kylerogers334/multipleth">
+                                here!
+                            </a>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -34,6 +38,7 @@ export class AboutModal extends React.Component {
 
 const mapStateToProps = state => ({
     showInfoModal: state.showInfoModal
+    // showInfoModal: state.showInfoModal
 });
 
 export default connect(mapStateToProps)(AboutModal);

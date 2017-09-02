@@ -49,10 +49,8 @@
     line-height: 2em;
 }
 
-.content > div a {
-    font-size: 0.8em;
-    color: #95a5a6;
-    border-radius: 3px;
+.text-container > p > a {
+    text-decoration: underline;
 }
 
 .close-button {

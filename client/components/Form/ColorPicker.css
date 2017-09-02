@@ -3,7 +3,7 @@
     border-radius: 5px 0px 0px 5px;
     border: 1px solid black;
     height: 160px;
-    width: 50px;
+    width: 54px;
     margin-left: -3%;
 }
 
@@ -14,8 +14,8 @@
     border-radius: 5px;
 }
 
-.palette-item:hover {
-    top: 2px;
+.pallete-selected {
+    border: 1.5px solid black;
 }
 
 .gray {
