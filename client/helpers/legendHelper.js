@@ -18,6 +18,7 @@ export const legendHelper = category => {
         case 'latino': return luh('latino');
         case 'black': return luh('black');
         case 'asian': return luh('asian');
+        case 'crime': return luh('rate');
         case 'election': return legendElectionHelper;
         case 'load': return legendLoadHelper;
         case 'number-fix': return legendNumberFixerHelper;
@@ -197,31 +198,33 @@ function legendNumberFixerHelper(n, currentView, category) {
             switch(category) {
                 case 'unemployment': return f('.1', 1e1)(n);
                 case 'population': return f('.1', 1e6)(n);
-                case 'income': return f('.1', 1e4)(n);
-                case 'age': return f('.1', 1e1)(n);
-                case 'education': return f('.1', 1e1)(n);
-                case 'housing': return f('.1', 1e1)(n);
-                case 'rent': return f('.1', 1e1)(n);
-                case 'white': return f('.1', 1e1)(n);
-                case 'latino': return f('.1', 1e1)(n);
-                case 'black': return f('.1', 1e1)(n);
-                case 'asian': return f('.1', 1e1)(n);
+                case 'income': return f('2.0', 1e4)(n);
+                case 'age': return f('2.0', 1e1)(n);
+                case 'education': return f('2.0', 1e1)(n);
+                case 'housing': return f('.0', 1e4)(n);
+                case 'rent': return f('.0', 1e1)(n);
+                case 'white': return f('.0', 1e1)(n);
+                case 'latino': return f('.0', 1e1)(n);
+                case 'black': return f('.0', 1e1)(n);
+                case 'asian': return f('.0', 1e1)(n);
+                case 'crime': return f('.0', 1e1)(n);
             }
         }
             
         case 'county': {
             switch(category) {
                 case 'unemployment': return f('.1', 1e1)(n);
-                case 'population': return f('.1', 1e5)(n);
-                case 'income': return f('.1', 1e4)(n);
-                case 'age': return f('.1', 1e1)(n);
-                case 'education': return f('.1', 1e1)(n);
-                case 'housing': return f('.1', 1e1)(n);
-                case 'rent': return f('.1', 1e1)(n);
-                case 'white': return f('.1', 1e1)(n);
-                case 'latino': return f('.1', 1e1)(n);
-                case 'black': return f('.1', 1e1)(n);
-                case 'asian': return f('.1', 1e1)(n);
+                case 'population': return f('.0', 1e5)(n);
+                case 'income': return f('2.0', 1e4)(n);
+                case 'age': return f('2.0', 1e1)(n);
+                case 'education': return f('2.0', 1e1)(n);
+                case 'housing': return f('.0', 1e4)(n);
+                case 'rent': return f('.0', 1e1)(n);
+                case 'white': return f('.0', 1e1)(n);
+                case 'latino': return f('.0', 1e1)(n);
+                case 'black': return f('.0', 1e1)(n);
+                case 'asian': return f('.0', 1e1)(n);
+                case 'crime': return f('.0', 1e1)(n);
             }
         }
     }
@@ -240,6 +243,7 @@ function legendTextHelper(category) {
         case 'latino': return '% of Population is Latino';
         case 'black': return '% of Population is Black';
         case 'asian': return '% of Population is Asian';
+        case 'crime': return 'Violent Crimes per 100,000 People per Year';
         case 'election': return '2016 Election Results';
     }
 }

@@ -161,8 +161,8 @@ export class Form extends React.Component {
                                 </DropdownItem>
                             </DropdownMenu>
                         </Dropdown>
-                        <div className={'selection-item' + this.applySelectedClass('TODO')}>
-                            <a onClick={e => this.handleSelection('TODO')} href="#">TODO</a>
+                        <div className={'selection-item' + this.applySelectedClass('crime')}>
+                            <a onClick={e => this.handleSelection('crime')} href="#">Crime</a>
                         </div>
                         <div className={'selection-item' + this.applySelectedClass('election')}>
                             <a onClick={e => this.handleSelection('election')} href="#">2016 Election</a>

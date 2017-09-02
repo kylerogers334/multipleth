@@ -20,6 +20,7 @@ export const countyHelper = category => {
         case 'latino': return cuh('latino');
         case 'black': return cuh('black');
         case 'asian': return cuh('asian');
+        case 'crime': return cuh('rate');
         case 'election': return countyElectionHelper();
     }
 };

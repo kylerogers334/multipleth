@@ -18,6 +18,7 @@ export const stateHelper = category => {
         case 'latino': return suh('latino');
         case 'black': return suh('black');
         case 'asian': return suh('asian');
+        case 'crime': return suh('rate');
         case 'election': return stateElectionHelper();
     }
 };

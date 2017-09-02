@@ -1,4 +1,3 @@
-const path = require('path');
 const express = require('express');
 const router = express.Router();
 
@@ -13,6 +12,7 @@ const whiteRouter = require('./whiteRouter');
 const latinoRouter = require('./latinoRouter');
 const blackRouter = require('./blackRouter');
 const asianRouter = require('./asianRouter');
+const crimeRouter = require('./crimeRouter');
 const electionRouter = require('./electionRouter');
 
 router.use('/population', populationRouter);
@@ -26,10 +26,7 @@ router.use('/white', whiteRouter);
 router.use('/latino', latinoRouter);
 router.use('/black', blackRouter);
 router.use('/asian', asianRouter);
+router.use('/crime', crimeRouter);
 router.use('/election', electionRouter);
-
-router.get('/', function(req, res) {
-    res.json({message: 'hello router'});
-});
 
 module.exports = router;
