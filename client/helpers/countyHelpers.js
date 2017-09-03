@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
 import * as topojson from 'topojson';
 
+import dimensionFix from './dimensionFix.js';
 import colorSelector from './colorHelpers';
 import store from '../store';
 
@@ -66,14 +67,16 @@ function countyElectionHelper() {
 
 function blankCountyLoadHelper() {
     const state = d3.select('.state-enlarged');
-        
+    const stateId = dimensionFix[state.attr('id')];
+    
     const dimensions = state.node().getBBox();
-    const scale = (dimensions.x > dimensions.y) ?
+    let scale = (dimensions.x > dimensions.y) ?
         Math.floor(600 / dimensions.height) :
         Math.floor(960 / dimensions.width);
-        
-    const tX = (-scale) * dimensions.x + 50;
-    const tY = (-scale) * dimensions.y + 50;
+    scale = scale + stateId.scale;
+    
+    const tX = (-scale) * dimensions.x + 100 + stateId.x;
+    const tY = (-scale) * dimensions.y + 100 + stateId.y;
     
     state.attr('transform', `translate(${tX}, ${tY}) scale(${scale}, ${scale})`)
         .attr('stroke-width', `${1 / (scale * 2)}`);
