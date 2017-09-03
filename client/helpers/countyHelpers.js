@@ -60,6 +60,10 @@ function countyElectionHelper() {
                         '#D22532' : // red
                         '#244999'   // blue
                     );
+                })
+                .each(function() {
+                    d3.select(this).select('title')
+                        .text(d3.select(this).attr('id'));
                 });
         }, 150);
     };
@@ -84,6 +88,7 @@ function blankCountyLoadHelper() {
     d3.json('./us-10m.v1.json', (error, us) => {
         // extracting data-FIPS-num attribute with correct format
         const temp = this.props.enlargedState.attributes[2].value;
+        // adds a 0 to one digit state codes
         const fipsNum = (temp.length === 1) ? '0' + temp : temp;
         const counties = us.objects.counties.geometries;
         us.objects.counties.geometries = counties.filter(c => {
@@ -91,8 +96,8 @@ function blankCountyLoadHelper() {
         });
         
         d3.select('#overlay-container').selectAll('path')
-            .data(topojson.feature(us, us.objects.counties).features)
-            .enter().append('path')
+            .data(topojson.feature(us, us.objects.counties).features).enter()
+            .append('path')
             .attr('class', 'county')
             .attr('id', (d, i) => {
                 return us.objects.counties.geometries[i].info.name;
@@ -111,12 +116,10 @@ function blankCountyLoadHelper() {
                 d3.select(this)
                     .style('fill-opacity', 1);
             })
-            .on('click', function() {
-                console.log(this.id);
-            })
+            
             // Add info on mouseover
             .append('title')
-                .text(function() { 
+                .text(function(d) {
                     return d3.select(this.parentNode).attr('id');
                 });
     });
@@ -135,12 +138,19 @@ function countyDataHelper(data) {
     // (data received from database) before D3 can draw every county line.
     // If that were to happen, D3 would find no path elements to select and 
     // will not update the color.
+
     setTimeout(() => {
         d3.select('#overlay-container').selectAll('path')
             .transition().duration(750)
             .style('fill', function() {
                 const match = data[this.attributes[2].value];
                 return (match === undefined) ? 'white' : color(match);
+            })
+            .each(function() {
+                const _this = d3.select(this);
+                const stateName = _this.attr('id');
+                const fips = _this.attr('data-FIPS-num');
+                _this.select('title').text(stateName + ' ' + data[fips]);
             });
     }, 150);
 }

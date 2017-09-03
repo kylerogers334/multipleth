@@ -23,7 +23,7 @@ export const stateHelper = category => {
     }
 };
 
-function stateClearHelper(categoryData) {
+function stateClearHelper() {
     d3.select('#states-container').selectAll('path')
         .transition().duration(750)
         .style('fill', 'white');
@@ -49,17 +49,22 @@ function stateElectionHelper() {
         
         d3.select('#states-container').selectAll('path')
             .transition().duration(750)
-            .style('fill', function(d, i) {
+            .style('fill', function(d) {
                 return (
                     dataAsObj[d3.select(this).attr('id')] === 'Donald Trump' ?
                         '#D22532' : // red
                         '#244999'   // blue
                 );
+            })
+            .each(function() {
+                // remove previous category data from title
+                d3.select(this).select('title')
+                    .text(d3.select(this).attr('id'));
             });
     };
 }
 
-function stateDataHelper(data, selectedColor) {
+function stateDataHelper(data) {
     const values = Object.values(data).sort((a, b) => a - b);
     const dataMin = d3.quantile(values, 0.15);
     const dataMax = d3.quantile(values, 0.95);
@@ -70,7 +75,11 @@ function stateDataHelper(data, selectedColor) {
 
     d3.select('#states-container').selectAll('path')
         .transition().duration(750)
-        .style('fill', function(d, i) {
+        .style('fill', function(d) {
             return color(data[d3.select(this).attr('id')]);
+        })
+        .each(function() {
+            const stateName = d3.select(this).attr('id');
+            d3.select(this).select('title').text(stateName + ' ' + data[stateName]);
         });
 }
