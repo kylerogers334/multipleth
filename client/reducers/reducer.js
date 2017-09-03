@@ -18,31 +18,22 @@ import { SHOW_ABOUT_MODAL, SHOW_HELP_MODAL, HIDE_MODAL } from '../actions/action
 
 const initialState = {
     usStatesLineData: null,
+    color: 'blue',
     displayOverlay: false,
     enlargedState: null,
     categoryStateData: null,
     categoryCountyData: null,
     categoryName: null,
-    color: 'blue',
     showInfoModal: false
 };
 
 export default function(state=initialState, action) {
     switch (action.type) {
         case LOAD_US_STATES_DATA: 
-            return Object.assign({}, state, {usStatesLineData: action.usStatesLineData});
-            
-        case SHOW_ABOUT_MODAL:
-            return Object.assign({}, state, {showInfoModal: 'about'});
-            
-        case SHOW_HELP_MODAL:
-            return Object.assign({}, state, {showInfoModal: 'help'});
-            
-        case HIDE_MODAL:
-            return Object.assign({}, state, {showInfoModal: false});
+            return Object.assign({}, state, { usStatesLineData: action.usStatesLineData });
         
         case CHANGE_COLOR:
-            return Object.assign({}, state, {color: action.color});
+            return Object.assign({}, state, { color: action.color });
         
         case SHOW_OVERLAY:
             return Object.assign({}, state, {
@@ -51,13 +42,13 @@ export default function(state=initialState, action) {
                     });
                     
         case HIDE_OVERLAY: 
-            return Object.assign({}, state, {displayOverlay: false});
+            return Object.assign({}, state, { displayOverlay: false });
             
         case CLEAR_MAP: 
             return Object.assign({}, state, {
                         categoryStateData: null,
                         categoryCountyData: null,
-                        categoryName: null,
+                        categoryName: null
                     });
                     
         case FETCH_CATEGORY_STATE_SUCCESS:
@@ -77,6 +68,15 @@ export default function(state=initialState, action) {
                     
         case FETCH_CATEGORY_COUNTY_ERROR:
             console.error(action.error); return state;
+            
+        case SHOW_ABOUT_MODAL:
+            return Object.assign({}, state, { showInfoModal: 'about' });
+            
+        case SHOW_HELP_MODAL:
+            return Object.assign({}, state, { showInfoModal: 'help' });
+            
+        case HIDE_MODAL:
+            return Object.assign({}, state, { showInfoModal: false });
         
         default: return state;
     }

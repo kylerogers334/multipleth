@@ -18,7 +18,12 @@
     "rules": {
         "indent": [
             "error",
-            "tab"
+            4,
+            { "SwitchCase": 1 }
+        ],
+        "jsx-quotes": [
+            "error", 
+            "prefer-double"
         ],
         "linebreak-style": [
             "error",

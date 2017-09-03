@@ -132,7 +132,7 @@ export class Form extends React.Component {
                             </a>
                         </div>
                         <div className={'selection-item' + this.applySelectedClass('education')}>
-                            <a onClick={e => this.handleSelection('education')} href="#">
+                            <a onClick={() => this.handleSelection('education')} href="#">
                                 Education
                             </a>
                         </div>
@@ -162,13 +162,13 @@ export class Form extends React.Component {
                             </DropdownMenu>
                         </Dropdown>
                         <div className={'selection-item' + this.applySelectedClass('crime')}>
-                            <a onClick={e => this.handleSelection('crime')} href="#">Crime</a>
+                            <a onClick={() => this.handleSelection('crime')} href="#">Crime</a>
                         </div>
                         <div className={'selection-item' + this.applySelectedClass('election')}>
-                            <a onClick={e => this.handleSelection('election')} href="#">2016 Election</a>
+                            <a onClick={() => this.handleSelection('election')} href="#">2016 Election</a>
                         </div>
                         <div className={'selection-item' + this.applySelectedClass(' ')}>
-                            <a onClick={e => this.handleSelection('clear')} href="#">Clear Map</a>
+                            <a onClick={() => this.handleSelection('clear')} href="#">Clear Map</a>
                         </div>
                     </div>
                 </div>

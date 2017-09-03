@@ -38,7 +38,6 @@ export class AboutModal extends React.Component {
 
 const mapStateToProps = state => ({
     showInfoModal: state.showInfoModal
-    // showInfoModal: state.showInfoModal
 });
 
 export default connect(mapStateToProps)(AboutModal);

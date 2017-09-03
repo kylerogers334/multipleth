@@ -38,9 +38,7 @@ export class CountyLegend extends React.Component {
     
     render() {
         return (
-            <g className="county-legend"> 
-
-            </g>
+            <g className="county-legend"></g>
         );
     }
 }

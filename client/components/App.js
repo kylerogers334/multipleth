@@ -14,8 +14,6 @@ export class App extends React.Component {
             return <HelpModal />;
         } else if (this.props.showInfoModal === 'about') {
             return <AboutModal />;
-        } else {
-            return;
         }
     }
     

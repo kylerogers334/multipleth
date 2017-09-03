@@ -8,20 +8,20 @@ import './Map.css';
 export class CloseOverlayButton extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {hover: false};
+        this.state = { hover: false };
     }
 
     addHoverCSS() {
-        this.setState({hover: 'hoverSvgOn'});
+        this.setState({ hover: 'hoverSvgOn' });
     }
     
     removeHoverCSS() {
-        this.setState({hover: 'hoverSvgOff'});
+        this.setState({ hover: 'hoverSvgOff' });
     }
     
     render() {
         return (
-            <g className={"close-overlay-container " + 
+            <g className={'close-overlay-container ' + 
                     (this.state.hover ? this.state.hover : '')}
                 onMouseEnter={() => this.addHoverCSS()}
                 onMouseLeave={() => this.removeHoverCSS()}

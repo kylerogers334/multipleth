@@ -64,7 +64,7 @@ function legendElectionHelper(currentView) {
     g.selectAll('rect')
         .data([0, 1]).enter()
         .append('rect')
-        .attr('x', function(d, i) { return 580 + 100 * i })
+        .attr('x', function(d, i) { return 580 + 100 * i; })
         .attr('width', 20)
         .attr('height', 20)
         .attr('fill', function(d, i) {
@@ -115,20 +115,20 @@ function legendLoadHelper(adjustedRange, category, currentView) {
         .rangeRound([541, 864]);
 
     g.selectAll('rect')
-        .data(color.range())
-        .enter().append('rect')
-            .attr('height', 8)
-            .attr('x', function(d, i) { return xPosition(i); })
-            .attr('width', 37)
-            .attr('fill', function(d, i) { return selectedColor[i]; })
-            .on('mouseover', function() {
-                d3.select(this)
-                    .style('fill-opacity', 0.8);
-            })
-            .on('mouseout', function() {
-                d3.select(this)
-                    .style('fill-opacity', 1);
-            });
+        .data(color.range()).enter()
+        .append('rect')
+        .attr('height', 8)
+        .attr('x', function(d, i) { return xPosition(i); })
+        .attr('width', 37)
+        .attr('fill', function(d, i) { return selectedColor[i]; })
+        .on('mouseover', function() {
+            d3.select(this)
+                .style('fill-opacity', 0.8);
+        })
+        .on('mouseout', function() {
+            d3.select(this)
+                .style('fill-opacity', 1);
+        });
     
     // Fixes an issue with text not being changed
     d3.selectAll('.state-legend-title').remove();
@@ -159,13 +159,15 @@ function legendLoadHelper(adjustedRange, category, currentView) {
         .remove();
     
     // hide the ticks on both ends
-    d3.select('.state-legend').selectAll('g')
+    d3.select('.state-legend')
+    .selectAll('g')
     .attr('opacity', function(d, i) {
         if (i === 0 || i === 9) return 0;
         else return 1;
     });
     
-    d3.select('.county-legend').selectAll('g')
+    d3.select('.county-legend')
+    .selectAll('g')
     .attr('opacity', function(d, i) {
         if (i === 0 || i === 9) return 0;
         else return 1;
@@ -208,6 +210,7 @@ function legendNumberFixerHelper(n, currentView, category) {
                 case 'black': return f('.0', 1e1)(n);
                 case 'asian': return f('.0', 1e1)(n);
                 case 'crime': return f('.0', 1e1)(n);
+                default: break;
             }
         }
             
@@ -225,6 +228,7 @@ function legendNumberFixerHelper(n, currentView, category) {
                 case 'black': return f('.0', 1e1)(n);
                 case 'asian': return f('.0', 1e1)(n);
                 case 'crime': return f('.0', 1e1)(n);
+                default: break;
             }
         }
     }
@@ -245,5 +249,6 @@ function legendTextHelper(category) {
         case 'asian': return '% of Population is Asian';
         case 'crime': return 'Violent Crimes per 100,000 People per Year';
         case 'election': return '2016 Election Results';
+        default: break;
     }
 }

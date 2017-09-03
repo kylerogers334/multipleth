@@ -31,9 +31,7 @@ export class StateLegend extends React.Component {
     
     render() {
         return (
-            <g className="state-legend"> 
-
-            </g>
+            <g className="state-legend"></g>
         );
     }
 }
@@ -41,7 +39,7 @@ export class StateLegend extends React.Component {
 const mapStateToProps = state => ({
     categoryName: state.categoryName,
     categoryStateData: state.categoryStateData,
-    color: state.color,
+    color: state.color
 });
 
 export default connect(mapStateToProps)(StateLegend);

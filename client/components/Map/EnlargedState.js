@@ -24,17 +24,19 @@ export class EnlargedState extends React.Component {
                 )
             );
         }
+        
         // Always show an empty state;
         countyHelper('blankLoad').call(this);
     }
     
     render() {
         return (
-                <path
-                    d={this.props.enlargedState.attributes[0].value}
-                    className='state-enlarged'
-                    id={this.props.enlargedState.id}
-                ></path>
+            <path
+                d={this.props.enlargedState.attributes[0].value}
+                className="state-enlarged"
+                id={this.props.enlargedState.id}
+            >
+            </path>
         );
     }
 }

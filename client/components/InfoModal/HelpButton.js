@@ -8,20 +8,20 @@ import './Button.css';
 export class HelpButton extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {hover: false};
+        this.state = { hover: false };
     }
 
     addHoverCSS() {
-        this.setState({hover: 'hoverOn'});
+        this.setState({ hover: 'hoverOn' });
     }
     
     removeHoverCSS() {
-        this.setState({hover: 'hoverOff'});
+        this.setState({ hover: 'hoverOff' });
     }
     
     render() {
         return (
-            <div className={"help info-btn " + (this.state.hover ? this.state.hover : '')}
+            <div className={'help info-btn ' + (this.state.hover ? this.state.hover : '')}
                 onMouseEnter={() => this.addHoverCSS()}
                 onMouseLeave={() => this.removeHoverCSS()}
                 onClick={() => this.props.dispatch(showHelpModal())}
