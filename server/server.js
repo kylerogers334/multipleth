@@ -15,6 +15,8 @@ app.get('/teapot', function(req, res) {
     res.status(418).send();
 });
 
-app.listen(process.env.PORT, function() {
+const server = app.listen(process.env.PORT, function() {
     console.log('App running on port', process.env.PORT);
 });
+
+module.exports = { app, server };
