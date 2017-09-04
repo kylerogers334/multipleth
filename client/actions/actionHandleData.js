@@ -1,29 +1,25 @@
 /* global fetch */
+import * as types from './actionTypes.js';
 
-export const LOAD_US_STATES_DATA = 'LOAD_US_STATES_DATA';
 export const loadUsStatesData = usStatesData => ({
     usStatesData,
-    type: LOAD_US_STATES_DATA
+    type: types.LOAD_US_STATES_DATA
 });
 
-export const CLEAR_MAP = 'CLEAR_MAP';
 export const clearMap = () => ({
-    type: CLEAR_MAP
+    type: types.CLEAR_MAP
 });
 
-export const FETCH_CATEGORY_STATE_SUCCESS = 'FETCH_CATEGORY_STATE_SUCCESS';
 export const fetchCategoryStateSuccess = data => ({
-    type: FETCH_CATEGORY_STATE_SUCCESS,
+    type: types.FETCH_CATEGORY_STATE_SUCCESS,
     data
 });
 
-export const FETCH_CATEGORY_STATE_ERROR = 'FETCH_CATEGORY_STATE_ERROR';
 export const fetchCategoryStateError = error => ({
-    type: FETCH_CATEGORY_STATE_ERROR,
+    type: types.FETCH_CATEGORY_STATE_ERROR,
     error
 });
 
-export const FETCH_CATEGORY_STATE = 'FETCH_CATEGORY_STATE';
 export const fetchCategoryState = category => dispatch => {
     return fetch(`/api/${category}/state`)
     .then(response => {
@@ -39,19 +35,16 @@ export const fetchCategoryState = category => dispatch => {
     });
 };
 
-export const FETCH_CATEGORY_COUNTY_SUCCESS = 'FETCH_CATEGORY_COUNTY_SUCCESS';
 export const fetchCategoryCountySuccess = data => ({
-    type: FETCH_CATEGORY_COUNTY_SUCCESS,
+    type: types.FETCH_CATEGORY_COUNTY_SUCCESS,
     data
 });
 
-export const FETCH_CATEGORY_COUNTY_ERROR = 'FETCH_CATEGORY_COUNTY_ERROR';
 export const fetchCategoryCountyError = error => ({
-    type: FETCH_CATEGORY_COUNTY_ERROR,
+    type: types.FETCH_CATEGORY_COUNTY_ERROR,
     error
 });
 
-export const FETCH_CATEGORY_COUNTY = 'FETCH_CATEGORY_COUNTY';
 export const fetchCategoryCounty = (category, selectedState) => dispatch => {
     return fetch(`/api/${category}/county/${selectedState}`)
     .then(response => {

@@ -1,6 +1,7 @@
-export const CHANGE_COLOR = 'CHANGE_COLOR';
+import * as types from './actionTypes.js';
+
 export const changeColor = color => ({
-    type: CHANGE_COLOR,
+    type: types.CHANGE_COLOR,
     color
 });
 

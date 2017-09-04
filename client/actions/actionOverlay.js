@@ -1,10 +1,10 @@
-export const SHOW_OVERLAY = 'SHOW_OVERLAY';
+import * as types from './actionTypes.js';
+
 export const showOverlay = enlargedState => ({
-    enlargedState,
-    type: SHOW_OVERLAY
+    type: types.SHOW_OVERLAY,
+    enlargedState
 });
 
-export const HIDE_OVERLAY = 'HIDE_OVERLAY';
 export const hideOverlay = () => ({
-    type: HIDE_OVERLAY
+    type: types.HIDE_OVERLAY
 });

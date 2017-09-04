@@ -1,20 +1,4 @@
-import {
-    LOAD_US_STATES_DATA,
-    CLEAR_MAP,
-    FETCH_CATEGORY_STATE_SUCCESS,
-    FETCH_CATEGORY_STATE_ERROR,
-    FETCH_CATEGORY_COUNTY_SUCCESS,
-    FETCH_CATEGORY_COUNTY_ERROR,
-} from '../actions/actionHandleData';
-
-import {
-    SHOW_OVERLAY, 
-    HIDE_OVERLAY
-} from '../actions/actionOverlay';
-
-import { CHANGE_COLOR } from '../actions/actionMap';
-
-import { SHOW_ABOUT_MODAL, SHOW_HELP_MODAL, HIDE_MODAL } from '../actions/actionInfoModal';
+import * as types from '../actions/actionTypes.js';
 
 const initialState = {
     usStatesLineData: null,
@@ -29,53 +13,53 @@ const initialState = {
 
 export default function(state=initialState, action) {
     switch (action.type) {
-        case LOAD_US_STATES_DATA: 
+        case types.LOAD_US_STATES_DATA: 
             return Object.assign({}, state, { usStatesLineData: action.usStatesLineData });
         
-        case CHANGE_COLOR:
+        case types.CHANGE_COLOR:
             return Object.assign({}, state, { color: action.color });
         
-        case SHOW_OVERLAY:
+        case types.SHOW_OVERLAY:
             return Object.assign({}, state, {
                         displayOverlay: true, 
                         enlargedState: action.enlargedState
                     });
                     
-        case HIDE_OVERLAY: 
+        case types.HIDE_OVERLAY: 
             return Object.assign({}, state, { displayOverlay: false });
             
-        case CLEAR_MAP: 
+        case types.CLEAR_MAP: 
             return Object.assign({}, state, {
                         categoryStateData: null,
                         categoryCountyData: null,
                         categoryName: null
                     });
                     
-        case FETCH_CATEGORY_STATE_SUCCESS:
+        case types.FETCH_CATEGORY_STATE_SUCCESS:
             return Object.assign({}, state, {
                         categoryStateData: action.data,
                         categoryName: action.data.category
                     });
                     
-        case FETCH_CATEGORY_STATE_ERROR:
+        case types.FETCH_CATEGORY_STATE_ERROR:
             console.error(action.error); return state;
         
-        case FETCH_CATEGORY_COUNTY_SUCCESS:
+        case types.FETCH_CATEGORY_COUNTY_SUCCESS:
             return Object.assign({}, state, {
                         categoryCountyData: action.data,
                         categoryName: action.data.category
                     });
                     
-        case FETCH_CATEGORY_COUNTY_ERROR:
+        case types.FETCH_CATEGORY_COUNTY_ERROR:
             console.error(action.error); return state;
             
-        case SHOW_ABOUT_MODAL:
+        case types.SHOW_ABOUT_MODAL:
             return Object.assign({}, state, { showInfoModal: 'about' });
             
-        case SHOW_HELP_MODAL:
+        case types.SHOW_HELP_MODAL:
             return Object.assign({}, state, { showInfoModal: 'help' });
             
-        case HIDE_MODAL:
+        case types.HIDE_MODAL:
             return Object.assign({}, state, { showInfoModal: false });
         
         default: return state;
