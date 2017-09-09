@@ -1,12 +1,12 @@
 /* global expect */
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+import fetchMock from 'fetch-mock';
 import * as handleDataActions from '../../client/actions/actionHandleData';
 import * as infoModalActions from '../../client/actions/actionInfoModal';
 import * as mapActions from '../../client/actions/actionMap';
 import * as overlayActions from '../../client/actions/actionOverlay';
 import * as types from '../../client/actions/actionTypes';
-// import nock from 'nock';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -59,25 +59,70 @@ describe('sync actions', () => {
     });
 });
 
-// describe('async actions', () => {
-//   afterEach(() => {
-//     nock.cleanAll()
-//   })
-
-//   it('creates FETCH_CATEGORY_STATE_SUCCESS when fetching state has been done', () => {
-//     nock('/api/age/state')
-//       .get('/todos')
-//       .reply(200, { body: { todos: ['do something'] } })
-
-//     const expectedActions = [
-//       { type: types.FETCH_TODOS_REQUEST },
-//       { type: types.FETCH_TODOS_SUCCESS, body: { todos: ['do something'] } }
-//     ]
-//     const store = mockStore({ todos: [] })
-
-//     return store.dispatch(actions.fetchTodos()).then(() => {
-//       // return of async actions
-//       expect(store.getActions()).toEqual(expectedActions)
-//     })
-//   })
-// })
+describe('async actions', () => {
+    afterEach(() => fetchMock.reset());
+    
+    it('creates FETCH_CATEGORY_STATE_SUCCESS when fetching state data has succeeded', () => {
+        fetchMock.getOnce('/api/age/state', {});
+        
+        const expectedActions = [
+            { 
+                type: types.FETCH_CATEGORY_STATE_SUCCESS, 
+                data: {}, 
+                category: 'age'
+            }
+        ];
+        const store = mockStore({ categoryStateData: null });
+        
+        return store.dispatch(handleDataActions.fetchCategoryState('age')).then(() => {
+            expect(store.getActions()).toEqual(expectedActions);
+        });
+    });
+    
+    it('creates FETCH_CATEGORY_STATE_ERROR when fetching state data has failed', () => {
+        fetchMock.mock('/api/INVALID/state', 503);
+        
+        const expectedActions = [
+        { type: types.FETCH_CATEGORY_STATE_ERROR, error: 
+            new Error('invalid json response body at /api/INVALID/state reason: ' + 
+            'Unexpected end of JSON input') }
+        ];
+        const store = mockStore({ categoryStateData: null });
+        
+        return store.dispatch(handleDataActions.fetchCategoryState('INVALID')).then(() => {
+            expect(store.getActions()).toEqual(expectedActions);
+        });
+    });
+    
+    it('creates FETCH_CATEGORY_STATE_SUCCESS when fetching state data has succeeded', () => {
+        fetchMock.getOnce('/api/age/county/01', {});
+        
+        const expectedActions = [
+            { 
+                type: types.FETCH_CATEGORY_COUNTY_SUCCESS, 
+                data: {},
+                category: 'age' 
+            }
+        ];
+        const store = mockStore({ categoryCountyData: null });
+        
+        return store.dispatch(handleDataActions.fetchCategoryCounty('age', '01')).then(() => {
+            expect(store.getActions()).toEqual(expectedActions);
+        });
+    });
+    
+    it('creates FETCH_CATEGORY_COUNTY_ERROR when fetching state data has failed', () => {
+        fetchMock.mock('/api/INVALID/county/01', 503);
+        
+        const expectedActions = [
+        { type: types.FETCH_CATEGORY_COUNTY_ERROR, error: 
+            new Error('invalid json response body at /api/INVALID/county/01 reason: ' + 
+            'Unexpected end of JSON input') }
+        ];
+        const store = mockStore({ categoryCountyData: null });
+        
+        return store.dispatch(handleDataActions.fetchCategoryCounty('INVALID', '01')).then(() => {
+            expect(store.getActions()).toEqual(expectedActions);
+        });
+    });
+});
