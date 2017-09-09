@@ -10,7 +10,7 @@ export class ColorPicker extends React.Component {
             .map((color, i) => {
                 return (
                     <div className={`palette-item ${color} 
-                        ${this.props.color === color ? 'pallete-selected': ''}`}
+                        ${this.props.color === color ? 'palette-selected': ''}`}
                      onClick={() => this.props.dispatch(changeColor(color))}
                      key={i}>
                     </div>
