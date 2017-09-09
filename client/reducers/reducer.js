@@ -26,9 +26,12 @@ export default function(state=initialState, action) {
                     });
                     
         case types.HIDE_OVERLAY: 
-            return Object.assign({}, state, { displayOverlay: false });
+            return Object.assign({}, state, { 
+                        displayOverlay: false, 
+                        enlargedState: null
+                    });
             
-        case types.CLEAR_MAP: 
+        case types.CLEAR_MAP:
             return Object.assign({}, state, {
                         categoryStateData: null,
                         categoryCountyData: null,
@@ -36,9 +39,10 @@ export default function(state=initialState, action) {
                     });
                     
         case types.FETCH_CATEGORY_STATE_SUCCESS:
+            console.log(action);
             return Object.assign({}, state, {
                         categoryStateData: action.data,
-                        categoryName: action.data.category
+                        categoryName: action.category
                     });
                     
         case types.FETCH_CATEGORY_STATE_ERROR:
@@ -47,7 +51,7 @@ export default function(state=initialState, action) {
         case types.FETCH_CATEGORY_COUNTY_SUCCESS:
             return Object.assign({}, state, {
                         categoryCountyData: action.data,
-                        categoryName: action.data.category
+                        categoryName: action.category
                     });
                     
         case types.FETCH_CATEGORY_COUNTY_ERROR:

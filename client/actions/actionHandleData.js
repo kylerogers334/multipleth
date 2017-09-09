@@ -10,9 +10,10 @@ export const clearMap = () => ({
     type: types.CLEAR_MAP
 });
 
-export const fetchCategoryStateSuccess = data => ({
+export const fetchCategoryStateSuccess = (data, category) => ({
     type: types.FETCH_CATEGORY_STATE_SUCCESS,
-    data
+    data,
+    category
 });
 
 export const fetchCategoryStateError = error => ({
@@ -27,17 +28,17 @@ export const fetchCategoryState = category => dispatch => {
         return response.json();
     })
     .then(data => {
-        data.category = category;
-        return dispatch(fetchCategoryStateSuccess(data));
+        return dispatch(fetchCategoryStateSuccess(data, category));
     })
     .catch(err => {
         dispatch(fetchCategoryStateError(err));
     });
 };
 
-export const fetchCategoryCountySuccess = data => ({
+export const fetchCategoryCountySuccess = (data, category) => ({
     type: types.FETCH_CATEGORY_COUNTY_SUCCESS,
-    data
+    data,
+    category
 });
 
 export const fetchCategoryCountyError = error => ({
@@ -52,8 +53,7 @@ export const fetchCategoryCounty = (category, selectedState) => dispatch => {
         return response.json();
     })
     .then(data => {
-        data.category = category;
-        return dispatch(fetchCategoryCountySuccess(data));
+        return dispatch(fetchCategoryCountySuccess(data, category));
     })
     .catch(err => {
         dispatch(fetchCategoryCountyError(err));
