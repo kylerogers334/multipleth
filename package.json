@@ -12,7 +12,7 @@
     "test:client": "jest test/test-client",
     "test:server": "mocha --compilers js:babel-core/register test/test-server/test-server.js",
     "//": "bootstrap sometimes fails to install for some reason, added a redundancy.",
-    "heroku:postbuild": "npm install bootstrap@4.0.0-alpha.6 && npm run webpack"
+    "heroku-postbuild": "npm install bootstrap@4.0.0-alpha.6 && npm run webpack"
   },
   "author": "Kyle Rogers",
   "license": "ISC",
