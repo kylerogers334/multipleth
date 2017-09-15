@@ -10,7 +10,9 @@
     "lint": "eslint config/",
     "test": "concurrently \"npm run test:server\" \"npm run test:client\"",
     "test:client": "jest test/test-client",
-    "test:server": "mocha --compilers js:babel-core/register test/test-server/test-server.js"
+    "test:server": "mocha --compilers js:babel-core/register test/test-server/test-server.js",
+    "//": "bootstrap sometimes fails to install for some reason, added a redundancy.",
+    "heroku:postinstall": "npm install bootstrap@4.0.0-alpha.6 && npm run webpack"
   },
   "author": "Kyle Rogers",
   "license": "ISC",
@@ -48,6 +50,7 @@
     "redux-thunk": "^2.2.0",
     "style-loader": "^0.18.2",
     "topojson": "^3.0.0",
+    "uglifyjs-webpack-plugin": "^0.4.6",
     "webpack": "^3.3.0"
   }
 }
