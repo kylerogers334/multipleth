@@ -39,7 +39,6 @@ export default function(state=initialState, action) {
                     });
                     
         case types.FETCH_CATEGORY_STATE_SUCCESS:
-            console.log(action);
             return Object.assign({}, state, {
                         categoryStateData: action.data,
                         categoryName: action.category

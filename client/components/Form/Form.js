@@ -15,7 +15,7 @@ export class Form extends React.Component {
         this.state = { 
             populationDropdownOpen: false,
             housingDropdownOpen: false,
-            cssSelection: ''
+            cssSelection: 'unemployment'
         };
     }
     

@@ -4,7 +4,7 @@ import * as d3 from 'd3';
 import * as topojson from 'topojson';
 
 import { stateHelper } from '../../helpers/stateHelpers';
-import { loadUsStatesData } from '../../actions/actionHandleData';
+import { loadUsStatesData, fetchCategoryState } from '../../actions/actionHandleData';
 import { showOverlay } from '../../actions/actionOverlay';
 
 import Overlay from './Overlay';
@@ -57,6 +57,13 @@ export class Map extends React.Component {
                     });
                 
             this.props.dispatch(loadUsStatesData(d3StatesData));
+            
+            // show unemployment map on load
+            // conditional to prevent loop of dispatching
+            if (!this.props.categoryStateData && !window.__map_loaded__) {
+                window.__map_loaded__ = true; // prevent Clear Map from loading unemployment
+                this.props.dispatch(fetchCategoryState('unemployment'));
+            }
         });
     }
     
