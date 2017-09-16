@@ -57,7 +57,8 @@ The linter can be run with `npm run lint`.
 
 ## Tech Stack ##
 
-I wrote a [Medium post]() outlining the design choices, challenges, and learning experiences.
+I wrote a [Medium post](https://medium.com/@kylerogers334/things-i-learned-making-my-first-d3-react-redux-app-called-multipleth-c0bfc088093c) 
+outlining the design choices, challenges, and learning experiences.
 
 The main tech used: 
 
