@@ -8,23 +8,13 @@ import CloseOverlayButton from './CloseOverlayButton';
 
 import './Map.css';
 
-export class Overlay extends React.Component {
-    componentDidMount() {
-        d3.select('.state-overlay')
-            .attr('height', 600)
-            .attr('width', 960);
-    }
-
-    render() {
-        return (
-            <g id="overlay-container">
-                <CountyLegend />
-                <rect className="state-overlay"></rect>
-                <EnlargedState />
-                <CloseOverlayButton />
-            </g>
-        );
-    }
-}
+export const Overlay = () => (
+	<g id="overlay-container">
+		<CountyLegend />
+		<rect className="state-overlay" style={{ height: 600, width: 960 }} />
+		<EnlargedState />
+		<CloseOverlayButton />
+	</g>
+);
 
 export default connect()(Overlay);

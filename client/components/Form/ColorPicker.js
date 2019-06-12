@@ -4,29 +4,28 @@ import { changeColor } from '../../actions/actionMap.js';
 
 import './ColorPicker.css';
 
-export class ColorPicker extends React.Component {
-    render() {
-        const PalleteItems = ['blue', 'purple', 'red', 'orange', 'green', 'gray']
-            .map((color, i) => {
-                return (
-                    <div className={`palette-item ${color} 
-                        ${this.props.color === color ? 'palette-selected': ''}`}
-                     onClick={() => this.props.dispatch(changeColor(color))}
-                     key={i}>
-                    </div>
-                );
-            });
+export const ColorPicker = props => {
+	const PalleteItems = [
+		'blue',
+		'purple',
+		'red',
+		'orange',
+		'green',
+		'gray'
+	].map((color, idx) => (
+		<div
+			className={`palette-item ${color}
+                        ${props.color === color ? 'palette-selected' : ''}`}
+			onClick={() => this.props.dispatch(changeColor(color))}
+			key={idx}
+		/>
+	));
 
-        return (
-            <div id="color-picker">
-                {PalleteItems}
-            </div>
-        );
-    }
-}
+	return <div id="color-picker">{PalleteItems}</div>;
+};
 
 const mapStateToProps = state => ({
-    color: state.color
+	color: state.color
 });
 
 export default connect(mapStateToProps)(ColorPicker);

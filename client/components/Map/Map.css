@@ -1,56 +1,56 @@
 #svg-container {
-    display: block;
-    margin: 0 auto;
-    margin-top: 20px;
+	display: block;
+	margin: 0 auto;
+	margin-top: 20px;
 }
 
 #overlay-container {
-    transition: all 0.75s ease;
-    fill: white;
+	transition: all 0.75s ease;
+	fill: #FFF;
 }
 
 .close-overlay-container {
-    margin-top: 10px;
-    margin-left: 10px;
-    transform: translate(889px, 0px);
+	margin-top: 10px;
+	margin-left: 10px;
+	transform: translate(889px, 0px);
 }
 
 .close-overlay-button {
-    cursor: pointer;
-    width: 70px;
-    height: 31px;
-    rx: 5px;
-    ry: 5px;
-    fill: white;
-    stroke: black;
-    color: #000000;
+	cursor: pointer;
+	width: 70px;
+	height: 31px;
+	rx: 5px;
+	ry: 5px;
+	fill: #FFF;
+	stroke: #000;
+	color: #000;
 }
 
 .close-overlay-text {
-    cursor: pointer;
-    transform: translate(35px, 21px);
-    font-family: 'Roboto Slab', serif;
-    fill: black;
-    text-anchor: middle;
-    font-size: 15;
+	cursor: pointer;
+	transform: translate(35px, 21px);
+	font-family: 'Roboto Slab', serif;
+	fill: #000;
+	text-anchor: middle;
+	font-size: 15;
 }
 
 .hoverSvgOn > rect {
-    transition: fill 0.5s ease;
-    fill: #000000;
+	transition: fill 0.5s ease;
+	fill: #000;
 }
 
 .hoverSvgOff > rect {
-    transition: fill 0.5s ease;
-    fill: #ffffff;
+	transition: fill 0.5s ease;
+	fill: #FFF;
 }
 
 .hoverSvgOn > text {
-    transition: fill 0.3s ease;
-    fill: #ffffff;
+	transition: fill 0.3s ease;
+	fill: #FFF;
 }
 
 .hoverSvgOff > text {
-    transition: fill 0.3s ease;
-    fill: #000000;
+	transition: fill 0.3s ease;
+	fill: #000;
 }
