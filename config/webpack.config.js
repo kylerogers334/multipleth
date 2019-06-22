@@ -1,5 +1,4 @@
 const path = require('path');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
@@ -9,12 +8,12 @@ module.exports = {
 		filename: 'bundle.js'
 	},
 	module: {
-		loaders: [
+		rules: [
 			{
 				test: /\.js$/,
-				loader: 'babel-loader',
-				query: {
-					presets: ['react', 'es2015']
+				exclude: /node_modules/,
+				use: {
+					loader: 'babel-loader'
 				}
 			},
 			{
@@ -23,14 +22,6 @@ module.exports = {
 			}
 		]
 	},
-	plugins: [
-		new webpack.DefinePlugin({
-			'process.env': {
-				NODE_ENV: JSON.stringify('production')
-			}
-		}),
-		new UglifyJSPlugin()
-	],
 	stats: {
 		colors: true
 	},
