@@ -8,3 +8,6 @@ bundle.js
 *.js.map
 
 data
+
+*.hot-update.js
+*.hot-update.json
