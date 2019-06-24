@@ -1,11 +1,8 @@
 import * as types from './actionTypes.js';
 
-export const showAboutModal = () => ({
-	type: types.SHOW_ABOUT_MODAL
-});
-
-export const showHelpModal = () => ({
-	type: types.SHOW_HELP_MODAL
+export const showModal = modalType => ({
+	modalType,
+	type: types.SHOW_MODAL
 });
 
 export const hideModal = () => ({

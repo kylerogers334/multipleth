@@ -3,8 +3,7 @@ export const HIDE_OVERLAY = 'HIDE_OVERLAY';
 
 export const CHANGE_COLOR = 'CHANGE_COLOR';
 
-export const SHOW_ABOUT_MODAL = 'SHOW_ABOUT_MODAL';
-export const SHOW_HELP_MODAL = 'SHOW_HELP_MODAL';
+export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
 
 export const LOAD_US_STATES_DATA = 'LOAD_US_STATES_DATA';
