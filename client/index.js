@@ -5,11 +5,24 @@ import { Provider } from 'react-redux';
 import store from './store';
 import App from './components/App';
 
-import './components/index.css';
+const rootEl = document.getElementById('root');
 
-ReactDOM.render(
+const AppWithStore = () => (
 	<Provider store={store}>
 		<App />
-	</Provider>,
-	document.getElementById('root')
+	</Provider>
 );
+
+ReactDOM.render(<AppWithStore />, rootEl);
+
+if (module.hot) {
+	module.hot.accept('./components/App', () => {
+		const NextApp = require('./components/App').default;
+		ReactDOM.render(
+			<Provider store={store}>
+				<NextApp />
+			</Provider>,
+			rootEl
+		);
+	});
+}
