@@ -1,4 +1,4 @@
-DROP TABLE population_state;
+DROP TABLE IF EXISTS population_state;
 CREATE TABLE population_state(
     id         serial PRIMARY KEY,
     fips       text  NOT null,
@@ -63,7 +63,7 @@ VALUES ('01', 'Alabama', 4830620, 4.0, 66.3, 26.3, 1.2),
 ('55', 'Wisconsin', 5742117, 6.3, 82.4, 6.2, 2.5),
 ('56', 'Wyoming', 579679, 9.6, 84.5, 1.0, 0.9);
 
-DROP TABLE population_county;
+DROP TABLE IF EXISTS population_county;
 CREATE TABLE population_county(
     id serial  PRIMARY KEY,
     fips       text  NOT null,

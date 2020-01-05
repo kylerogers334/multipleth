@@ -1,4 +1,4 @@
-DROP TABLE age_state;
+DROP TABLE IF EXISTS age_state;
 CREATE TABLE age_state(
     id serial PRIMARY KEY,
     fips text NOT null,
@@ -59,7 +59,7 @@ VALUES ('01', 'Alabama', 38.4),
 ('55', 'Wisconsin', 39.0), 
 ('56', 'Wyoming', 36.8);
 
-DROP TABLE age_county;
+DROP TABLE IF EXISTS age_county;
 CREATE TABLE age_county(
     id serial PRIMARY KEY,
     fips text NOT null,

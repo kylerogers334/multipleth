@@ -1,4 +1,4 @@
-DROP TABLE housing_state;
+DROP TABLE IF EXISTS housing_state;
 CREATE TABLE housing_state(
     id serial PRIMARY KEY,
     fips text NOT null,
@@ -60,7 +60,7 @@ VALUES ('01', 'Alabama', 125500, 717),
 ('55', 'Wisconsin', 165800, 776), 
 ('56', 'Wyoming', 194800, 789);
 
-DROP TABLE housing_county;
+DROP TABLE IF EXISTS housing_county;
 CREATE TABLE housing_county(
     id serial PRIMARY KEY,
     fips text NOT null,

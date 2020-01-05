@@ -1,4 +1,4 @@
-DROP TABLE income_state;
+DROP TABLE IF EXISTS income_state;
 CREATE TABLE income_state (
     id serial PRIMARY KEY,
     fips text NOT null,
@@ -61,7 +61,7 @@ VALUES ('01', 'Alabama', 1848325, 43623, 60511),
 ('55', 'Wisconsin', 2299107, 53357, 69333), 
 ('56', 'Wyoming', 226865, 58840, 73477);
 
-DROP TABLE income_county;
+DROP TABLE IF EXISTS income_county;
 CREATE TABLE income_county (
     id serial PRIMARY KEY,
     fips text NOT null,

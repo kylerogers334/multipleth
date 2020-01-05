@@ -1,4 +1,4 @@
-DROP TABLE unemployment_state;
+DROP TABLE IF EXISTS unemployment_state;
 CREATE TABLE unemployment_state (
     id serial PRIMARY KEY,
     name text NOT null,
@@ -58,7 +58,7 @@ VALUES ('Colorado', 2.3),
     ('New Mexico', 6.4), 
     ('Alaska', 6.8);
 
-DROP TABLE unemployment_county;
+DROP TABLE IF EXISTS unemployment_county;
 CREATE TABLE unemployment_county (
     id serial PRIMARY KEY,
     fips text NOT null,

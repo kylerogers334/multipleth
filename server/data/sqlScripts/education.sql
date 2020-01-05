@@ -1,4 +1,4 @@
-DROP TABLE education_state;
+DROP TABLE IF EXISTS education_state;
 CREATE TABLE education_state (
     id serial primary key,
     fips text NOT null,
@@ -59,7 +59,7 @@ VALUES ('01', 'Alabama', 23.5),
 ('55', 'Wisconsin', 27.8), 
 ('56', 'Wyoming', 25.7);
 
-DROP TABLE education_county;
+DROP TABLE IF EXISTS education_county;
 CREATE TABLE education_county (
     id serial primary key,
     fips text NOT null,

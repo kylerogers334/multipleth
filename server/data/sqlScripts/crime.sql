@@ -1,4 +1,4 @@
-DROP TABLE crime_state;
+DROP TABLE IF EXISTS crime_state;
 CREATE TABLE crime_state(
     id serial  PRIMARY KEY,
     name text  NOT null,
@@ -58,7 +58,7 @@ VALUES ('Alabama', 436),
 ('Wyoming', 201);
 
 
-DROP TABLE crime_county;
+DROP TABLE IF EXISTS crime_county;
 CREATE TABLE crime_county(
     id serial  PRIMARY KEY,
     fips text  NOT null,
