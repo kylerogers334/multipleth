@@ -65,7 +65,7 @@ const countyElectionHelper = () => categoryCountyData => {
 				const match = dataAsObj[this.attributes[2].value];
 
 				return !match
-					? '#FFF'
+					? '#FFFFFF'
 					: match === 'Donald Trump'
 					? '#D22532'
 					: '#244999';
@@ -78,7 +78,7 @@ const countyElectionHelper = () => categoryCountyData => {
 	}, 150);
 };
 
-const blankCountyLoadHelper = () => {
+const blankCountyLoadHelper = function() {
 	const state = d3.select('.state-enlarged');
 	const stateId = dimensionFix[state.attr('id')];
 

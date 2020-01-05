@@ -1,22 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Container = styled.button({
+const Container = styled.div(({ css }) => ({
 	alignItems: 'center',
-	border: '1px solid #000',
-	borderRadius: '4px',
+	border: '1px solid #000000',
+	borderRadius: '2px',
 	cursor: 'pointer',
 	display: 'inline-flex',
-	fontSize: '16px',
-	height: '36px',
+	fontSize: '18px',
+	height: '44px',
 	justifyContent: 'center',
 	marginRight: '20px',
 	outline: 'none',
-	width: '64px'
-});
+	width: '80px',
+	...css
+}));
 
-const Button = ({ onClick, text }) => (
-	<Container onClick={() => onClick()}>{text}</Container>
+const Button = ({ css, onClick, text }) => (
+	<Container css={css} onClick={onClick}>
+		{text}
+	</Container>
 );
 
 export default Button;

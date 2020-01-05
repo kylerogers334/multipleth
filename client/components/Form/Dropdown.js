@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div({
-	backgroundColor: '#FFF',
+	backgroundColor: '#FFFFFF',
 	border: '1px solid black',
-	borderColor: '#FFF',
+	borderColor: '#FFFFFF',
 	color: '#292B2C',
 	cursor: 'pointer',
 	fontFamily: 'Roboto Slab, serif',
@@ -14,7 +14,7 @@ const Container = styled.div({
 });
 
 const DropdownContainer = styled.div({
-	backgroundColor: '#FFF',
+	backgroundColor: '#FFFFFF',
 	border: '1px solid rgba(0, 0, 0, 0.15)',
 	borderRadius: '0.25rem',
 	color: '#292B2C',

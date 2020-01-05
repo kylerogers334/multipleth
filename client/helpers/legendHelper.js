@@ -59,7 +59,6 @@ const legendClearHelper = () => {
 };
 
 const legendRangeAdjustHelper = (currentView, categoryName, data) => {
-	console.log(currentView, categoryName, data);
 	const dataMin = d3.quantile(data, 0.05);
 	const dataMax = d3.quantile(data, 0.95);
 	const steps = (dataMax - dataMin) / 8;
@@ -75,7 +74,7 @@ const legendUniversalHelper = dataKey => categoryData =>
 const legendElectionHelper = currentView => {
 	const g = legendDOMSelectionHelper(currentView);
 
-	g.attr('transform', 'translate(0, 40)').raise();
+	g.attr('transform', 'translate(0, 20)').raise();
 
 	g.selectAll('rect')
 		.data([0, 1])
@@ -107,7 +106,7 @@ const legendElectionHelper = currentView => {
 		.text(legendTextHelper('election'));
 
 	g.selectAll('text')
-		.attr('fill', '#000')
+		.attr('fill', '#000000')
 		.attr('text-anchor', 'start')
 		.attr('font-size', '11px')
 		.attr('font-family', 'Roboto Slab, serif')
@@ -117,7 +116,7 @@ const legendElectionHelper = currentView => {
 const legendLoadHelper = (adjustedRange, category, currentView) => {
 	const g = legendDOMSelectionHelper(currentView);
 
-	g.attr('transform', 'translate(0,40)').raise();
+	g.attr('transform', 'translate(0, 20)').raise();
 
 	const selectedColor = colorSelector(store.getState().color);
 
@@ -160,7 +159,7 @@ const legendLoadHelper = (adjustedRange, category, currentView) => {
 		)
 		.attr('x', 541)
 		.attr('y', -6)
-		.attr('fill', '#000')
+		.attr('fill', '#000000')
 		.attr('text-anchor', 'start')
 		.attr('font-size', '11px')
 		.attr('font-family', 'Roboto Slab, serif')

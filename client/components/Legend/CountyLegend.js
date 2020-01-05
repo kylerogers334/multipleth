@@ -9,6 +9,8 @@ export class CountyLegend extends React.Component {
 
 		if (this.props.categoryName === null) {
 			categoryHelper();
+
+			return;
 		}
 
 		if (this.props.categoryName === 'election') {
@@ -16,6 +18,8 @@ export class CountyLegend extends React.Component {
 			// a completely different legend
 			categoryHelper('state');
 			categoryHelper('county');
+
+			return;
 		}
 
 		const adjustedRangeState = legendHelper('range-adjust')(

@@ -3,10 +3,9 @@ import styled from 'styled-components';
 
 import EnlargedState from './EnlargedState';
 import CountyLegend from '../Legend/CountyLegend';
-import CloseOverlayButton from './CloseOverlayButton';
 
 const OverlayContainer = styled.g({
-	fill: '#FFF',
+	fill: '#FFFFFF',
 	transition: 'all 0.75s ease'
 });
 
@@ -20,7 +19,6 @@ export const Overlay = () => (
 		<CountyLegend />
 		<StateOverlay />
 		<EnlargedState />
-		<CloseOverlayButton />
 	</OverlayContainer>
 );
 

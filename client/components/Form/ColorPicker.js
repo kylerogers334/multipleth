@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { changeColor } from '../../actions/actionMap.js';
 
 const Container = styled.div({
-	backgroundColor: '#FFF',
+	backgroundColor: '#FFFFFF',
 	border: '1px solid #000',
 	borderRadius: '5px 0px 0px 5px',
 	height: '160px',

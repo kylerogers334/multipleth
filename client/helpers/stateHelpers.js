@@ -69,7 +69,7 @@ const stateElectionHelper = () => categoryStateData => {
 		.transition()
 		.duration(750)
 		.style('fill', function(d) {
-			return dataAsObj[d3.select(this).attr('id')] === 'T' // Trump
+			return dataAsObj[d3.select(this).attr('id')] === 'Donald Trump'
 				? '#D22532'
 				: '#244999';
 		})
