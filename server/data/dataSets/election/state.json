@@ -1,0 +1,257 @@
+[
+	{
+		"state": "California",
+		"percentage": "0.6158",
+		"winner": "C"
+	},
+	{
+		"state": "Florida",
+		"percentage": "0.4906",
+		"winner": "T"
+	},
+	{
+		"state": "Texas",
+		"percentage": "0.5258",
+		"winner": "T"
+	},
+	{
+		"state": "New York",
+		"percentage": "0.5881",
+		"winner": "C"
+	},
+	{
+		"state": "Pennsylvania",
+		"percentage": "0.4879",
+		"winner": "T"
+	},
+	{
+		"state": "Illinois",
+		"percentage": "0.5540",
+		"winner": "C"
+	},
+	{
+		"state": "Ohio",
+		"percentage": "0.5205",
+		"winner": "T"
+	},
+	{
+		"state": "Michigan",
+		"percentage": "0.4759",
+		"winner": "T"
+	},
+	{
+		"state": "North Carolina",
+		"percentage": "0.5054",
+		"winner": "T"
+	},
+	{
+		"state": "Georgia",
+		"percentage": "0.5134",
+		"winner": "T"
+	},
+	{
+		"state": "Virginia",
+		"percentage": "0.4986",
+		"winner": "C"
+	},
+	{
+		"state": "New Jersey",
+		"percentage": "0.5502",
+		"winner": "C"
+	},
+	{
+		"state": "Massachusetts",
+		"percentage": "0.6080",
+		"winner": "C"
+	},
+	{
+		"state": "Wisconsin",
+		"percentage": "0.4787",
+		"winner": "T"
+	},
+	{
+		"state": "Minnesota",
+		"percentage": "0.4686",
+		"winner": "C"
+	},
+	{
+		"state": "Missouri",
+		"percentage": "0.5714",
+		"winner": "T"
+	},
+	{
+		"state": "Washington",
+		"percentage": "0.5509",
+		"winner": "C"
+	},
+	{
+		"state": "Indiana",
+		"percentage": "0.5717",
+		"winner": "T"
+	},
+	{
+		"state": "Colorado",
+		"percentage": "0.4727",
+		"winner": "C"
+	},
+	{
+		"state": "Tennessee",
+		"percentage": "0.6107",
+		"winner": "T"
+	},
+	{
+		"state": "Maryland",
+		"percentage": "0.6053",
+		"winner": "C"
+	},
+	{
+		"state": "South Carolina",
+		"percentage": "0.5486",
+		"winner": "T"
+	},
+	{
+		"state": "Alabama",
+		"percentage": "0.6289",
+		"winner": "T"
+	},
+	{
+		"state": "Arizona",
+		"percentage": "0.4950",
+		"winner": "T"
+	},
+	{
+		"state": "Louisiana",
+		"percentage": "0.5809",
+		"winner": "T"
+	},
+	{
+		"state": "Kentucky",
+		"percentage": "0.6254",
+		"winner": "T"
+	},
+	{
+		"state": "Oregon",
+		"percentage": "0.5168",
+		"winner": "C"
+	},
+	{
+		"state": "Connecticut",
+		"percentage": "0.5448",
+		"winner": "C"
+	},
+	{
+		"state": "Iowa",
+		"percentage": "0.5178",
+		"winner": "T"
+	},
+	{
+		"state": "Oklahoma",
+		"percentage": "0.6533",
+		"winner": "T"
+	},
+	{
+		"state": "Mississippi",
+		"percentage": "0.5834",
+		"winner": "T"
+	},
+	{
+		"state": "Kansas",
+		"percentage": "0.5719",
+		"winner": "T"
+	},
+	{
+		"state": "Nevada",
+		"percentage": "0.4789",
+		"winner": "C"
+	},
+	{
+		"state": "Arkansas",
+		"percentage": "0.6044",
+		"winner": "T"
+	},
+	{
+		"state": "Utah",
+		"percentage": "0.4657",
+		"winner": "T"
+	},
+	{
+		"state": "Nebraska",
+		"percentage": "0.6030",
+		"winner": "T"
+	},
+	{
+		"state": "New Mexico",
+		"percentage": "0.4826",
+		"winner": "C"
+	},
+	{
+		"state": "Maine",
+		"percentage": "0.4786",
+		"winner": "C"
+	},
+	{
+		"state": "New Hampshire",
+		"percentage": "0.4760",
+		"winner": "C"
+	},
+	{
+		"state": "West Virginia",
+		"percentage": "0.6865",
+		"winner": "T"
+	},
+	{
+		"state": "Idaho",
+		"percentage": "0.5917",
+		"winner": "T"
+	},
+	{
+		"state": "Montana",
+		"percentage": "0.5651",
+		"winner": "T"
+	},
+	{
+		"state": "Rhode Island",
+		"percentage": "0.5544",
+		"winner": "C"
+	},
+	{
+		"state": "Delaware",
+		"percentage": "0.5336",
+		"winner": "C"
+	},
+	{
+		"state": "Hawaii",
+		"percentage": "0.6222",
+		"winner": "C"
+	},
+	{
+		"state": "South Dakota",
+		"percentage": "0.6153",
+		"winner": "T"
+	},
+	{
+		"state": "North Dakota",
+		"percentage": "0.6414",
+		"winner": "T"
+	},
+	{
+		"state": "Vermont",
+		"percentage": "0.6114",
+		"winner": "C"
+	},
+	{
+		"state": "District of Columbia",
+		"percentage": "0.9285",
+		"winner": "C"
+	},
+	{
+		"state": "Wyoming",
+		"percentage": "0.7005",
+		"winner": "T"
+	},
+	{
+		"state": "Alaska",
+		"percentage": "0.5289",
+		"winner": "T"
+	}
+]

@@ -3,7 +3,7 @@
 	"version": "1.0.7",
 	"description": "A data visualization map made with D3 and React",
 	"engines": {
-		"node": "10.x"
+		"node": "12.x"
 	},
 	"scripts": {
 		"start": "node ./server/server.js",

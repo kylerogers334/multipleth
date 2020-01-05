@@ -59,6 +59,7 @@ const legendClearHelper = () => {
 };
 
 const legendRangeAdjustHelper = (currentView, categoryName, data) => {
+	console.log(currentView, categoryName, data);
 	const dataMin = d3.quantile(data, 0.05);
 	const dataMax = d3.quantile(data, 0.95);
 	const steps = (dataMax - dataMin) / 8;

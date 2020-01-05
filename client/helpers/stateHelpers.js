@@ -44,7 +44,7 @@ const stateClearHelper = () =>
 		.selectAll('path')
 		.transition()
 		.duration(750)
-		.style('fill', '#FFF');
+		.style('fill', '#FFFFFF');
 
 const stateUniversalHelper = dataKey => categoryStateData => {
 	const dataAsObj = categoryStateData.reduce((acc, cur) => ({
@@ -56,17 +56,20 @@ const stateUniversalHelper = dataKey => categoryStateData => {
 };
 
 const stateElectionHelper = () => categoryStateData => {
-	const dataAsObj = categoryStateData.reduce((acc, cur) => ({
-		...acc,
-		[state.name]: state['winner']
-	}));
+	const dataAsObj = categoryStateData.reduce(
+		(acc, cur) => ({
+			...acc,
+			[cur.state]: cur.winner
+		}),
+		{}
+	);
 
 	d3.select('#states-container')
 		.selectAll('path')
 		.transition()
 		.duration(750)
 		.style('fill', function(d) {
-			return dataAsObj[d3.select(this).attr('id')] === 'Donald Trump'
+			return dataAsObj[d3.select(this).attr('id')] === 'T' // Trump
 				? '#D22532'
 				: '#244999';
 		})

@@ -15,16 +15,20 @@ export class StateLegend extends React.Component {
 		if (this.props.categoryName === 'election') {
 			// election is a completely different dataset requiring
 			// a completely different legend
-			categoryHelper('state');
+			categoryHelper('election');
+		} else {
+			const adjustedRange = legendHelper('range-adjust')(
+				'state',
+				this.props.categoryName,
+				categoryHelper(this.props.categoryStateData)
+			);
+
+			legendHelper('load')(
+				adjustedRange,
+				this.props.categoryName,
+				'state'
+			);
 		}
-
-		const adjustedRange = legendHelper('range-adjust')(
-			'state',
-			this.props.categoryName,
-			categoryHelper(this.props.categoryStateData)
-		);
-
-		legendHelper('load')(adjustedRange, this.props.categoryName, 'state');
 	}
 
 	render() {

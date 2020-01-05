@@ -80,7 +80,7 @@ export class Map extends React.Component {
 			// conditional to prevent loop of dispatching
 			if (!this.props.categoryStateData && !window.__MAP_LOADED__) {
 				window.__MAP_LOADED__ = true; // prevent Clear Map from loading unemployment
-				this.props.dispatch(fetchCategoryState('unemployment'));
+				this.props.dispatch(fetchCategoryState('population'));
 			}
 		});
 	}

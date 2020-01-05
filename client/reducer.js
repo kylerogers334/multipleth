@@ -12,7 +12,6 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-	console.log(action);
 	switch (action.type) {
 		case types.LOAD_US_STATES_DATA:
 			return { ...state, usStatesLineData: action.usStatesLineData };

@@ -5,7 +5,7 @@ const knex = require('../../config/config.js').knex;
 
 router.get('/state', (req, res) =>
 	knex
-		.select('name', 'winner')
+		.select('state', 'winner')
 		.from('election_state')
 		.then(results => res.json(results))
 		.catch(err => console.error(err))

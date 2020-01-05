@@ -25,10 +25,7 @@ app.use('/api', apiRouter);
 
 app.get('/', (req, res) => res.sendFile(path.resolve('/index.html')));
 
-app.get('/teapot', (req, res) => res.status(418).send());
-
-const server = app.listen(process.env.PORT, () =>
-	console.log('App running on port', process.env.PORT)
-);
+const port = process.env.MULTIPLETH_WEB_PORT;
+const server = app.listen(port, () => console.log('App running on port', port));
 
 module.exports = { app, server };

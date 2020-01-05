@@ -3,8 +3,8 @@ require('dotenv').config();
 
 exports.knex = require('knex')({
 	client: 'pg',
-	connection: process.env.DATABASE_URL
+	connection: process.env.MULTIPLETH_DATABASE_URL
 });
 
-exports.DATABASE_URL = process.env.DATABASE_URL;
-exports.PORT = process.env.PORT;
+exports.MULTIPLETH_DATABASE_URL = process.env.MULTIPLETH_DATABASE_URL;
+exports.MULTIPLETH_DATABASE_PORT = process.env.MULTIPLETH_DATABASE_PORT;
