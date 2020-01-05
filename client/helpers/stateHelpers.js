@@ -47,7 +47,7 @@ const stateClearHelper = () =>
 		.style('fill', '#FFF');
 
 const stateUniversalHelper = dataKey => categoryStateData => {
-	categoryStateData.reduce((acc, cur) => ({
+	const dataAsObj = categoryStateData.reduce((acc, cur) => ({
 		...acc,
 		[cur.name]: cur[dataKey]
 	}));

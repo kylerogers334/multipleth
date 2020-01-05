@@ -1,27 +1,44 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
+
 import { changeColor } from '../../actions/actionMap.js';
 
-import './ColorPicker.css';
+const Container = styled.div({
+	backgroundColor: '#FFF',
+	border: '1px solid #000',
+	borderRadius: '5px 0px 0px 5px',
+	height: '160px',
+	marginLeft: '-3%',
+	width: '54px'
+});
 
-export const ColorPicker = props => {
+const PalleteItem = styled.div(({ backgroundColor, selected }) => ({
+	backgroundColor,
+	border: selected ? '1.5px solid #000' : 'none',
+	height: '20px',
+	margin: '5.7px',
+	width: '40px'
+}));
+
+export const ColorPicker = ({ color: selectedColor, dispatch }) => {
 	const PalleteItems = [
-		'blue',
-		'purple',
-		'red',
-		'orange',
-		'green',
-		'gray'
+		{ name: 'blue', hex: '#6BAED6' },
+		{ name: 'purple', hex: '#9E9AC8' },
+		{ name: 'red', hex: '#FB6A4A' },
+		{ name: 'orange', hex: '#FD8D3C' },
+		{ name: 'green', hex: '#74C476' },
+		{ name: 'gray', hex: '#969696' }
 	].map((color, idx) => (
-		<div
-			className={`palette-item ${color}
-                        ${props.color === color ? 'palette-selected' : ''}`}
-			onClick={() => this.props.dispatch(changeColor(color))}
+		<PalleteItem
+			backgroundColor={color.hex}
 			key={idx}
+			onClick={() => dispatch(changeColor(color.name))}
+			selected={color.name === selectedColor}
 		/>
 	));
 
-	return <div id="color-picker">{PalleteItems}</div>;
+	return <Container>{PalleteItems}</Container>;
 };
 
 const mapStateToProps = state => ({

@@ -1,33 +1,31 @@
-# Multipleth API Docs #
+# Multipleth API Docs
 
-## Data Source ## 
+## Data Source
 
-All of the data (except for the 2016 election) is taken from the [U.S. Census Bureau FactFinder.](https://factfinder.census.gov/faces/nav/jsf/pages/index.xhtml)
-The data it provides is in an awful format and requires significant manual manipulation
-to consume easily (i.e. JSON). These docs detail easy retrieval of the Census Bureau data.
+All of the data (except for the 2016 election) is taken from the [U.S. Census Bureau FactFinder.](https://data.census.gov/cedsci/)
 
-## Usage ##
+## Usage
 
 GET endpoints are provided in the following format at https://multipleth.herokuapp.com
- 
+
 `/api/:category/:locale/:fips`
 
-**:category** is one of: 
+**:category** is one of:
 
-* unemployment
-* population (for total population)
-* white (for population by race)
-* black
-* latino
-* asian
-* income
-* age
-* education
-* crime
-* housing (for housing purchase cost)
-* rent (for housing rental cost)
-* crime
-* election
+-   unemployment
+-   population (for total population)
+-   white (for population by race)
+-   black
+-   latino
+-   asian
+-   income
+-   age
+-   education
+-   crime
+-   housing (for housing purchase cost)
+-   rent (for housing rental cost)
+-   crime
+-   election
 
 **:locale** is either `state` (view data for all 50 states) or `county` (view all counties for 1 state)
 

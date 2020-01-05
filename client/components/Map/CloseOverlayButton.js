@@ -1,40 +1,52 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 
 import { hideOverlay } from '../../actions/actionOverlay';
 
-import './Map.css';
-
-export class CloseOverlayButton extends React.Component {
-	constructor(props) {
-		super(props);
-
-		this.state = { hover: false };
+const Container = styled.g({
+	marginLeft: '10px',
+	marginTop: '10px',
+	transform: 'translate(889px, 0px)',
+	'&:hover': {
+		fill: '#FFF',
+		transition: 'all 0.75s ease'
 	}
+});
 
-	addHoverCSS() {
-		this.setState({ hover: 'hoverSvgOn' });
+const Button = styled.rect({
+	color: '#000',
+	cursor: 'pointer',
+	fill: '#FFF',
+	height: '31px',
+	rx: '5px',
+	ry: '5px',
+	stroke: '#000',
+	width: '70px',
+	'&:hover': {
+		fill: '#000',
+		transition: 'fill 0.5s ease'
 	}
+});
 
-	removeHoverCSS() {
-		this.setState({ hover: 'hoverSvgOff' });
+const Text = styled.text({
+	cursor: 'pointer',
+	fill: '#000',
+	fontFamily: 'Roboto Slab, serif',
+	fontSize: 15,
+	textAnchor: 'middle',
+	transform: 'translate(35px, 21px)',
+	'&:hover': {
+		fill: '#FFF',
+		transition: 'fill 0.3s ease'
 	}
+});
 
-	render() {
-		return (
-			<g
-				className={
-					'close-overlay-container ' +
-					(this.state.hover ? this.state.hover : '')
-				}
-				onMouseEnter={() => this.addHoverCSS()}
-				onMouseLeave={() => this.removeHoverCSS()}
-				onClick={() => this.props.dispatch(hideOverlay())}>
-				<rect className="close-overlay-button" />
-				<text className="close-overlay-text">Back</text>
-			</g>
-		);
-	}
-}
+const CloseOverlayButton = ({ dispatch }) => (
+	<Container onClick={() => dispatch(hideOverlay())}>
+		<Button />
+		<Text>Back</Text>
+	</Container>
+);
 
 export default connect()(CloseOverlayButton);

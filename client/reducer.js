@@ -1,17 +1,18 @@
 import * as types from './actions/actionTypes.js';
 
 const initialState = {
-	usStatesLineData: null,
+	categoryCountyData: null,
+	categoryName: null,
+	categoryStateData: null,
 	color: 'blue',
 	displayOverlay: false,
 	enlargedState: null,
-	categoryStateData: null,
-	categoryCountyData: null,
-	categoryName: null,
-	showInfoModal: false
+	showModalType: false,
+	usStatesLineData: null
 };
 
 export default (state = initialState, action) => {
+	console.log(action);
 	switch (action.type) {
 		case types.LOAD_US_STATES_DATA:
 			return { ...state, usStatesLineData: action.usStatesLineData };
@@ -63,14 +64,11 @@ export default (state = initialState, action) => {
 			console.error(action.error);
 			return state;
 
-		case types.SHOW_ABOUT_MODAL:
-			return { ...state, showInfoModal: 'about' };
-
-		case types.SHOW_HELP_MODAL:
-			return { ...state, showInfoModal: 'help' };
+		case types.SHOW_MODAL:
+			return { ...state, showModalType: action.modalType };
 
 		case types.HIDE_MODAL:
-			return { ...state, showInfoModal: false };
+			return { ...state, showModalType: false };
 
 		default:
 			return state;

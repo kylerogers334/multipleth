@@ -41,11 +41,11 @@ export class EnlargedState extends React.Component {
 }
 
 const mapStateToProps = state => ({
-	usStatesLineData: state.usStatesLineData,
-	enlargedState: state.enlargedState,
 	categoryCountyData: state.categoryCountyData,
 	categoryName: state.categoryName,
-	color: state.color
+	color: state.color,
+	enlargedState: state.enlargedState,
+	usStatesLineData: state.usStatesLineData
 });
 
 export default connect(mapStateToProps)(EnlargedState);

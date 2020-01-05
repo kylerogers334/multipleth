@@ -1,190 +1,96 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-	Dropdown,
-	DropdownToggle,
-	DropdownMenu,
-	DropdownItem
-} from 'reactstrap';
 
+import Dropdown from './Dropdown';
+import {
+	Container,
+	SelectionContainer,
+	SelectionItem,
+	SelectionItemsContainer
+} from './formComponents';
 import ColorPicker from './ColorPicker';
 
 import { clearMap, fetchCategoryState } from '../../actions/actionHandleData';
 import { fetchCategoryCounty } from '../../actions/actionHandleData';
 
-import './Form.css';
+const Form = ({ dispatch, enlargedState }) => {
+	const handleSelection = selection => {
+		selection === 'clear'
+			? dispatch(clearMap())
+			: !enlargedState
+			? dispatch(fetchCategoryState(selection))
+			: (() => {
+					dispatch(fetchCategoryState(selection));
+					dispatch(
+						fetchCategoryCounty(
+							selection,
+							enlargedState.attributes[2].value
+						)
+					);
+			  })();
+	};
 
-export class Form extends React.Component {
-	constructor(props) {
-		super(props);
+	const getDropdown = (type, idx) =>
+		type === 'population' ? (
+			<Dropdown
+				key={idx}
+				label="Population"
+				onSelect={selection => handleSelection(selection)}
+				selections={['Total', 'White', 'Asian', 'Latino', 'Black']}
+			/>
+		) : (
+			<Dropdown
+				key={idx}
+				label="Housing Cost"
+				onSelect={selection => handleSelection(selection)}
+				selections={['Purchase', 'Rent']}
+			/>
+		);
 
-		this.state = {
-			populationDropdownOpen: false,
-			housingDropdownOpen: false,
-			cssSelection: 'unemployment'
-		};
-	}
-
-	toggleDropdown(selection) {
-		this.setState({
-			[selection]: !this.state[selection]
-		});
-	}
-
-	applySelectedClass(selection) {
-		// handle dropdowns
-		if (
-			(['white', 'black', 'asian'].includes(this.state.cssSelection) &&
-				selection === 'population') ||
-			(this.state.cssSelection === 'rent' && selection === 'housing')
-		) {
-			return ' selected-outline';
-		}
-
-		if (this.state.cssSelection === selection) {
-			return ' selected-outline';
-		}
-
-		return '';
-	}
-
-	handleSelection(selection) {
-		// if (selection === 'ignore') {
-		// 	return;
-		// }
-
-		this.setState({
-			cssSelection: selection
-		});
-
-		if (selection === 'clear') {
-			this.props.dispatch(clearMap());
-		} else if (!this.props.enlargedState) {
-			this.props.dispatch(fetchCategoryState(selection));
-		} else {
-			this.props.dispatch(fetchCategoryState(selection));
-			this.props.dispatch(
-				fetchCategoryCounty(
-					selection,
-					this.props.enlargedState.attributes[2].value
-				)
-			);
-		}
-	}
-
-	render() {
-		return (
-			<div className="form-container">
-				<ColorPicker />
-				<div className="selection-container">
-					<div className="selection-items-container">
-						{[
-							'Unemployment',
-							'DD-population',
-							'income',
-							'age',
-							'education',
-							'DD-housing',
-							'crime',
-							'election',
-							'clear'
-						].map((category, idx) => (
-							<div
-								className={
-									'selection-item' +
-									this.applySelectedClass(
-										category.toLowerCase()
-									)
-								}>
+	return (
+		<Container>
+			<ColorPicker />
+			<SelectionContainer>
+				<SelectionItemsContainer>
+					{[
+						'Unemployment',
+						'Dropdown-population',
+						'income',
+						'age',
+						'education',
+						'Dropdown-housing',
+						'crime',
+						'election',
+						'clear'
+					].map((category, idx) =>
+						category.includes('Dropdown') ? (
+							getDropdown(category.split('-')[1], idx)
+						) : (
+							<SelectionItem key={idx}>
 								<a
 									onClick={() =>
-										this.handleSelection(
-											category.toLowerCase()
-										)
+										handleSelection(category.toLowerCase())
 									}>
-									{category === election
+									{category === 'election'
 										? '2016 Election'
 											? category === 'clear'
 											: 'Clear Map'
 										: category}
 								</a>
-							</div>
-						))}
-						<Dropdown
-							id="population-dropdown"
-							style={this.state.selected}
-							isOpen={this.state.populationDropdownOpen}
-							toggle={() =>
-								this.toggleDropdown('populationDropdownOpen')
-							}>
-							<DropdownToggle
-								caret
-								className={this.applySelectedClass(
-									'population'
-								)}>
-								Population
-							</DropdownToggle>
-							<DropdownMenu>
-								{[
-									'Total',
-									'White',
-									'Asian',
-									'Latino',
-									'Black'
-								].map((category, idx) => (
-									<DropdownItem
-										key={idx}
-										onClick={() =>
-											this.handleSelection(
-												category === 'Total'
-													? 'population'
-													: category.toLowerCase()
-											)
-										}>
-										{category}
-									</DropdownItem>
-								))}
-							</DropdownMenu>
-						</Dropdown>
-						<Dropdown
-							id="housing-dropdown"
-							style={this.state.selected}
-							isOpen={this.state.housingDropdownOpen}
-							toggle={() =>
-								this.toggleDropdown('housingDropdownOpen')
-							}>
-							<DropdownToggle
-								caret
-								className={this.applySelectedClass('housing')}>
-								Housing Cost
-							</DropdownToggle>
-							<DropdownMenu>
-								<DropdownItem
-									onClick={() =>
-										this.handleSelection('housing')
-									}>
-									Purchase
-								</DropdownItem>
-								<DropdownItem
-									onClick={() =>
-										this.handleSelection('rent')
-									}>
-									Rent
-								</DropdownItem>
-							</DropdownMenu>
-						</Dropdown>
-					</div>
-				</div>
-			</div>
-		);
-	}
-}
+							</SelectionItem>
+						)
+					)}
+				</SelectionItemsContainer>
+			</SelectionContainer>
+		</Container>
+	);
+};
 
 const mapStateToProps = state => ({
-	enlargedState: state.enlargedState,
-	categoryStateData: state.categoryStateData,
 	categoryCountyData: state.categoryCountyData,
-	categoryName: state.categoryName
+	categoryName: state.categoryName,
+	categoryStateData: state.categoryStateData,
+	enlargedState: state.enlargedState
 });
 
 export default connect(mapStateToProps)(Form);

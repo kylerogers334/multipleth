@@ -1,20 +1,27 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import * as d3 from 'd3';
+import styled from 'styled-components';
 
 import EnlargedState from './EnlargedState';
 import CountyLegend from '../Legend/CountyLegend';
 import CloseOverlayButton from './CloseOverlayButton';
 
-import './Map.css';
+const OverlayContainer = styled.g({
+	fill: '#FFF',
+	transition: 'all 0.75s ease'
+});
+
+const StateOverlay = styled.rect({
+	height: 600,
+	width: 960
+});
 
 export const Overlay = () => (
-	<g id="overlay-container">
+	<OverlayContainer id="overlay-container">
 		<CountyLegend />
-		<rect className="state-overlay" style={{ height: 600, width: 960 }} />
+		<StateOverlay />
 		<EnlargedState />
 		<CloseOverlayButton />
-	</g>
+	</OverlayContainer>
 );
 
-export default connect()(Overlay);
+export default Overlay;

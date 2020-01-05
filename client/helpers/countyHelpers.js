@@ -7,6 +7,7 @@ import store from '../store';
 
 export const countyHelper = category => {
 	const cuh = countyUniversalHelper;
+
 	switch (category) {
 		case 'clear':
 			return countyClearHelper;
@@ -60,7 +61,7 @@ const countyElectionHelper = () => categoryCountyData => {
 			.selectAll('path')
 			.transition()
 			.duration(750)
-			.style('fill', () => {
+			.style('fill', function() {
 				const match = dataAsObj[this.attributes[2].value];
 
 				return !match
@@ -95,29 +96,29 @@ const blankCountyLoadHelper = () => {
 		.attr('transform', `translate(${tX}, ${tY}) scale(${scale}, ${scale})`)
 		.attr('stroke-width', `${1 / (scale * 2)}`);
 
-	d3.json('./us-10m.v1.json', (error, us) => {
+	d3.json('./us-10m.v1.json').then(data => {
 		// extracting data-FIPS-num attribute with correct format
 		const fipsStateCode = this.props.enlargedState.attributes[2].value;
 		// adds a 0 to one digit state codes, FIPS standard requires double digit
 		// state codes
 		const fipsNum =
 			fipsStateCode.length === 1 ? '0' + fipsStateCode : fipsStateCode;
-		const counties = us.objects.counties.geometries;
+		const counties = data.objects.counties.geometries;
 
-		us.objects.counties.geometries = counties.filter(
+		data.objects.counties.geometries = counties.filter(
 			c => c.info.id.slice(0, 2) === fipsNum
 		);
 
 		d3.select('#overlay-container')
 			.selectAll('path')
-			.data(topojson.feature(us, us.objects.counties).features)
+			.data(topojson.feature(data, data.objects.counties).features)
 			.enter()
 			.append('path')
 			.attr('class', 'county')
-			.attr('id', (d, i) => us.objects.counties.geometries[i].info.name)
+			.attr('id', (d, i) => data.objects.counties.geometries[i].info.name)
 			.attr(
 				'data-FIPS-num',
-				(d, i) => us.objects.counties.geometries[i].info.id
+				(d, i) => data.objects.counties.geometries[i].info.id
 			)
 			.attr('d', d3.geoPath())
 			.attr(
@@ -140,7 +141,7 @@ const blankCountyLoadHelper = () => {
 	});
 };
 
-const countyDataHelper(data) => {
+const countyDataHelper = data => {
 	const values = Object.values(data).sort((a, b) => a - b);
 	const dataMin = d3.quantile(values, 0.05);
 	const dataMax = d3.quantile(values, 0.95);
@@ -161,9 +162,7 @@ const countyDataHelper(data) => {
 			.transition()
 			.duration(750)
 			.style('fill', function() {
-				const match = data[this.attributes[2].value];
-
-				return match ? '#FFF' : color(match);
+				return color(data[this.attributes[2].value]);
 			})
 			.each(function() {
 				const _this = d3.select(this);
@@ -172,7 +171,7 @@ const countyDataHelper(data) => {
 				_this.select('title').text(stateName + ' ' + data[fips]);
 			});
 	}, 150);
-}
+};
 
 const countyUniversalHelper = dataKey => categoryCountyData => {
 	const dataAsObj = categoryCountyData.reduce(

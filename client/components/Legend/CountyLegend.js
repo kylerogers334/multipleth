@@ -49,9 +49,9 @@ export class CountyLegend extends React.Component {
 }
 
 const mapStateToProps = state => ({
+	categoryCountyData: state.categoryCountyData,
 	categoryName: state.categoryName,
 	categoryStateData: state.categoryStateData,
-	categoryCountyData: state.categoryCountyData,
 	color: state.color
 });
 
