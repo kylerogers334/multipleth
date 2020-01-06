@@ -5,6 +5,10 @@ import { legendHelper } from '../../helpers/legendHelper';
 
 export class CountyLegend extends React.Component {
 	componentDidUpdate() {
+		if (this.props.categoryCountyData === null) {
+			return;
+		}
+
 		const categoryHelper = legendHelper(this.props.categoryName);
 
 		if (this.props.categoryName === null) {

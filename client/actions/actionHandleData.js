@@ -22,6 +22,7 @@ export const fetchCategoryStateError = error => ({
 });
 
 export const fetchCategoryState = category => dispatch =>
+	category &&
 	fetch(`/api/${category}/state`)
 		.then(response => response.json())
 		.then(data => dispatch(fetchCategoryStateSuccess(data, category)))

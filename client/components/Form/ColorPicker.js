@@ -6,19 +6,21 @@ import { changeColor } from '../../actions/actionMap.js';
 
 const Container = styled.div({
 	backgroundColor: '#FFFFFF',
-	border: '1px solid #000',
-	borderRadius: '5px 0px 0px 5px',
-	height: '160px',
+	border: '1px solid #000000',
+	borderRight: 'none',
+	display: 'flex',
+	flexDirection: 'column',
+	justifyContent: 'space-evenly',
 	marginLeft: '-3%',
 	width: '54px'
 });
 
 const PalleteItem = styled.div(({ backgroundColor, selected }) => ({
 	backgroundColor,
-	border: selected ? '1.5px solid #000' : 'none',
-	height: '20px',
-	margin: '5.7px',
-	width: '40px'
+	border: selected ? '1.5px solid #000000' : 'none',
+	cursor: 'pointer',
+	height: selected ? '19px' : '22px',
+	margin: '1px 4px'
 }));
 
 export const ColorPicker = ({ color: selectedColor, dispatch }) => {

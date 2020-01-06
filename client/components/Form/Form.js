@@ -13,7 +13,7 @@ import ColorPicker from './ColorPicker';
 import { clearMap, fetchCategoryState } from '../../actions/actionHandleData';
 import { fetchCategoryCounty } from '../../actions/actionHandleData';
 
-const Form = ({ dispatch, enlargedState }) => {
+const Form = ({ categoryName, dispatch, enlargedState }) => {
 	const handleSelection = selection => {
 		selection === 'clear'
 			? dispatch(clearMap())
@@ -30,20 +30,33 @@ const Form = ({ dispatch, enlargedState }) => {
 			  })();
 	};
 
-	const getDropdown = (type, idx) =>
+	const getDropdown = (type, idx, selected) =>
 		type === 'population' ? (
 			<Dropdown
 				key={idx}
 				label="Population"
 				onSelect={selection => handleSelection(selection)}
-				selections={['Total', 'White', 'Asian', 'Latino', 'Black']}
+				selections={[
+					{ label: 'Total', category: 'population' },
+					{ label: 'Asian', category: 'asian' },
+					{ label: 'Black', category: 'black' },
+					{ label: 'Latino', category: 'latino' },
+					{ label: 'White', category: 'white' }
+				]}
+				selected={selected}
+				type={type}
 			/>
 		) : (
 			<Dropdown
 				key={idx}
 				label="Housing Cost"
 				onSelect={selection => handleSelection(selection)}
-				selections={['Purchase', 'Rent']}
+				selections={[
+					{ label: 'Purchase', category: 'housing' },
+					{ label: 'Rent', category: 'rent' }
+				]}
+				selected={selected}
+				type={type}
 			/>
 		);
 
@@ -53,29 +66,47 @@ const Form = ({ dispatch, enlargedState }) => {
 			<SelectionContainer>
 				<SelectionItemsContainer>
 					{[
-						'Unemployment',
-						'Dropdown-population',
-						'income',
-						'age',
-						'education',
-						'Dropdown-housing',
-						'crime',
-						'election',
-						'clear'
+						{
+							isDropdown: true,
+							categories: [
+								'population',
+								'asian',
+								'black',
+								'latino',
+								'white'
+							]
+						},
+						{ label: 'Unemployment', category: 'unemployment' },
+						{ label: 'Income', category: 'income' },
+						{ label: 'Age', category: 'age' },
+						{ label: 'Education', category: 'education' },
+						{
+							isDropdown: true,
+							categories: ['housing', 'rent']
+						},
+						{ label: 'Crime', category: 'crime' },
+						{ label: '2016 Election', category: 'election' },
+						{ label: 'Clear', category: 'clear' }
 					].map((category, idx) =>
-						category.includes('Dropdown') ? (
-							getDropdown(category.split('-')[1], idx)
+						category.isDropdown ? (
+							getDropdown(
+								category.categories[0],
+								idx,
+								categoryName === category.category ||
+									(category.categories &&
+										category.categories.includes(
+											categoryName
+										))
+							)
 						) : (
-							<SelectionItem key={idx}>
+							<SelectionItem
+								key={idx}
+								selected={categoryName === category.category}>
 								<a
 									onClick={() =>
-										handleSelection(category.toLowerCase())
+										handleSelection(category.category)
 									}>
-									{category === 'election'
-										? '2016 Election'
-											? category === 'clear'
-											: 'Clear Map'
-										: category}
+									{category.label}
 								</a>
 							</SelectionItem>
 						)

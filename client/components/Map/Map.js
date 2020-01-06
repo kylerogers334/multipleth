@@ -20,7 +20,7 @@ const Container = styled.div({
 
 const SvgContainer = styled.svg({
 	height: 650,
-	margin: 'auto',
+	margin: '32px auto',
 	width: 960
 });
 
@@ -35,8 +35,8 @@ export class Map extends React.Component {
 
 	createMap() {
 		d3.json('./us-10m.v1.json').then(topologyData => {
-			// React and D3 use this differently. reactThis saves the class this.
-			// Normal this is used as the D3 this.
+			// React and D3 use 'this' differently. reactThis saves the class scope.
+			// Normal this is used as the D3 scope.
 			const reactThis = this;
 
 			const d3StatesData = d3
@@ -80,7 +80,7 @@ export class Map extends React.Component {
 			// conditional to prevent loop of dispatching
 			if (!this.props.categoryStateData && !window.__MAP_LOADED__) {
 				window.__MAP_LOADED__ = true; // prevent Clear Map from loading unemployment
-				this.props.dispatch(fetchCategoryState('election'));
+				this.props.dispatch(fetchCategoryState('population'));
 			}
 		});
 	}
